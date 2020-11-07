@@ -4,11 +4,20 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
+  // layout主组件
   {
     path: '/',
-    component: () => import('@/views/layout')
+    component: () => import('@/views/layout'),
+    children: [{
+      path: '/Business',
+      name: 'Business',
+      component: () => import('@/views/layout/Home/Business.vue')
+    }]
     // redirect: '/Home'
-  }
+  },
+  // 登录页面
+  { path: '/Login', component: () => import('@/views/login') }
+
 ]
 
 const router = new VueRouter({
