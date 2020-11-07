@@ -18,6 +18,7 @@ files.keys().forEach(key => {
 currentArray.forEach(item => {
   for (const [path, target] of Object.entries(item)) {
     const protocal = path.split('|')
+    console.log(protocal[0], protocal[1])
     MockJs.mock(new RegExp(`^${protocal[0]}`), protocal[1], target)
   }
 })

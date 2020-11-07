@@ -7,7 +7,7 @@ import Vant from 'vant'
 import 'vant/lib/index.css'
 import 'amfe-flexible'
 // 导入Mock
-import 'mockjs'
+import '../mock'
 // 全局使用vant组件
 Vue.use(Vant)
 

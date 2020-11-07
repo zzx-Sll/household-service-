@@ -10,9 +10,7 @@ import axios from 'axios'
 export default {
   methods: {
     async  getRes () {
-      const res = await axios.get({
-        url: 'http://localhost:8080/getAPI'
-      })
+      const res = await axios.get('http://localhost:8080/getAPI')
       console.log(res)
     }
   }
