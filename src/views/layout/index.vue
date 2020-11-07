@@ -42,12 +42,6 @@ export default {
     return {
 
     }
-  },
-  beforeUpdate () {
-    this.$store.commit('addCachePage', 'LayoutIndex')
-  },
-  computed: {
-    // ...mapState(['user'])
   }
 }
 </script>
