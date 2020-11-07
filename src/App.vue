@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <!-- <div>家政服务平台</div>
-    <van-button type="primary" @click="getRes">主要按钮</van-button> -->
+    <div>家政服务平台</div>
+    <van-button type="primary" @click="getRes">主要按钮</van-button>
     <router-view />
   </div>
 </template>
