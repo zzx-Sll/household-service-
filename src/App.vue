@@ -1,33 +1,23 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <div>23</div>
+    <div>家政服务平台</div>
+    <van-button type="primary" @click="getRes">主要按钮</van-button>
     <router-view />
   </div>
 </template>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import axios from 'axios'
+export default {
+  methods: {
+    async  getRes () {
+      const res = await axios.get({
+        url: 'http://localhost:8080/getAPI'
+      })
+      console.log(res)
     }
   }
 }
+</script>
+
+<style lang="scss">
 </style>
