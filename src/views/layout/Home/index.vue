@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div class="all">
+    <van-nav-bar left-text="家政平台"
+                 left-arrow
+                 @click-left="onClickLeft" />
     <div class="head">
       <!-- 上轮播图 -->
       <div class="swipe">
@@ -78,6 +81,10 @@
         </li>
       </ul>
     </div>
+    <van-cell icon="shop-o"
+              size="large">
+      <div slot="title">湖南家信认证家服公司</div>
+    </van-cell>
   </div>
 </template>
 
@@ -93,12 +100,28 @@ export default {
     }
   },
   methods: {
+    onClickLeft () {
+      this.$toast('返回')
+    }
 
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.all {
+  margin-bottom: 100px;
+}
+.van-nav-bar {
+  background-color: #3f51b5;
+}
+::v-deep .van-nav-bar__text {
+  color: white;
+  font-size: 32px;
+}
+::v-deep .van-icon {
+  color: white;
+}
 .head {
   height: 346px;
   background-color: #3f51b5;
@@ -128,6 +151,9 @@ export default {
       height: 174px;
     }
   }
+}
+::v-deep .van-icon-shop-o {
+  color: black;
 }
 ::v-deep .van-grid-item__content {
   background-color: #eeecec;
