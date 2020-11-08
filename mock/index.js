@@ -3,7 +3,7 @@ import MockJs from 'mockjs'
 // 配置mockjs
 MockJs.setup({
   // 超时时间
-  timeout: 5000
+  timeout: 400
 })
 // 使用mock
 // 半自动化导入 require.context()方法

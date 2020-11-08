@@ -2,7 +2,7 @@
 <template>
   <div class="layout-container">
     <!-- layout 的子路由出口，或者说是二级路由 -->
-    <router-view />
+    <router-view></router-view>
 
     <!-- /子路由出口 -->
 
