@@ -26,6 +26,12 @@ const routes = [
     path: '/Business',
     name: 'Business',
     component: () => import('@/views/layout/Home/components/Business.vue')
+  },
+  {
+    // 商务入住组件
+    path: '/CompanyDetails',
+    name: 'CompanyDetails',
+    component: () => import('@/views/layout/Home/components/CompanyDetails.vue')
   }
 
 ]
