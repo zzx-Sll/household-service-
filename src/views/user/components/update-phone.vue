@@ -1,25 +1,21 @@
 <template>
   <div class="update-phone">
     <!-- 导航栏 -->
-    <van-nav-bar
-      title="填写手机号码"
-      left-text="取消"
-      right-text="完成"
-      @click-left="$emit('close')"
-      @click-right="onConfirm"
-    />
+    <van-nav-bar title="填写手机号码"
+                 left-text="取消"
+                 right-text="完成"
+                 @click-left="$emit('close')"
+                 @click-right="onConfirm" />
     <!-- /导航栏 -->
     <!-- 输入框 -->
     <div class="field-wrap">
-      <van-field
-        v-model.trim="localPhone"
-        rows="2"
-        autosize
-        type="textarea"
-        maxlength="11"
-        placeholder="请输入电话号码"
-        show-word-limit
-      />
+      <van-field v-model.trim="localPhone"
+                 rows="2"
+                 autosize
+                 type="textarea"
+                 maxlength="11"
+                 placeholder="请输入电话号码"
+                 show-word-limit />
     </div>
     <!-- /输入框 -->
   </div>
@@ -31,14 +27,15 @@ export default {
   name: 'UpdatePhone',
   components: {},
   props: {
-    value: {
-      type: Number,
-      required: true
-    }
+    // value: {
+    //   type: Number,
+    //   required: true
+    // }
   },
   data () {
     return {
-      localPhone: this.value
+      // localPhone: this.value
+      localPhone: 13811111111
     }
   },
   computed: {},
@@ -80,11 +77,10 @@ export default {
 .field-wrap {
   padding: 20px;
 }
-.van-nav-bar{
-    height: 128px;
+.van-nav-bar {
+  height: 128px;
 
-    background-color:#3F51B5 ;
-
+  background-color: #3f51b5;
 }
 ::v-deep .van-nav-bar__title {
   color: white;
