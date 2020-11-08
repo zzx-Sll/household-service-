@@ -79,6 +79,7 @@
     <div class="cell-container2">
       <van-cell title="身份认证通道"
                 is-link
+                @click="isShow = true"
                 center>
         <i slot="icon"
            class="iconfont icon-renzheng-tianchong"></i>
@@ -98,6 +99,20 @@
                 size="large"
                 class="out-login-btn"
                 @click="outLogin">退出登录</van-button>
+
+    <!-- 身份认证弹出层 -->
+    <van-popup v-model="isShow"
+               position="bottom">
+      <van-cell title="家服人员授权认证"
+                clickable
+                to="/power"
+                center />
+      <van-cell title="家服公司管理员认证"
+                clickable
+                to="/companyAdmin"
+                :border="false"
+                center />
+    </van-popup>
   </div>
 </template>
 
@@ -106,7 +121,7 @@ export default {
 
   data () {
     return {
-
+      isShow: false
     }
   },
   methods: {
@@ -217,6 +232,13 @@ export default {
     margin-top: 9px;
     font-size: 30px;
     color: #d86262;
+  }
+  .van-popup {
+    .van-cell {
+      .van-cell__title {
+        text-align: center;
+      }
+    }
   }
 }
 </style>
