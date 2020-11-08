@@ -1,17 +1,12 @@
 <template>
   <div class="all">
-    <van-nav-bar left-text="家政平台"
-                 left-arrow
-                 @click-left="onClickLeft"
-                 class="navbar" />
+    <van-nav-bar left-text="家政平台" left-arrow @click-left="onClickLeft" class="navbar" />
 
     <div class="head">
       <!-- 上轮播图 -->
       <div class="swipe">
-        <van-swipe :autoplay="3000"
-                   class="swipeimg">
-          <van-swipe-item v-for="(image, index) in images"
-                          :key="index">
+        <van-swipe :autoplay="3000" class="swipeimg">
+          <van-swipe-item v-for="(image, index) in images" :key="index">
             <img :src="image" />
           </van-swipe-item>
         </van-swipe>
@@ -19,20 +14,15 @@
     </div>
     <!-- 服务内容 -->
     <div class="content">
-      <van-grid :column-num="3"
-                gutter="11px"
-                :border="false">
-        <van-grid-item v-for="value in 6"
-                       :key="value"
-                       text="文字" />
+      <van-grid :column-num="3" gutter="11px" :border="false">
+        <van-grid-item v-for="value in 6" :key="value" text="文字" />
       </van-grid>
     </div>
 
     <!-- 服务项目 -->
     <div class="content2">
       <ul>
-        <li v-for="(item,index) in 8"
-            :key="index">
+        <li v-for="(item,index) in 8" :key="index">
           <div class="box">
             <div class="radiu"></div>
             <span>nihao</span>
@@ -42,20 +32,16 @@
     </div>
     <!-- 公司中 -->
     <div class="companydesign">
-      <van-cell icon="shop-o"
-                size="large">
+      <van-cell icon="shop-o" size="large">
         <div slot="title">湖南家信认证家服公司</div>
       </van-cell>
 
-      <van-cell v-for="(data,i) in 3"
-                :key="i">
+      <van-cell v-for="(data,i) in 3" :key="i">
         <div class="comment_list">
           <div class="touxiang">
-            <img src="https://img.yzcdn.cn/vant/apple-1.jpg"
-                 alt="">
+            <img src="https://img.yzcdn.cn/vant/apple-1.jpg" alt="">
             <div>
-              <van-icon name="location"
-                        class="dizhi" />10000km
+              <van-icon name="location" class="dizhi" />10000km
             </div>
           </div>
           <div class="youall">
@@ -75,17 +61,14 @@
 
     <!-- 服务人员详情 -->
     <div class="companydesign">
-      <van-cell icon="manager"
-                size="large">
+      <van-cell icon="manager" size="large">
         <div slot="title">诚信注册家服员</div>
       </van-cell>
 
-      <van-cell v-for="(data,i) in 3"
-                :key="i">
+      <van-cell v-for="(data,i) in 3" :key="i">
         <div class="comment_list">
           <div class="touxiang">
-            <img src="https://img.yzcdn.cn/vant/apple-1.jpg"
-                 alt="">
+            <img src="https://img.yzcdn.cn/vant/apple-1.jpg" alt="">
 
           </div>
           <div class="youall">
@@ -134,7 +117,7 @@ export default {
 <style lang="scss" scoped>
 .all {
   margin-top: 92px;
-  margin-bottom: 110px;
+  margin-bottom: 150px;
   .navbar {
     width: 100%;
     position: fixed;
