@@ -90,12 +90,40 @@
       </van-cell>
     </div>
 
+    <!-- 退出登录按钮 -->
+    <van-button type="default"
+                size="large"
+                class="out-login-btn"
+                @click="outLogin">退出登录</van-button>
   </div>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
 
+    }
+  },
+  methods: {
+    outLogin () {
+      // 退出提示
+      // 在组件中需要使用 this.$dialog 来调用弹框组件
+      this.$dialog.confirm({
+        title: '确认是否退出？'
+      })
+      // .then(() => {
+      //   // 确认退出：清除登录状态（容器中的 user + 本地存储中的 user）
+      //   this.$store.commit('setUser', null)
+
+      //   // 在退出登录把组件缓存清除掉
+      //   this.$store.commit('removeCachePage', 'LayoutIndex')
+      // })
+      // .catch(() => {
+      //   // console.log('取消了退出')
+      // })
+    }
+  }
 }
 </script>
 
@@ -203,6 +231,11 @@ export default {
       font-size: 36px;
       color: #979191;
     }
+  }
+  .out-login-btn {
+    margin-top: 9px;
+    font-size: 30px;
+    color: #d86262;
   }
 }
 </style>
