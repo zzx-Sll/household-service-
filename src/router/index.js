@@ -43,7 +43,9 @@ const routes = [
     name: 'CompanyDetails',
     component: () => import('@/views/layout/Home/components/CompanyDetails.vue')
 
-  }
+  },
+  // 关于我们组件
+  { path: '/AboutUs', component: () => import('@/views/aboutus') }
 
 ]
 
