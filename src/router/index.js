@@ -26,10 +26,17 @@ const routes = [
   },
 
   // My组件的子路由
+  // 个人资料
   {
     path: '/user/profile',
     name: 'user',
     component: () => import('@/views/user/profile')
+  },
+  // 我的关注
+  {
+    path: '/myfocus',
+    name: 'focus',
+    component: () => import('@/views/myfocus/index')
   },
   // 登录页面
   { path: '/Login', component: () => import('@/views/login') },
@@ -46,8 +53,18 @@ const routes = [
     component: () => import('@/views/layout/Home/components/CompanyDetails.vue')
 
   },
+  {
+    //
+    path: '/boss',
+    name: 'ServiceStaff',
+    component: () => import('../views/boss/index.vue')
+
+  },
   // 关于我们组件
-  { path: '/AboutUs', component: () => import('@/views/aboutus') }
+  { path: '/AboutUs', component: () => import('@/views/aboutus') },
+  // 身份认证组件
+  { path: '/power', component: () => import('@/views/Authentication/power') },
+  { path: '/companyAdmin', component: () => import('@/views/Authentication/company-admin') }
 
 ]
 

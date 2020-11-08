@@ -1,7 +1,7 @@
 <template>
-  <div class="update-phone">
+  <div class="update-address">
     <!-- 导航栏 -->
-    <van-nav-bar title="填写手机号码"
+    <van-nav-bar title="编辑服务区域"
                  left-text="取消"
                  right-text="完成"
                  @click-left="$emit('close')"
@@ -9,12 +9,12 @@
     <!-- /导航栏 -->
     <!-- 输入框 -->
     <div class="field-wrap">
-      <van-field v-model.trim="localPhone"
+      <van-field v-model.trim="localService"
                  rows="2"
                  autosize
                  type="textarea"
-                 maxlength="11"
-                 placeholder="请输入电话号码"
+                 maxlength="99"
+                 placeholder="请输入服务区域"
                  show-word-limit />
     </div>
     <!-- /输入框 -->
@@ -24,18 +24,18 @@
 <script>
 
 export default {
-  name: 'UpdatePhone',
+  name: 'UpdateService',
   components: {},
   props: {
     // value: {
-    //   type: Number,
+    //   type: String,
     //   required: true
     // }
   },
   data () {
     return {
-      // localPhone: this.value
-      localPhone: 13811111111
+      // localService: this.value
+      localService: '湖南省长沙市'
     }
   },
   computed: {},
@@ -51,14 +51,14 @@ export default {
       })
 
       try {
-        const localPhone = this.localPhone
-        if (!localPhone.length) {
-          this.$toast('昵称不能为空')
+        const localService = this.localService
+        if (!localService.length) {
+          this.$toast('地址不能为空')
           return
         }
 
         // 更新视图
-        this.$emit('input', localPhone)
+        this.$emit('input', localService)
 
         // 关闭弹层
         this.$emit('close')

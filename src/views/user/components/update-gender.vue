@@ -64,4 +64,18 @@ export default {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+::v-deep .van-picker__toolbar{
+    height: 128px;
+
+    background-color:#3F51B5 ;
+}
+::v-deep .van-picker__confirm {
+      color: white;
+    }
+::v-deep .van-picker__cancel {
+    color: white;
+}
+::v-deep .van-picker__title {
+  color: white;
+}</style>

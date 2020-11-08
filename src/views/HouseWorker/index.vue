@@ -1,10 +1,14 @@
 <template>
   <div class="nav">
     <div class="service-staffs">
-
-      <div class="Housekeeping">家政平台</div>
+      <van-nav-bar left-text="家政平台" left-arrow class="navbar" />
+      <!-- <div class="Housekeeping">家政平台</div> -->
       <div class="service-staff">
-        <van-search v-model="value" placeholder="智能匹配" class="search" right-icon="clear" /><span class="changsha">长沙</span>
+        <van-search v-model="value" placeholder="智能匹配" class="search" @click="showPopup" />
+        <van-cell v-model="value" is-link class="search" style="display:none"></van-cell>
+        <van-popup v-model="show" position="bottom" :style="{ height: '81%', width:'100%' }">
+          <house-info></house-info>
+        </van-popup><span class="changsha">长沙</span>
         <div class="box">
           <van-icon name="arrow-down" size="10px" />
         </div>
@@ -38,36 +42,43 @@
 </template>
 
 <script>
+import HouseInfo from './components/house-list'
 import HouseList from './components/house-info'
 export default {
   name: 'HouseWorker',
   components: {
-    HouseList
+    HouseList,
+    HouseInfo
   },
   props: {},
   data () {
     return {
-      value: ''
+      value: '',
+      show: false
     }
   },
   computed: {},
   watch: {},
   created () {},
   mounted () {},
-  methods: {}
+  methods: {
+    showPopup () {
+      this.show = true
+    }
+  }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .service-staffs {
-  background-color: #354499;
+  background-color: #3f51b5;
   height: 252px;
 }
 .service-staff {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #354499;
+  background-color: #3f51b5;
 }
 .search {
   width: 85%;
@@ -141,5 +152,8 @@ button {
   width: 100px;
   height: 150px;
   background-color: #979393;
+}
+.van-nav-bar {
+  background-color: #3f51b5;
 }
 </style>
