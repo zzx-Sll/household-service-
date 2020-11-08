@@ -12,6 +12,7 @@
       type="file"
       hidden
       ref="file"
+      @change="onFileChange"
     >
     <!-- 个人信息 -->
     <van-cell
@@ -161,7 +162,23 @@ export default {
   computed: {},
   watch: {},
 
-  mounted () {}
+  mounted () {},
+  methods: {
+    onFileChange () {
+      // 获取文件对象
+      const file = this.$refs.file.files[0]
+
+      // 基于文章对象获取 blob 数据
+      this.img = window.URL.createObjectURL(file)
+
+      // 展示预览图片弹出层
+      this.isUpdatePhotoShow = true
+
+      // file-input 如果选了同一个文件不会触发 change 事件
+      // 解决办法就是每次使用完毕，把它的 value 清空
+      this.$refs.file.value = ''
+    }
+  }
 }
 </script>
 
