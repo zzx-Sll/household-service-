@@ -134,6 +134,7 @@ export default {
         .then(() => {
         // 确认退出：清除登录状态（容器中的 user + 本地存储中的 user）
           this.$store.commit('setUser', [null, null])
+          window.localStorage.removeItem('usersdata')
 
           // 在退出登录把组件缓存清除掉
           // this.$store.commit('removeCachePage', 'LayoutIndex')
