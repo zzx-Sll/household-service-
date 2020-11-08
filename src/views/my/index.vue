@@ -1,4 +1,5 @@
 <template>
+
   <div class="my-container">
 
     <!-- 导航栏 -->
@@ -9,7 +10,7 @@
       <div class="base-info">
         <div class="left">
           <van-image class="avatar" round fit="cover" src="https://img.yzcdn.cn/vant/cat.jpeg" />
-          <span class="uname">名称</span>
+          <span class="uname">{{$store.state.user.username}}</span>
         </div>
       </div>
     </div>
@@ -66,6 +67,7 @@
 
 <script>
 export default {
+
   data () {
     return {
 

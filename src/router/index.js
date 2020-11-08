@@ -22,6 +22,13 @@ const routes = [
   {
     path: '/MaternityMatron', component: () => import('@/views/layout/Home/components/MaternityMatron.vue')
   },
+
+  // My组件的子路由
+  {
+    path: '/user/profile',
+    name: 'user',
+    component: () => import('@/views/user/profile')
+  },
   // 登录页面
   { path: '/Login', component: () => import('@/views/login') },
   {
@@ -31,10 +38,11 @@ const routes = [
     component: () => import('@/views/layout/Home/components/Business.vue')
   },
   {
-    // 商务入住组件
+    // 公司详情组件
     path: '/CompanyDetails',
     name: 'CompanyDetails',
     component: () => import('@/views/layout/Home/components/CompanyDetails.vue')
+
   }
 
 ]
