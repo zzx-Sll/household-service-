@@ -2,9 +2,6 @@
   <div class="company-info">
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
       <div class="companydesign">
-        <van-cell icon="manager" size="large">
-          <div slot="title">诚信注册家服员</div>
-        </van-cell>
 
         <van-cell v-for="(data,i) in 6" :key="i">
           <div class="comment_list">
