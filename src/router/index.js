@@ -16,7 +16,9 @@ const routes = [
 
       // redirect: '/Home'
     },
-    { path: '/My', component: () => import('@/views/my') }
+    { path: '/My', component: () => import('@/views/my') },
+    { path: '/HouseWorker', component: () => import('@/views/HouseWorker') },
+    { path: '/Company', component: () => import('@/views/Company') }
     ]
   }, // 月嫂详情组件
   {
@@ -43,7 +45,9 @@ const routes = [
     name: 'CompanyDetails',
     component: () => import('@/views/layout/Home/components/CompanyDetails.vue')
 
-  }
+  },
+  // 关于我们组件
+  { path: '/AboutUs', component: () => import('@/views/aboutus') }
 
 ]
 

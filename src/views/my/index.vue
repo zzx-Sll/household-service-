@@ -3,65 +3,101 @@
   <div class="my-container">
 
     <!-- 导航栏 -->
-    <van-nav-bar left-text="我的" :border="false" class="my-nav-bar" />
+    <van-nav-bar left-text="我的"
+                 :border="false"
+                 class="my-nav-bar" />
 
     <!-- 已登录头部 -->
-    <div v-if="$store.state.user.username" class="header user-info">
-      <div class="base-info">
-        <div class="left">
-          <van-image class="avatar" round fit="cover" src="https://img.yzcdn.cn/vant/cat.jpeg" />
-          <span class="uname">{{$store.state.user.username}}</span>
-        </div>
+    <div v-if="$store.state.user.username"
+         class="header not-login">
+      <div class="login-btn">
+        <img class="login-img"
+             src="https://img.yzcdn.cn/vant/cat.jpeg"
+             alt="">
+        <span class="text">{{$store.state.user.username}}</span>
       </div>
     </div>
 
     <!-- 未登录头部 -->
-    <div v-else class="header not-login">
-      <div class="login-btn" @click="$router.push('/Login')">
-        <img class="login-img" src="../../assets/mobile.png" alt="">
+    <div v-else
+         class="header not-login">
+      <div class="login-btn"
+           @click="$router.push('/Login')">
+        <img class="login-img"
+             src="../../assets/mobile.png"
+             alt="">
         <span class="text">点击登录</span>
       </div>
     </div>
 
     <!-- 宫格导航 -->
-    <van-grid :column-num="4" :border="false" class="grid-nav" clickable>
-      <van-grid-item class="grid-item">
-        <i slot="icon" class="iconfont icon-gonggongziliao"></i>
-        <span slot="text" class="text">个人资料</span>
+    <van-grid :column-num="4"
+              :border="false"
+              class="grid-nav"
+              clickable>
+      <van-grid-item class="grid-item"
+                     @click="$router.push('/user/profile')">
+        <i slot="icon"
+           class="iconfont icon-gonggongziliao"></i>
+        <span slot="text"
+              class="text">个人资料</span>
       </van-grid-item>
       <van-grid-item class="grid-item">
-        <i slot="icon" class="iconfont icon-wo"></i>
-        <span slot="text" class="text">我的关注</span>
+        <i slot="icon"
+           class="iconfont icon-wo"></i>
+        <span slot="text"
+              class="text">我的关注</span>
       </van-grid-item>
       <van-grid-item class="grid-item">
-        <i slot="icon" class="iconfont icon-pinglun"></i>
-        <span slot="text" class="text">我的评价</span>
+        <i slot="icon"
+           class="iconfont icon-pinglun"></i>
+        <span slot="text"
+              class="text">我的评价</span>
       </van-grid-item>
       <van-grid-item class="grid-item">
-        <i slot="icon" class="iconfont icon-29"></i>
-        <span slot="text" class="text">已联系家政员</span>
+        <i slot="icon"
+           class="iconfont icon-29"></i>
+        <span slot="text"
+              class="text">已联系家政员</span>
       </van-grid-item>
     </van-grid>
 
     <div class="cell-container">
-      <van-cell title="找家政服务记录" is-link center>
-        <i slot="icon" class="iconfont icon-jilu"></i>
+      <van-cell title="找家政服务记录"
+                is-link
+                center>
+        <i slot="icon"
+           class="iconfont icon-jilu"></i>
       </van-cell>
-      <van-cell title="家政求职记录" is-link center>
-        <i slot="icon" class="iconfont icon-jilu1"></i>
+      <van-cell title="家政求职记录"
+                is-link
+                center>
+        <i slot="icon"
+           class="iconfont icon-jilu1"></i>
       </van-cell>
     </div>
     <div class="cell-container2">
-      <van-cell title="身份认证通道" is-link center>
-        <i slot="icon" class="iconfont icon-renzheng-tianchong"></i>
+      <van-cell title="身份认证通道"
+                is-link
+                center>
+        <i slot="icon"
+           class="iconfont icon-renzheng-tianchong"></i>
       </van-cell>
-      <van-cell title="关于我们" is-link center>
-        <i slot="icon" class="iconfont icon-guanyu"></i>
+      <van-cell title="关于我们"
+                is-link
+                @click="$router.push('/AboutUs')"
+                center>
+        <i slot="icon"
+           class="iconfont icon-guanyu"></i>
       </van-cell>
     </div>
 
     <!-- 退出登录按钮 -->
-    <van-button v-if="$store.state.user.username" type="default" size="large" class="out-login-btn" @click="outLogin">退出登录</van-button>
+    <van-button v-if="$store.state.user.username"
+                type="default"
+                size="large"
+                class="out-login-btn"
+                @click="outLogin">退出登录</van-button>
   </div>
 </template>
 
@@ -123,38 +159,15 @@ export default {
       align-items: center;
       margin-bottom: 100px;
       .login-img {
-        height: 132px;
-        width: 132px;
+        height: 140px;
+        width: 140px;
+        border: 4px solid #fff;
         border-radius: 50%;
-        margin-bottom: 30px;
+        margin-bottom: 25px;
       }
       .text {
-        font-size: 28px;
+        font-size: 32px;
         color: #fff;
-      }
-    }
-  }
-  .user-info {
-    .base-info {
-      height: 231px;
-      padding: 76px 32px 23px;
-      box-sizing: border-box;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      .left {
-        display: flex;
-        align-items: center;
-        .avatar {
-          width: 132px;
-          height: 132px;
-          border: 4px solid #fff;
-          margin-right: 23px;
-        }
-        .uname {
-          color: #fff;
-          font-size: 30px;
-        }
       }
     }
   }

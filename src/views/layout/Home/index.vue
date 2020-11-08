@@ -22,23 +22,18 @@
       <van-grid :column-num="3"
                 gutter="11px"
                 :border="false">
-        <van-grid-item text="入驻商务部">
-
+        <van-grid-item text="入驻商务部"
+                       @click="$router.push('/Business')">
         </van-grid-item>
         <van-grid-item text="家政求职">
-
         </van-grid-item>
         <van-grid-item text="找家庭服务">
-
         </van-grid-item>
         <van-grid-item text="线上家政培训">
-
         </van-grid-item>
         <van-grid-item text="线上家政保险">
-
         </van-grid-item>
         <van-grid-item text="合同">
-
         </van-grid-item>
       </van-grid>
     </div>
