@@ -22,9 +22,24 @@
       <van-grid :column-num="3"
                 gutter="11px"
                 :border="false">
-        <van-grid-item v-for="value in 6"
-                       :key="value"
-                       text="文字" />
+        <van-grid-item text="入驻商务部">
+
+        </van-grid-item>
+        <van-grid-item text="家政求职">
+
+        </van-grid-item>
+        <van-grid-item text="找家庭服务">
+
+        </van-grid-item>
+        <van-grid-item text="线上家政培训">
+
+        </van-grid-item>
+        <van-grid-item text="线上家政保险">
+
+        </van-grid-item>
+        <van-grid-item text="合同">
+
+        </van-grid-item>
       </van-grid>
     </div>
 
@@ -134,7 +149,7 @@ export default {
 <style lang="scss" scoped>
 .all {
   margin-top: 92px;
-  margin-bottom: 110px;
+  margin-bottom: 150px;
   .navbar {
     width: 100%;
     position: fixed;
