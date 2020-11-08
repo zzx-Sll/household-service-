@@ -1,7 +1,6 @@
 <template>
   <div class="nav">
     <div class="service-staffs">
-
       <div class="Housekeeping">家政平台</div>
       <div class="service-staff">
         <van-search v-model="value" placeholder="智能匹配" class="search" right-icon="clear" /><span class="changsha">长沙</span>
@@ -58,7 +57,7 @@ export default {
 }
 </script>
 
-<style less>
+<style scoped lang="scss" >
 .service-staffs {
   background-color: #354499;
   height: 252px;
