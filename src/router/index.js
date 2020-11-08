@@ -7,25 +7,36 @@ const routes = [
   // layout主组件
   {
     path: '/',
-
     component: () => import('@/views/layout'),
+
     children: [{
+      // home组件
       path: '/Home',
-      component: () => import('../views/layout/Home/index.vue'),
-      children: [{
-        path: '/Business',
-        name: 'Business',
-        component: () => import('@/views/layout/Home/Business.vue')
-      }]
-    }]
-    // redirect: '/Home'
+      component: () => import('../views/layout/Home/index.vue')
+
+      // redirect: '/Home'
+    },
+    { path: '/My', component: () => import('@/views/my') }
+    ]
+  }, // 月嫂详情组件
+  {
+    path: '/MaternityMatron', component: () => import('@/views/layout/Home/components/MaternityMatron.vue')
   },
-  { path: '/Login', component: () => import('@/views/login') },
+
   // My组件的子路由
   {
-    path: '/user/index',
+    path: '/user/profile',
     name: 'user',
-    component: () => import('@/views/user/index')
+    component: () => import('@/views/user/profile')
+  },
+  // 登录页面
+  { path: '/Login', component: () => import('@/views/login') },
+  {
+    // 商务入住组件
+    path: '/Business',
+    name: 'Business',
+    component: () => import('@/views/layout/Home/components/Business.vue')
+
   }
 
 ]
