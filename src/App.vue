@@ -6,15 +6,15 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 export default {
-  methods: {
+/*   methods: {
     async  getRes () {
       const res = await axios.get('http://localhost:8080/getAPI')
       console.log(res)
     }
   }
-}
+ */}
 </script>
 
 <style lang="scss">

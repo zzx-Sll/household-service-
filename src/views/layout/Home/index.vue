@@ -4,6 +4,7 @@
                  left-arrow
                  @click-left="onClickLeft"
                  class="navbar" />
+
     <div class="head">
       <!-- 上轮播图 -->
       <div class="swipe">
@@ -106,6 +107,7 @@
         <van-icon name="arrow" />
       </div>
     </div>
+
   </div>
 </template>
 

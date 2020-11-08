@@ -49,8 +49,10 @@ export default {
 <style lang="scss" scoped>
 .layout-container {
   .layout-tabbar {
+    height: 134px;
     i.iconfont {
-      font-size: 40px;
+      font-size: 50px;
+      color: #979191;
     }
     span.text {
       font-size: 20px;

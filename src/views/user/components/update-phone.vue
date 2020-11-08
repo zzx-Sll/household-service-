@@ -1,6 +1,6 @@
 <template>
   <div>
-
+手机号
   </div>
 </template>
 
@@ -11,4 +11,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 </style>
