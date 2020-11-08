@@ -8,12 +8,15 @@ const routes = [
   {
     path: '/',
     component: () => import('@/views/layout'),
+
     children: [{
       // home组件
       path: '/Home',
       component: () => import('../views/layout/Home/index.vue')
-    // redirect: '/Home'
-    }
+
+      // redirect: '/Home'
+    },
+    { path: '/My', component: () => import('@/views/my') }
     ]
   }, // 月嫂详情组件
   {
