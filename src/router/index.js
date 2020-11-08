@@ -46,8 +46,18 @@ const routes = [
     component: () => import('@/views/layout/Home/components/CompanyDetails.vue')
 
   },
+  {
+    //
+    path: '/boss',
+    name: 'ServiceStaff',
+    component: () => import('../views/boss/index.vue')
+
+  },
   // 关于我们组件
-  { path: '/AboutUs', component: () => import('@/views/aboutus') }
+  { path: '/AboutUs', component: () => import('@/views/aboutus') },
+  // 身份认证组件
+  { path: '/power', component: () => import('@/views/Authentication/power') },
+  { path: '/companyAdmin', component: () => import('@/views/Authentication/company-admin') }
 
 ]
 
