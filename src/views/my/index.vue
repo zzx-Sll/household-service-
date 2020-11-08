@@ -36,7 +36,7 @@
               :border="false"
               class="grid-nav"
               clickable>
-      <van-grid-item class="grid-item">
+      <van-grid-item class="grid-item" @click="$router.push('/user/profile')">
         <i slot="icon"
            class="iconfont icon-gonggongziliao"></i>
         <span slot="text"

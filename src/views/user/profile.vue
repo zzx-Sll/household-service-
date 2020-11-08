@@ -29,37 +29,42 @@
       />
     </van-cell>
     <van-cell
-      title="昵称"
+      title="昵称:"
       is-link
       @click="isUpdateNameShow = true"
+      :value="user.name"
     />
     <van-cell
-      title="性别"
+      title="性别:"
       is-link
       @click="isUpdateGenderShow = true"
+      v-model="user.gender"
     />
         <van-cell
-      title="手机号码"
+      title="手机号码:"
+      :value="user.phone"
       is-link
       @click="isUpdatePhoneShow = true"
     />
         <van-cell
-      title="服务区域"
+      title="服务区域:"
       is-link
       @click="isUpdateServiceShow = true"
     />
         <van-cell
-      title="详细地址"
+      title="详细地址:"
       is-link
       @click="isUpdateAddressShow = true"
+      :value="user.address"
+
     />
           <van-field label="手机验证码:" name="code" placeholder="请输入验证码"  type="number" maxlength="6">
         <i slot="left-icon" class="iconfont iconyanzhengma"></i>
 
           <!-- <van-count-down :time="1000 * 60" format="ss s" v-if="isCountDown" @finish="isCountDown = false" /> -->
         <template #button>
-          <van-count-down :time="1000 * 60" format="ss s"  />
-          <van-button  round class="send-sms-btn" size="small" type="default" native-type="button">获取验证码</van-button>
+          <van-count-down :time="1000 * 60" format="ss s"  v-if="isCountDown" @finish="isCountDown = false"/>
+          <van-button  round class="send-sms-btn" size="small" type="default" native-type="button" @click="onSendSms" v-else>获取验证码</van-button>
         </template>
           </van-field>
 
@@ -85,6 +90,7 @@
     >
       <update-name
         v-if="isUpdateNameShow"
+        v-model="user.name"
         @close="isUpdateNameShow = false"
       />
     </van-popup>
@@ -110,6 +116,7 @@
     >
       <update-phone
         v-if="isUpdatePhoneShow"
+        v-model="user.phone"
         @close="isUpdatePhoneShow = false"
       />
     </van-popup>
@@ -122,6 +129,7 @@
     >
       <update-address
         v-if="isUpdateAddressShow"
+        v-model="user.address"
         @close="isUpdateAddressShow = false"
       />
     </van-popup>
@@ -149,14 +157,22 @@ export default {
   props: {},
   data () {
     return {
-      user: {}, // 个人信息
+      user: {
+        src: '',
+        name: '芜湖大司马',
+        gender: '男',
+        phone: 13911111111,
+        address: '长沙市岳麓区东方红大厦'
+
+      }, // 个人信息
       isUpdateNameShow: false,
       isUpdateGenderShow: false,
       isUpdatePhotoShow: false,
       isUpdatePhoneShow: false,
       isUpdateServiceShow: false,
       isUpdateAddressShow: false,
-      img: null // 预览的图片
+      img: null, // 预览的图片
+      isCountDown: false
     }
   },
   computed: {},
@@ -177,7 +193,11 @@ export default {
       // file-input 如果选了同一个文件不会触发 change 事件
       // 解决办法就是每次使用完毕，把它的 value 清空
       this.$refs.file.value = ''
+    },
+    onSendSms () {
+      this.isCountDown = true
     }
+
   }
 }
 </script>
