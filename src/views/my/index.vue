@@ -35,8 +35,7 @@
               :border="false"
               class="grid-nav"
               clickable>
-      <van-grid-item class="grid-item"
-                     @click="$router.push('/user/profile')">
+      <van-grid-item class="grid-item" @click="$router.push('/user/profile')">
         <i slot="icon"
            class="iconfont icon-gonggongziliao"></i>
         <span slot="text"
@@ -79,6 +78,7 @@
     <div class="cell-container2">
       <van-cell title="身份认证通道"
                 is-link
+                @click="isShow = true"
                 center>
         <i slot="icon"
            class="iconfont icon-renzheng-tianchong"></i>
@@ -98,6 +98,20 @@
                 size="large"
                 class="out-login-btn"
                 @click="outLogin">退出登录</van-button>
+
+    <!-- 身份认证弹出层 -->
+    <van-popup v-model="isShow"
+               position="bottom">
+      <van-cell title="家服人员授权认证"
+                clickable
+                to="/power"
+                center />
+      <van-cell title="家服公司管理员认证"
+                clickable
+                to="/companyAdmin"
+                :border="false"
+                center />
+    </van-popup>
   </div>
 </template>
 
@@ -106,7 +120,7 @@ export default {
 
   data () {
     return {
-
+      isShow: false
     }
   },
   methods: {
@@ -119,6 +133,7 @@ export default {
         .then(() => {
         // 确认退出：清除登录状态（容器中的 user + 本地存储中的 user）
           this.$store.commit('setUser', [null, null])
+          window.localStorage.removeItem('usersdata')
 
           // 在退出登录把组件缓存清除掉
           // this.$store.commit('removeCachePage', 'LayoutIndex')
@@ -217,6 +232,13 @@ export default {
     margin-top: 9px;
     font-size: 30px;
     color: #d86262;
+  }
+  .van-popup {
+    .van-cell {
+      .van-cell__title {
+        text-align: center;
+      }
+    }
   }
 }
 </style>

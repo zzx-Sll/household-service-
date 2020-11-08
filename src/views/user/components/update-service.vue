@@ -2,7 +2,7 @@
   <div class="update-address">
     <!-- 导航栏 -->
     <van-nav-bar
-      title="编辑详细地址"
+      title="编辑服务区域"
       left-text="取消"
       right-text="完成"
       @click-left="$emit('close')"
@@ -12,12 +12,12 @@
     <!-- 输入框 -->
     <div class="field-wrap">
       <van-field
-        v-model.trim="localAddress"
+        v-model.trim="localService"
         rows="2"
         autosize
         type="textarea"
         maxlength="99"
-        placeholder="请输入详细地址"
+        placeholder="请输入服务区域"
         show-word-limit
       />
     </div>
@@ -28,7 +28,7 @@
 <script>
 
 export default {
-  name: 'UpdateAddress',
+  name: 'UpdateService',
   components: {},
   props: {
     value: {
@@ -38,7 +38,7 @@ export default {
   },
   data () {
     return {
-      localAddress: this.value
+      localService: this.value
     }
   },
   computed: {},
@@ -54,14 +54,14 @@ export default {
       })
 
       try {
-        const localAddress = this.localAddress
-        if (!localAddress.length) {
+        const localService = this.localService
+        if (!localService.length) {
           this.$toast('地址不能为空')
           return
         }
 
         // 更新视图
-        this.$emit('input', localAddress)
+        this.$emit('input', localService)
 
         // 关闭弹层
         this.$emit('close')
