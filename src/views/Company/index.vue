@@ -58,7 +58,7 @@ export default {
 }
 </script>
 
-<style less>
+<style lang="scss" scoped>
 .service-staffs {
   background-color: #354499;
   height: 252px;
@@ -124,8 +124,6 @@ button {
 }
 .van-button__text {
   color: #979393;
-}
-.van-button--info {
 }
 .gekai {
   height: 25px;

@@ -74,7 +74,7 @@ export default {
 
 </script>
 
-<style scoped lang="less">
+<style scoped lang="scss">
 .comment_list {
   display: flex;
 
