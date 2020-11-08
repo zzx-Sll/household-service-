@@ -10,7 +10,7 @@
       <van-field v-model="password" type="password" name="password" label="密码" placeholder="密码" :rules="loginForm.password" />
       <div style="margin: 16px;">
         <van-button class="login-btn" block native-type="submit">
-          提交
+          登录
         </van-button>
       </div>
     </van-form>
@@ -25,8 +25,8 @@ export default {
   data () {
     return {
     //  登录的用户名,密码
-      username: 'admin',
-      password: '123456',
+      username: '',
+      password: '',
       // 验证登录时手机的规则
       loginForm: {
         username: [{ required: true, message: '请填写用户名' }, { pattern: /^[a-zA-Z0-9_-]{4,12}$/, message: '请填入合法用户名' }],
@@ -59,6 +59,13 @@ export default {
         }
 
       })
+      console.log(this.username,
+        this.password)
+      // 登录成功，将用户信息存储到store中
+      this.$store.commit('setUser', [this.username,
+        this.password]
+
+      )
       // 提示成功
       this.$toast.success('登录成功')
       // 登录成功，跳转到home
