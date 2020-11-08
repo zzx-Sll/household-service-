@@ -1,12 +1,13 @@
 <template>
   <div>
+    <!-- 路由出口 -->
+    <!-- <router-view></router-view> -->
+    <!-- 路由出口 -->
     <div class="head">
       <!-- 上轮播图 -->
       <div class="swipe">
-        <van-swipe :autoplay="3000"
-                   class="swipeimg">
-          <van-swipe-item v-for="(image, index) in images"
-                          :key="index">
+        <van-swipe :autoplay="3000" class="swipeimg">
+          <van-swipe-item v-for="(image, index) in images" :key="index">
             <img :src="image" />
           </van-swipe-item>
         </van-swipe>
@@ -14,12 +15,8 @@
     </div>
     <!-- 服务内容 -->
     <div class="content">
-      <van-grid :column-num="3"
-                gutter="11px"
-                :border="false">
-        <van-grid-item v-for="value in 6"
-                       :key="value"
-                       text="文字" />
+      <van-grid :column-num="3" gutter="11px" :border="false">
+        <van-grid-item v-for="value in 6" :key="value" text="文字" />
       </van-grid>
     </div>
 
@@ -78,6 +75,7 @@
         </li>
       </ul>
     </div>
+
   </div>
 </template>
 
