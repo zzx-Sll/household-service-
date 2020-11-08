@@ -7,7 +7,7 @@
         <van-search v-model="value" placeholder="智能匹配" class="search" @click="showPopup" />
         <van-cell v-model="value" is-link class="search" style="display:none"></van-cell>
         <van-popup v-model="show" position="bottom" :style="{ height: '81%', width:'100%' }">
-          <house-list></house-list>
+          <house-info></house-info>
         </van-popup><span class="changsha">长沙</span>
         <div class="box">
           <van-icon name="arrow-down" size="10px" />
@@ -42,11 +42,13 @@
 </template>
 
 <script>
+import HouseInfo from './components/house-list'
 import HouseList from './components/house-info'
 export default {
   name: 'HouseWorker',
   components: {
-    HouseList
+    HouseList,
+    HouseInfo
   },
   props: {},
   data () {

@@ -7,7 +7,7 @@
         <van-search v-model="value" placeholder="智能匹配" class="search" @click="showPopup" />
         <van-cell v-model="value" is-link class="search" style="display:none"></van-cell>
         <van-popup v-model="show" position="bottom" :style="{ height: '81%', width:'100%' }">
-          <company-list></company-list>
+          <service-staff></service-staff>
         </van-popup><span class="changsha">长沙</span>
         <div class="box">
           <van-icon name="arrow-down" size="10px" />
@@ -42,11 +42,13 @@
 </template>
 
 <script>
+import ServiceStaff from '../boss/index'
 import CompanyList from './components/company-list'
 export default {
   name: 'Company',
   components: {
-    CompanyList
+    CompanyList,
+    ServiceStaff
   },
   props: {},
   data () {
