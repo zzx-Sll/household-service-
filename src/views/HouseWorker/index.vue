@@ -58,7 +58,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .service-staffs {
   background-color: #354499;
   height: 252px;
