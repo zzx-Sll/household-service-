@@ -80,4 +80,13 @@ export default {
 .field-wrap {
   padding: 20px;
 }
+.van-nav-bar{
+    height: 128px;
+
+    background-color:#3F51B5 ;
+
+}
+::v-deep .van-nav-bar__title {
+  color: white;
+}
 </style>

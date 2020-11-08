@@ -8,20 +8,19 @@
                  class="my-nav-bar" />
 
     <!-- 已登录头部 -->
-    <!-- <div class="header user-info">
-      <div class="base-info">
-        <div class="left">
-          <van-image class="avatar"
-                     round
-                     fit="cover"
-                     src="https://img.yzcdn.cn/vant/cat.jpeg" />
-          <span class="uname">名称</span>
-        </div>
+    <div v-if="$store.state.user.username"
+         class="header not-login">
+      <div class="login-btn">
+        <img class="login-img"
+             src="https://img.yzcdn.cn/vant/cat.jpeg"
+             alt="">
+        <span class="text">{{$store.state.user.username}}</span>
       </div>
-    </div> -->
+    </div>
 
     <!-- 未登录头部 -->
-    <div class="header not-login">
+    <div v-else
+         class="header not-login">
       <div class="login-btn"
            @click="$router.push('/Login')">
         <img class="login-img"
@@ -85,6 +84,7 @@
       </van-cell>
       <van-cell title="关于我们"
                 is-link
+                @click="$router.push('/AboutUs')"
                 center>
         <i slot="icon"
            class="iconfont icon-guanyu"></i>
@@ -92,7 +92,8 @@
     </div>
 
     <!-- 退出登录按钮 -->
-    <van-button type="default"
+    <van-button v-if="$store.state.user.username"
+                type="default"
                 size="large"
                 class="out-login-btn"
                 @click="outLogin">退出登录</van-button>
@@ -114,16 +115,16 @@ export default {
       this.$dialog.confirm({
         title: '确认是否退出？'
       })
-      // .then(() => {
-      //   // 确认退出：清除登录状态（容器中的 user + 本地存储中的 user）
-      //   this.$store.commit('setUser', null)
+        .then(() => {
+        // 确认退出：清除登录状态（容器中的 user + 本地存储中的 user）
+          this.$store.commit('setUser', [null, null])
 
-      //   // 在退出登录把组件缓存清除掉
-      //   this.$store.commit('removeCachePage', 'LayoutIndex')
-      // })
-      // .catch(() => {
-      //   // console.log('取消了退出')
-      // })
+          // 在退出登录把组件缓存清除掉
+          // this.$store.commit('removeCachePage', 'LayoutIndex')
+        })
+        .catch(() => {
+        // console.log('取消了退出')
+        })
     }
   }
 }
@@ -157,38 +158,15 @@ export default {
       align-items: center;
       margin-bottom: 100px;
       .login-img {
-        height: 132px;
-        width: 132px;
+        height: 140px;
+        width: 140px;
+        border: 4px solid #fff;
         border-radius: 50%;
-        margin-bottom: 30px;
+        margin-bottom: 25px;
       }
       .text {
-        font-size: 28px;
+        font-size: 32px;
         color: #fff;
-      }
-    }
-  }
-  .user-info {
-    .base-info {
-      height: 231px;
-      padding: 76px 32px 23px;
-      box-sizing: border-box;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      .left {
-        display: flex;
-        align-items: center;
-        .avatar {
-          width: 132px;
-          height: 132px;
-          border: 4px solid #fff;
-          margin-right: 23px;
-        }
-        .uname {
-          color: #fff;
-          font-size: 30px;
-        }
       }
     }
   }
@@ -240,5 +218,4 @@ export default {
     color: #d86262;
   }
 }
-
 </style>

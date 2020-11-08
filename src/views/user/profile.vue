@@ -2,8 +2,9 @@
   <div class="user">
     <!-- 导航栏 -->
     <van-nav-bar
+
       class="page-nav-bar"
-      title="个人资料"
+      left-text="个人资料"
       left-arrow
       @click-left="$router.back()"
     />
@@ -16,42 +17,51 @@
     >
     <!-- 个人信息 -->
     <van-cell
+    size="large"
       class="photo-cell"
       title="头像"
       is-link
       center
       @click="$refs.file.click()"
     >
-      <van-image
-        class="avatar"
-        fit="cover"
-        round
-      />
+      <van-image class="avatar" src="https://img.yzcdn.cn/vant/cat.jpeg" fit="cover" round
+      width="55px" height="55px"
+      >
+      <template v-slot:loading>
+          <van-loading type="spinner" size="20" />
+      </template>
+</van-image>
     </van-cell>
     <van-cell
+    size="large"
       title="昵称:"
       is-link
       @click="isUpdateNameShow = true"
       :value="user.name"
     />
     <van-cell
+    size="large"
       title="性别:"
       is-link
       @click="isUpdateGenderShow = true"
-      v-model="user.gender"
+      :value="user.gender === 0 ? '男' : '女'"
     />
         <van-cell
+      size="large"
       title="手机号码:"
       :value="user.phone"
       is-link
       @click="isUpdatePhoneShow = true"
     />
         <van-cell
+        size="large"
       title="服务区域:"
+      :value="user.service"
       is-link
       @click="isUpdateServiceShow = true"
     />
         <van-cell
+        size="large"
       title="详细地址:"
       is-link
       @click="isUpdateAddressShow = true"
@@ -67,6 +77,7 @@
           <van-button  round class="send-sms-btn" size="small" type="default" native-type="button" @click="onSendSms" v-else>获取验证码</van-button>
         </template>
           </van-field>
+        <van-button class="save" @click="SaveUserMessage">保存</van-button>
 
     <!-- 个人信息 -->
 <!-- 弹层 -->
@@ -104,6 +115,7 @@
     >
       <update-gender
         v-if="isUpdateGenderShow"
+        v-model="user.gender"
         @close="isUpdateGenderShow = false"
       />
     </van-popup>
@@ -134,6 +146,19 @@
       />
     </van-popup>
     <!-- /编辑详细地址 -->
+                <!-- 编服务地址 -->
+    <van-popup
+      v-model="isUpdateServiceShow"
+      style="height: 100%;"
+      position="bottom"
+    >
+      <update-service
+        v-if="isUpdateServiceShow"
+        v-model="user.service"
+        @close="isUpdateServiceShow = false"
+      />
+    </van-popup>
+    <!-- /编辑服务地址 -->
 
   </div>
 </template>
@@ -144,6 +169,9 @@ import UpdateName from './components/update-name'
 import UpdatePhoto from './components/update-photo'
 import UpdatePhone from './components/update-phone'
 import UpdateAddress from './components/update-address'
+import UpdateService from './components/update-service'
+
+import { mapState } from 'vuex'
 export default {
   name: 'User',
   components: {
@@ -151,19 +179,14 @@ export default {
     UpdateName,
     UpdatePhoto,
     UpdatePhone,
-    UpdateAddress
+    UpdateAddress,
+    UpdateService
 
   },
   props: {},
   data () {
     return {
       user: {
-        src: '',
-        name: '芜湖大司马',
-        gender: '男',
-        phone: 13911111111,
-        address: '长沙市岳麓区东方红大厦'
-
       }, // 个人信息
       isUpdateNameShow: false,
       isUpdateGenderShow: false,
@@ -175,7 +198,9 @@ export default {
       isCountDown: false
     }
   },
-  computed: {},
+  computed: {
+    ...mapState(['user'])
+  },
   watch: {},
 
   mounted () {},
@@ -196,6 +221,9 @@ export default {
     },
     onSendSms () {
       this.isCountDown = true
+    },
+    SaveUserMessage () {
+      this.$router.push('/My')
     }
 
   }
@@ -204,6 +232,23 @@ export default {
 
 <style scoped lang="scss">
 .user{
+.page-nav-bar{
+    height: 128px;
+
+    background-color:#3F51B5 ;
+
+  }
+  ::v-deep .van-nav-bar__text{
+      font-size: 32px;
+      color: white;
+    }
+    ::v-deep .van-nav-bar__arrow{
+      color: white;
+    }
+    .van-cell__title>span {
+      font-size: 26x;
+    }
+
   .avatar {
     width: 60px;
     height: 60px;
@@ -218,6 +263,18 @@ export default {
       display: flex;
       flex-direction: row-reverse;
     }
+  }
+  .save {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 98px;
+    width: 100%;
+    font-size: 28px;
+    line-height: 98px;
+    color: white;
+    text-align: center;
+    background-color: #3F51B5 ;
   }
 }
 </style>
