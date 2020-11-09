@@ -72,6 +72,7 @@ export default {
 <style lang="scss" scoped>
 .service-staffs {
   background-color: #3f51b5;
+  box-sizing: border-box;
   height: 252px;
 }
 .service-staff {
@@ -79,6 +80,7 @@ export default {
   justify-content: center;
   align-items: center;
   background-color: #3f51b5;
+  padding-top: 92px;
 }
 .search {
   width: 85%;
@@ -155,5 +157,15 @@ button {
 }
 .van-nav-bar {
   background-color: #3f51b5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  ::v-deep .van-nav-bar__left{
+    .van-nav-bar__text{
+      color: #fff;
+      font-size: 32px;
+    }
+  }
 }
 </style>
