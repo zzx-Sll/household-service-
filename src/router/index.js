@@ -7,6 +7,7 @@ const routes = [
   // layout主组件
   {
     path: '/',
+    redirect: '/Home',
     component: () => import('@/views/layout'),
 
     children: [{
@@ -14,7 +15,6 @@ const routes = [
       path: '/Home',
       component: () => import('../views/layout/Home/index.vue')
 
-      // redirect: '/Home'
     },
     { path: '/My', component: () => import('@/views/my') },
     { path: '/HouseWorker', component: () => import('@/views/HouseWorker') },
@@ -47,7 +47,7 @@ const routes = [
 
   },
   {
-    //
+    // 智能匹配
     path: '/boss',
     name: 'ServiceStaff',
     component: () => import('../views/boss/index.vue')
@@ -57,7 +57,9 @@ const routes = [
   { path: '/AboutUs', component: () => import('@/views/aboutus') },
   // 身份认证组件
   { path: '/power', component: () => import('@/views/Authentication/power') },
-  { path: '/companyAdmin', component: () => import('@/views/Authentication/company-admin') }
+  { path: '/companyAdmin', component: () => import('@/views/Authentication/company-admin') },
+  // 家政求职组件
+  { path: '/HouseJob', component: () => import('@/views/layout/Home/components/HouseJob.vue') }
 
 ]
 
