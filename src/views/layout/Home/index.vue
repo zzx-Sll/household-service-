@@ -1,6 +1,7 @@
 <template>
   <div class="all">
     <van-nav-bar left-text="家政平台"
+                 :border="false"
                  class="navbar" />
 
     <div class="head">

@@ -1,7 +1,7 @@
 <template>
   <div class="nav">
     <div class="service-staffs">
-      <van-nav-bar left-text="家政平台" class="navbar" />
+      <van-nav-bar left-text="家政平台" class="navbar" :border="false"/>
       <!-- <div class="Housekeeping">家政平台</div> -->
       <div class="service-staff">
         <van-search v-model="value" placeholder="智能匹配" class="search" @click="showPopup" />
