@@ -237,8 +237,8 @@
       </div>
     </div>
     <div class="btn-puls">
-      <van-button type="primary" size="large" class="vbs_btn" round>清除条件</van-button>
-      <van-button type="primary" size="large" class="vbs_btn" round>确认筛选</van-button>
+      <van-button type="primary" size="small" class="vbs_btn" round>清除条件</van-button>
+      <van-button type="primary" size="small" class="vbs_btn" round>确认筛选</van-button>
     </div>
 
   </div>

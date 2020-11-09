@@ -1,8 +1,6 @@
 <template>
   <div class="all">
     <van-nav-bar left-text="家政平台"
-                 left-arrow
-                 @click-left="onClickLeft"
                  class="navbar" />
 
     <div class="head">
@@ -133,9 +131,6 @@ export default {
     }
   },
   methods: {
-    onClickLeft () {
-      this.$toast('返回')
-    }
 
   }
 }
