@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     // 用户信息
     user: JSON.parse(window.localStorage.getItem('usersdata')) || { username: '', password: '' }
+
   },
   mutations: {
     // 存储用户信息的函数

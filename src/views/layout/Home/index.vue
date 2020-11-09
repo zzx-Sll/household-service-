@@ -17,7 +17,7 @@
       <van-grid :column-num="3" gutter="11px" :border="false">
         <van-grid-item text="入驻商务部" @click="$router.push('/Business')">
         </van-grid-item>
-        <van-grid-item text="家政求职" @click="getRes">
+        <van-grid-item text="家政求职" @click="$router.push('/HouseJob')">
         </van-grid-item>
         <van-grid-item text="找家庭服务">
         </van-grid-item>
@@ -33,12 +33,77 @@
     <!-- 服务项目 -->
     <div class="content2">
       <ul>
-        <li v-for="(item,index) in 8" :key="index">
+        <!-- 月嫂  -->
+        <li>
           <div class="box">
             <div class="radiu"></div>
-            <span>nihao</span>
+            <span>月嫂</span>
           </div>
         </li>
+        <!-- 月嫂  -->
+
+        <!-- 育婴师  -->
+        <li>
+          <div class="box">
+            <div class="radiu"></div>
+            <span>育婴师</span>
+          </div>
+        </li>
+        <!-- 育婴师  -->
+
+        <!-- 保洁/清洁  -->
+        <li>
+          <div class="box">
+            <div class="radiu"></div>
+            <span>保洁/清洁</span>
+          </div>
+        </li>
+        <!-- 保洁/清洁  -->
+
+        <!-- 保姆  -->
+        <li>
+          <div class="box">
+            <div class="radiu"></div>
+            <span>保姆</span>
+          </div>
+        </li>
+        <!-- 保姆  -->
+
+        <!-- 产康师  -->
+        <li>
+          <div class="box">
+            <div class="radiu"></div>
+            <span>产康师</span>
+          </div>
+        </li>
+        <!-- 产康师  -->
+
+        <!-- 早教/托育  -->
+        <li>
+          <div class="box">
+            <div class="radiu"></div>
+            <span>早教/托育</span>
+          </div>
+        </li>
+        <!-- 早教/托育  -->
+
+        <!-- 养老/陪护  -->
+        <li>
+          <div class="box">
+            <div class="radiu"></div>
+            <span>养老/陪护</span>
+          </div>
+        </li>
+        <!-- 养老/陪护  -->
+
+        <!-- 家装/搬家  -->
+        <li>
+          <div class="box">
+            <div class="radiu"></div>
+            <span>家装/搬家</span>
+          </div>
+        </li>
+        <!-- 家装/搬家  -->
       </ul>
     </div>
     <!-- 公司中 -->
@@ -47,7 +112,7 @@
         <div slot="title">湖南家信认证家服公司</div>
       </van-cell>
 
-      <van-cell v-for="(data,i) in 3" :key="i">
+      <van-cell v-for="(data,i) in 3" :key="i" @click="$router.push('/CompanyDetails')">
         <div class="comment_list">
           <div class="touxiang">
             <img src="https://img.yzcdn.cn/vant/apple-1.jpg" alt="">
@@ -76,7 +141,7 @@
         <div slot="title">诚信注册家服员</div>
       </van-cell>
 
-      <van-cell v-for="(data,i) in 3" :key="i">
+      <van-cell v-for="(data,i) in 3" :key="i" @click="$router.push('/MaternityMatron')">
         <div class="comment_list">
           <div class="touxiang">
             <img src="https://img.yzcdn.cn/vant/apple-1.jpg" alt="">
@@ -119,10 +184,10 @@ export default {
     }
   },
   methods: {
-    async  getRes () {
+    /*  async  getRes () {
       const res = await this.$request.post('getAPI', { params: { nusername: 'bob' } })
       console.log(res)
-    }
+    } */
   }
 }
 </script>
@@ -214,7 +279,8 @@ export default {
           border-radius: 50%;
         }
         span {
-          font-size: 40px;
+          margin-top: 10px;
+          font-size: 25px;
         }
       }
     }
