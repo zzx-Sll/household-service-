@@ -12,13 +12,15 @@ const currentArray = []
 // console.log(files)
 files.keys().forEach(key => {
   if (key === './index.js') return
+  // console.log('这又是啥', files(key))
   currentArray.push(files(key).default)
+  // currentArray.push(files(key).default)
 })
 
 currentArray.forEach(item => {
   for (const [path, target] of Object.entries(item)) {
     const protocal = path.split('|')
-    console.log(protocal[0], protocal[1])
+    // console.log(protocal[0], protocal[1])
     MockJs.mock(new RegExp(`^${protocal[0]}`), protocal[1], target)
   }
 })

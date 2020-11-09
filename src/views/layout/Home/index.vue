@@ -1,16 +1,12 @@
 <template>
   <div class="all">
-    <van-nav-bar left-text="家政平台"
-                 :border="false"
-                 class="navbar" />
+    <van-nav-bar left-text="家政平台" :border="false" class="navbar" />
 
     <div class="head">
       <!-- 上轮播图 -->
       <div class="swipe">
-        <van-swipe :autoplay="3000"
-                   class="swipeimg">
-          <van-swipe-item v-for="(image, index) in images"
-                          :key="index">
+        <van-swipe :autoplay="3000" class="swipeimg">
+          <van-swipe-item v-for="(image, index) in images" :key="index">
             <img :src="image" />
           </van-swipe-item>
         </van-swipe>
@@ -18,13 +14,10 @@
     </div>
     <!-- 服务内容 -->
     <div class="content">
-      <van-grid :column-num="3"
-                gutter="11px"
-                :border="false">
-        <van-grid-item text="入驻商务部"
-                       @click="$router.push('/Business')">
+      <van-grid :column-num="3" gutter="11px" :border="false">
+        <van-grid-item text="入驻商务部" @click="$router.push('/Business')">
         </van-grid-item>
-        <van-grid-item text="家政求职">
+        <van-grid-item text="家政求职" @click="getRes">
         </van-grid-item>
         <van-grid-item text="找家庭服务">
         </van-grid-item>
@@ -40,8 +33,7 @@
     <!-- 服务项目 -->
     <div class="content2">
       <ul>
-        <li v-for="(item,index) in 8"
-            :key="index">
+        <li v-for="(item,index) in 8" :key="index">
           <div class="box">
             <div class="radiu"></div>
             <span>nihao</span>
@@ -51,20 +43,16 @@
     </div>
     <!-- 公司中 -->
     <div class="companydesign">
-      <van-cell icon="shop-o"
-                size="large">
+      <van-cell icon="shop-o" size="large">
         <div slot="title">湖南家信认证家服公司</div>
       </van-cell>
 
-      <van-cell v-for="(data,i) in 3"
-                :key="i">
+      <van-cell v-for="(data,i) in 3" :key="i">
         <div class="comment_list">
           <div class="touxiang">
-            <img src="https://img.yzcdn.cn/vant/apple-1.jpg"
-                 alt="">
+            <img src="https://img.yzcdn.cn/vant/apple-1.jpg" alt="">
             <div>
-              <van-icon name="location"
-                        class="dizhi" />10000km
+              <van-icon name="location" class="dizhi" />10000km
             </div>
           </div>
           <div class="youall">
@@ -84,17 +72,14 @@
 
     <!-- 服务人员详情 -->
     <div class="companydesign">
-      <van-cell icon="manager"
-                size="large">
+      <van-cell icon="manager" size="large">
         <div slot="title">诚信注册家服员</div>
       </van-cell>
 
-      <van-cell v-for="(data,i) in 3"
-                :key="i">
+      <van-cell v-for="(data,i) in 3" :key="i">
         <div class="comment_list">
           <div class="touxiang">
-            <img src="https://img.yzcdn.cn/vant/apple-1.jpg"
-                 alt="">
+            <img src="https://img.yzcdn.cn/vant/apple-1.jpg" alt="">
 
           </div>
           <div class="youall">
@@ -121,8 +106,10 @@
 </template>
 
 <script>
-
+// import axios from 'axios'
+// import request from '../../../utiles/request'
 export default {
+
   data () {
     return {
       images: [
@@ -132,7 +119,10 @@ export default {
     }
   },
   methods: {
-
+    async  getRes () {
+      const res = await this.$request.post('getAPI', { params: { nusername: 'bob' } })
+      console.log(res)
+    }
   }
 }
 </script>

@@ -18,22 +18,22 @@
         <!-- 手机框 -->
 
         <!-- 意向岗位 -->
-        <van-cell-group>
-          <van-cell title="* 意向岗位 ：">
-            <template #label>
-              <div class="intention-job">
-                <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">月嫂</van-tag>
-                <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">育婴师</van-tag>
-                <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">保洁/清洁</van-tag>
-                <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">保姆</van-tag>
-                <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">早教/托管</van-tag>
-                <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">养老/陪护</van-tag>
-                <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">家装/搬家</van-tag>
-                <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">产康师</van-tag>
-              </div>
-            </template>
-          </van-cell>
-        </van-cell-group>
+        <!-- <van-cell-group> -->
+        <van-cell title="* 意向岗位 ：">
+          <template #label>
+            <div class="intention-job">
+              <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">月嫂</van-tag>
+              <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">育婴师</van-tag>
+              <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">保洁/清洁</van-tag>
+              <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">保姆</van-tag>
+              <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">早教/托管</van-tag>
+              <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">养老/陪护</van-tag>
+              <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">家装/搬家</van-tag>
+              <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">产康师</van-tag>
+            </div>
+          </template>
+        </van-cell>
+        <!-- </van-cell-group> -->
         <!-- 意向岗位 -->
 
         <!-- 已获证书 -->
@@ -46,7 +46,6 @@
                 <van-tag class="certificate-tag" color="#9f9a9a" plain round type="primary">小儿推拿</van-tag>
                 <van-tag class="certificate-tag" color="#9f9a9a" plain round type="primary">保姆</van-tag>
                 <van-tag class="certificate-tag" color="#9f9a9a" plain round type="primary">保育员证</van-tag>
-
               </div>
             </template>
           </van-cell>
