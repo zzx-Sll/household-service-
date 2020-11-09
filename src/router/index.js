@@ -7,14 +7,15 @@ const routes = [
   // layout主组件
   {
     path: '/',
+    redirect: '/Home',
     component: () => import('@/views/layout'),
 
     children: [{
       // home组件
       path: '/Home',
+
       component: () => import('../views/layout/Home/index.vue')
 
-      // redirect: '/Home'
     },
     { path: '/My', component: () => import('@/views/my') },
     { path: '/HouseWorker', component: () => import('@/views/HouseWorker') },
@@ -45,6 +46,18 @@ const routes = [
     path: '/Business',
     name: 'Business',
     component: () => import('@/views/layout/Home/components/Business.vue')
+  },
+  // 城市家政服务标准
+  {
+    path: '/UrbanService',
+    name: 'UrbanService',
+    component: () => import('@/views/layout/Home/components/UrbanService.vue')
+  },
+  // 找家政服务组件needs
+  {
+    path: '/DomesticNeeds',
+    name: 'DomesticNeeds',
+    component: () => import('@/views/layout/Home/components/DomesticNeeds.vue')
   },
   {
     // 公司详情组件

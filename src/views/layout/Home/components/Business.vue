@@ -5,57 +5,69 @@
                  @click-left="onClickLeft"
                  class="navbar" />
     <div class="kard">
-      <van-cell title="单元格"
-                class="first">
-        <div slot="title">企业资料</div>
+      <van-cell class="first">
+        <div slot="title">
+          <span class="bluebox">企业资料</span>
+        </div>
       </van-cell>
-      <van-field readonly
-                 clickable
-                 label="法人类型"
-                 :value="value"
-                 placeholder="请选择法人类型"
-                 @click="showPicker = true"
-                 input-align="right" />
-      <van-field v-model="Enterprisename"
-                 label="企业名称:"
-                 input-align="right" />
-      <van-field v-model="showname"
-                 label="显示名字:"
-                 input-align="right" />
-      <van-field v-model="CreditCode"
-                 label="社会信用代码:"
-                 input-align="right"
-                 placeholder="请输入统一的18位信用代码" />
-      <van-field readonly
-                 clickable
-                 name="datetimePicker"
-                 :value="timevalue"
-                 label="注册时间"
-                 placeholder="点击选择工商注册时间"
-                 @click="timeshow = true"
-                 input-align="right" />
-      <van-field v-model="dollar"
-                 label="注册资本:"
-                 input-align="right" />
-      <van-field label="注册地区:"
-                 readonly
-                 clickable
-                 name="area"
-                 :value="areavalue"
-                 placeholder="点击选择省市区"
-                 @click="showArea = true"
-                 input-align="right" />
-      <van-field :value="typevalue"
-                 readonly
-                 clickable
-                 label="企业类型:"
-                 input-align="right"
-                 placeholder="点击选择企业类型"
-                 @click="showtype = true" />
-      <!-- <van-field label="主营业务:" /> -->
-      <van-cell title="主营业务">
-        <div slot="label">描述信息</div>
-      </van-cell>
+      <van-form>
+        <van-field readonly
+                   clickable
+                   label="法人类型"
+                   :value="value"
+                   placeholder="请选择法人类型"
+                   @click="showPicker = true"
+                   input-align="right" />
+        <van-field v-model="Enterprisename"
+                   label="企业名称:"
+                   :rules="rule.name_company" />
+        <van-field v-model="showname"
+                   label="显示名字:"
+                   :rules="rule.showname" />
+        <van-field v-model="CreditCode"
+                   label="社会信用代码:"
+                   input-align="right"
+                   placeholder="请输入统一的18位信用代码" />
+        <van-field readonly
+                   clickable
+                   name="datetimePicker"
+                   :value="timevalue"
+                   label="注册时间"
+                   placeholder="点击选择工商注册时间"
+                   @click="timeshow = true"
+                   input-align="right" />
+        <van-field v-model="dollar"
+                   label="注册资本:"
+                   :rules="rule.money" />
+        <van-field label="注册地区:"
+                   readonly
+                   clickable
+                   name="area"
+                   :value="areavalue"
+                   placeholder="点击选择省市区"
+                   @click="showArea = true"
+                   input-align="right" />
+        <van-field :value="typevalue"
+                   readonly
+                   clickable
+                   label="企业类型:"
+                   input-align="right"
+                   placeholder="点击选择企业类型"
+                   @click="showtype = true" />
+        <!-- <van-field label="主营业务:" /> -->
+        <van-cell title="主营业务">
+          <div slot="label">
+            <van-tag size="medium"
+                     round
+                     type="primary"
+                     plain
+                     v-for="(item,i) in 4"
+                     :key="i"
+                     class="skill"
+                     color="#A7A2A2">月嫂</van-tag>
+          </div>
+        </van-cell>
+      </van-form>
     </div>
     <!-- 法人选择器 -->
     <van-popup v-model="showPicker"
@@ -127,7 +139,15 @@ export default {
       // 企业类型数据
       typevalue: '',
       showtype: false,
-      typedata: ['酱油型', '边缘ob型', '挂机划水型', '混日子型']
+      typedata: ['酱油型', '边缘ob型', '挂机划水型', '混日子型'],
+
+      // 验证规则
+      rule: {
+        name_company: [{ required: true, message: '请填写企业名称' }],
+        showname: [{ required: true, message: '请填写显示名称' }],
+        money: [{ required: true, message: '请填写注册资本' }]
+      }
+
     }
   },
   methods: {
@@ -164,11 +184,7 @@ export default {
   background-color: #3f51b5;
   height: 180px;
 }
-.head {
-  margin-top: 0;
-  height: 80px;
-  background-color: #3f51b5;
-}
+
 ::v-deep .navbar {
   .van-nav-bar__arrow {
     color: white;
@@ -180,12 +196,16 @@ export default {
 .kard {
   width: 704px;
   height: 1126px;
-
   position: absolute;
   top: 53%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
+  font-size: 32px;
+  .bluebox {
+    padding-left: 20px;
+    border-left: #3f51b5 solid 8px;
+  }
   .van-cell {
     line-height: 70px;
   }
@@ -194,6 +214,9 @@ export default {
   }
   .first {
     height: 110px;
+  }
+  .skill {
+    margin: 10px;
   }
 }
 .next {
