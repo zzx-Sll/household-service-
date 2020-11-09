@@ -1,6 +1,55 @@
 <template>
   <div class="user">
     <!-- 导航栏 -->
+<<<<<<< HEAD
+    <van-nav-bar class="page-nav-bar" title="个人资料" left-arrow @click-left="$router.back()" />
+
+    <van-nav-bar class="page-nav-bar" left-text="个人资料" left-arrow @click-left="$router.back()" />
+
+    <!-- /导航栏 -->
+    <input type="file" hidden ref="file" @change="onFileChange">
+    <!-- 个人信息 -->
+    <van-cell class="photo-cell" title="头像" is-link center @click="$refs.file.click()">
+      <van-image class="avatar" fit="cover" round />
+    </van-cell>
+    <van-cell title="昵称" is-link @click="isUpdateNameShow = true" />
+    <van-cell title="性别" is-link @click="isUpdateGenderShow = true" />
+    <van-cell title="手机号码" is-link @click="isUpdatePhoneShow = true" />
+    <van-cell title="服务区域" is-link @click="isUpdateServiceShow = true" />
+    <van-cell title="详细地址" is-link @click="isUpdateAddressShow = true" />
+    <van-field label="手机验证码:" name="code" placeholder="请输入验证码" type="number" maxlength="6">
+      <i slot="left-icon" class="iconfont iconyanzhengma"></i>
+
+      <!-- <van-count-down :time="1000 * 60" format="ss s" v-if="isCountDown" @finish="isCountDown = false" /> -->
+      <template #button>
+        <van-count-down :time="1000 * 60" format="ss s" />
+        <van-button round class="send-sms-btn" size="small" type="default" native-type="button">获取验证码</van-button>
+      </template>
+    </van-field>
+
+    <van-cell size="large" class="photo-cell" title="头像" is-link center @click="$refs.file.click()">
+      <van-image class="avatar" src="https://img.yzcdn.cn/vant/cat.jpeg" fit="cover" round width="55px" height="55px">
+        <template v-slot:loading>
+          <van-loading type="spinner" size="20" />
+        </template>
+      </van-image>
+    </van-cell>
+    <van-cell size="large" title="昵称:" is-link @click="isUpdateNameShow = true" :value="user.name" />
+    <van-cell size="large" title="性别:" is-link @click="isUpdateGenderShow = true" :value="user.gender === 0 ? '男' : '女'" />
+    <van-cell size="large" title="手机号码:" :value="user.phone" is-link @click="isUpdatePhoneShow = true" />
+    <van-cell size="large" title="服务区域:" :value="user.service" is-link @click="isUpdateServiceShow = true" />
+    <van-cell size="large" title="详细地址:" is-link @click="isUpdateAddressShow = true" :value="user.address" />
+    <van-field label="手机验证码:" name="code" placeholder="请输入验证码" type="number" maxlength="6">
+      <i slot="left-icon" class="iconfont iconyanzhengma"></i>
+
+      <!-- <van-count-down :time="1000 * 60" format="ss s" v-if="isCountDown" @finish="isCountDown = false" /> -->
+      <template #button>
+        <van-count-down :time="1000 * 60" format="ss s" v-if="isCountDown" @finish="isCountDown = false" />
+        <van-button round class="send-sms-btn" size="small" type="default" native-type="button" @click="onSendSms" v-else>获取验证码</van-button>
+      </template>
+    </van-field>
+    <van-button class="save" @click="SaveUserMessage">保存</van-button>
+=======
     <van-nav-bar class="page-nav-bar"
                  left-text="个人资料"
                  left-arrow
@@ -79,10 +128,61 @@
     </van-field>
     <van-button class="save"
                 @click="SaveUserMessage">保存</van-button>
+>>>>>>> ac6bb2feeff4d82501e88db4860ac8362f9f0a5a
 
     <!-- 个人信息 -->
     <!-- 弹层 -->
     <!-- 编辑头像 -->
+<<<<<<< HEAD
+    <van-popup v-model="isUpdatePhotoShow" position="bottom" style="height: 100%;">
+      <update-photo v-if="isUpdatePhotoShow" :img="img" />
+    </van-popup>
+    <!-- /编辑头像 -->
+    <!-- 编辑昵称 -->
+    <van-popup v-model="isUpdateNameShow" style="height: 100%;" position="bottom">
+      <update-name v-if="isUpdateNameShow" @close="isUpdateNameShow = false" />
+
+      <van-popup v-model="isUpdateNameShow" style="height: 100%;" position="bottom">
+        <update-name v-if="isUpdateNameShow" v-model="user.name" @close="isUpdateNameShow = false" />
+
+      </van-popup>
+      <!-- /编辑昵称 -->
+
+      <!-- 编辑性别 -->
+      <van-popup v-model="isUpdateGenderShow" style="height: 100%;" position="bottom">
+        <update-gender v-if="isUpdateGenderShow" @close="isUpdateGenderShow = false" />
+      </van-popup>
+      <!-- /编辑性别 -->
+      <!-- 编辑手机 -->
+      <van-popup v-model="isUpdatePhoneShow" style="height: 100%;" position="bottom">
+        <update-phone v-if="isUpdatePhoneShow" @close="isUpdatePhoneShow = false" />
+      </van-popup>
+      <!-- /编辑手机 -->
+      <!-- 编辑详细地址 -->
+      <van-popup v-model="isUpdateAddressShow" style="height: 100%;" position="bottom">
+        <update-address v-if="isUpdateAddressShow" @close="isUpdateAddressShow = false" />
+
+        <van-popup v-model="isUpdateGenderShow" style="height: 100%;" position="bottom">
+          <update-gender v-if="isUpdateGenderShow" v-model="user.gender" @close="isUpdateGenderShow = false" />
+        </van-popup>
+        <!-- /编辑性别 -->
+        <!-- 编辑手机 -->
+        <van-popup v-model="isUpdatePhoneShow" style="height: 100%;" position="bottom">
+          <update-phone v-if="isUpdatePhoneShow" v-model="user.phone" @close="isUpdatePhoneShow = false" />
+        </van-popup>
+        <!-- /编辑手机 -->
+        <!-- 编辑详细地址 -->
+        <van-popup v-model="isUpdateAddressShow" style="height: 100%;" position="bottom">
+          <update-address v-if="isUpdateAddressShow" v-model="user.address" @close="isUpdateAddressShow = false" />
+
+        </van-popup>
+        <!-- /编辑详细地址 -->
+        <!-- 编服务地址 -->
+        <van-popup v-model="isUpdateServiceShow" style="height: 100%;" position="bottom">
+          <update-service v-if="isUpdateServiceShow" v-model="user.service" @close="isUpdateServiceShow = false" />
+        </van-popup>
+        <!-- /编辑服务地址 -->
+=======
     <van-popup v-model="isUpdatePhotoShow"
                position="bottom"
                style="height: 100%;">
@@ -137,6 +237,7 @@
                       @close="isUpdateServiceShow = false" />
     </van-popup>
     <!-- /编辑服务地址 -->
+>>>>>>> ac6bb2feeff4d82501e88db4860ac8362f9f0a5a
 
   </div>
 </template>
