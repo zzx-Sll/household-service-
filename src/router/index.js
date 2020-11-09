@@ -1,3 +1,4 @@
+
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -26,10 +27,17 @@ const routes = [
   },
 
   // My组件的子路由
+  // 个人资料
   {
     path: '/user/profile',
     name: 'user',
     component: () => import('@/views/user/profile')
+  },
+  // 我的关注
+  {
+    path: '/myfocus',
+    name: 'focus',
+    component: () => import('@/views/myfocus/index')
   },
   // 登录页面
   { path: '/Login', component: () => import('@/views/login') },
@@ -53,6 +61,15 @@ const routes = [
     component: () => import('../views/boss/index.vue')
 
   },
+
+  {
+    //
+    path: '/sttr',
+    name: 'Contact',
+    component: () => import('../views/boss/contact/contact-staff.vue')
+
+  },
+
   // 关于我们组件
   { path: '/AboutUs', component: () => import('@/views/aboutus') },
   // 身份认证组件

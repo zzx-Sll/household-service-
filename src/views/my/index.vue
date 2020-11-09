@@ -41,7 +41,7 @@
         <span slot="text"
               class="text">个人资料</span>
       </van-grid-item>
-      <van-grid-item class="grid-item">
+      <van-grid-item class="grid-item" @click="$router.push('../myfocus')">
         <i slot="icon"
            class="iconfont icon-wo"></i>
         <span slot="text"

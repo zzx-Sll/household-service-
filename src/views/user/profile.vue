@@ -164,7 +164,6 @@ export default {
   props: {},
   data () {
     return {
-
       isUpdateNameShow: false,
       isUpdateGenderShow: false,
       isUpdatePhotoShow: false,
