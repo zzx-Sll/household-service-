@@ -1,12 +1,12 @@
 <template>
   <div class="contact">
 
-    <div class="nav">
-      <div>
-        <van-icon name="arrow-left" class="icone" />
-        <span> 已联系家政人员</span>
-      </div>
-    </div>
+     <!-- 导航栏 -->
+    <van-nav-bar left-text="已联系家政人员"
+                 :border="false"
+                 left-arrow
+                 @click-left="$router.back()"
+                 class="contact-nav-bar" />
 
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
       <div class="companydesign">
@@ -87,6 +87,24 @@ export default {
 body {
   background-color: #f8f8f8;
 }
+.contact-nav-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #3f51b5;
+    height: 130px;
+    ::v-deep .van-nav-bar__left {
+      .van-icon-arrow-left,
+      .van-nav-bar__text {
+        color: #fff;
+        font-size: 30px;
+      }
+    }
+  }
+  .companydesign{
+    padding-top: 130px;
+  }
 .nav {
   // 头部 背景颜色
   height: 100px;

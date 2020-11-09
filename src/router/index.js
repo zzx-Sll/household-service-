@@ -63,7 +63,7 @@ const routes = [
   },
 
   {
-    //
+    // 已联系家政人员组件
     path: '/sttr',
     name: 'Contact',
     component: () => import('../views/boss/contact/contact-staff.vue')

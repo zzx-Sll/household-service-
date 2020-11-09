@@ -53,7 +53,7 @@
         <span slot="text"
               class="text">我的评价</span>
       </van-grid-item>
-      <van-grid-item class="grid-item">
+      <van-grid-item class="grid-item" @click="$router.push('/sttr')">
         <i slot="icon"
            class="iconfont icon-29"></i>
         <span slot="text"
