@@ -27,10 +27,17 @@ const routes = [
   },
 
   // My组件的子路由
+  // 个人资料
   {
     path: '/user/profile',
     name: 'user',
     component: () => import('@/views/user/profile')
+  },
+  // 我的关注
+  {
+    path: '/myfocus',
+    name: 'focus',
+    component: () => import('@/views/myfocus/index')
   },
   // 登录页面
   { path: '/Login', component: () => import('@/views/login') },

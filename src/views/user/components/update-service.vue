@@ -1,25 +1,21 @@
 <template>
   <div class="update-address">
     <!-- 导航栏 -->
-    <van-nav-bar
-      title="编辑服务区域"
-      left-text="取消"
-      right-text="完成"
-      @click-left="$emit('close')"
-      @click-right="onConfirm"
-    />
+    <van-nav-bar title="编辑服务区域"
+                 left-text="取消"
+                 right-text="完成"
+                 @click-left="$emit('close')"
+                 @click-right="onConfirm" />
     <!-- /导航栏 -->
     <!-- 输入框 -->
     <div class="field-wrap">
-      <van-field
-        v-model.trim="localService"
-        rows="2"
-        autosize
-        type="textarea"
-        maxlength="99"
-        placeholder="请输入服务区域"
-        show-word-limit
-      />
+      <van-field v-model.trim="localService"
+                 rows="2"
+                 autosize
+                 type="textarea"
+                 maxlength="99"
+                 placeholder="请输入服务区域"
+                 show-word-limit />
     </div>
     <!-- /输入框 -->
   </div>
@@ -31,14 +27,15 @@ export default {
   name: 'UpdateService',
   components: {},
   props: {
-    value: {
-      type: String,
-      required: true
-    }
+    // value: {
+    //   type: String,
+    //   required: true
+    // }
   },
   data () {
     return {
-      localService: this.value
+      // localService: this.value
+      localService: '湖南省长沙市'
     }
   },
   computed: {},
@@ -80,11 +77,10 @@ export default {
 .field-wrap {
   padding: 20px;
 }
-.van-nav-bar{
-    height: 128px;
+.van-nav-bar {
+  height: 128px;
 
-    background-color:#3F51B5 ;
-
+  background-color: #3f51b5;
 }
 ::v-deep .van-nav-bar__title {
   color: white;

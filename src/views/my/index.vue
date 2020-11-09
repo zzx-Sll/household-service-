@@ -41,7 +41,7 @@
         <span slot="text"
               class="text">个人资料</span>
       </van-grid-item>
-      <van-grid-item class="grid-item">
+      <van-grid-item class="grid-item" @click="$router.push('../myfocus')">
         <i slot="icon"
            class="iconfont icon-wo"></i>
         <span slot="text"
@@ -133,6 +133,7 @@ export default {
         .then(() => {
         // 确认退出：清除登录状态（容器中的 user + 本地存储中的 user）
           this.$store.commit('setUser', [null, null])
+          window.localStorage.removeItem('usersdata')
 
           // 在退出登录把组件缓存清除掉
           // this.$store.commit('removeCachePage', 'LayoutIndex')

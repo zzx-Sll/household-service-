@@ -63,7 +63,6 @@
     <div class="main-info">
       <!-- 主要技能  -->
       <div class="main-skill">
-
         <ul class="border">
           <li><span>主要技能</span></li>
         </ul>
