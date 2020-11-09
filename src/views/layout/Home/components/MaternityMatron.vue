@@ -159,6 +159,7 @@ export default {
     return {
       // 折叠面板的索引
       activeNames: ['1', '2']
+
     }
   },
   methods: {
