@@ -1,3 +1,4 @@
+
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -53,6 +54,15 @@ const routes = [
     component: () => import('../views/boss/index.vue')
 
   },
+
+  {
+    //
+    path: '/sttr',
+    name: 'Contact',
+    component: () => import('../views/boss/contact/contact-staff.vue')
+
+  },
+
   // 关于我们组件
   { path: '/AboutUs', component: () => import('@/views/aboutus') },
   // 身份认证组件
