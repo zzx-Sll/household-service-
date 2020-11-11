@@ -46,6 +46,7 @@
                 <van-tag class="certificate-tag" color="#9f9a9a" plain round type="primary">小儿推拿</van-tag>
                 <van-tag class="certificate-tag" color="#9f9a9a" plain round type="primary">保姆</van-tag>
                 <van-tag class="certificate-tag" color="#9f9a9a" plain round type="primary">保育员证</van-tag>
+
               </div>
             </template>
           </van-cell>
