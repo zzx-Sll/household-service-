@@ -25,7 +25,7 @@ for (var i = 1; i <= 10; i++) {
 
   companys.push({
     // id
-    id: i,
+    id: i + '',
     // 公司名字
     name: `长沙第${i}家政公司`,
     //  公司图片
@@ -38,6 +38,10 @@ for (var i = 1; i <= 10; i++) {
     address: `${Random.county(true)}第${i}街道`,
     // 关键字
     keyWord: keyWord,
+    // 公司标签
+    comTag1: '协会成员',
+    comTag2: '服务好',
+    comTag3: '环境优美',
     // 注册人员
     regPerson: i,
     // 认证客户数
@@ -49,7 +53,9 @@ for (var i = 1; i <= 10; i++) {
     // 公司规模
     scale: `${i}00人以下`,
     // 公司介绍
-    companyIntroduce: Random.cparagraph()
+    companyIntroduce: Random.cparagraph(),
+    // 是否已关注
+    is_followed: false
 
   })
 }

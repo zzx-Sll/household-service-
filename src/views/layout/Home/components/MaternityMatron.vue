@@ -197,6 +197,10 @@ export default {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
+      .van-tag {
+        padding: 10px 20px;
+        margin: 0 10px;
+      }
       div {
         margin-top: 20px;
         span {

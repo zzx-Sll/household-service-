@@ -1,3 +1,4 @@
+
 <template>
   <div class="all">
     <van-nav-bar left-text="家政平台" :border="false" class="navbar" />
@@ -6,7 +7,7 @@
       <!-- 上轮播图 -->
       <div class="swipe">
         <van-swipe :autoplay="3000" class="swipeimg">
-          <van-swipe-item v-for="(image, index) in images" :key="index">
+          <van-swipe-item v-for="(image, index) in  companyImages" :key="index">
             <img :src="image" />
           </van-swipe-item>
         </van-swipe>
@@ -111,25 +112,33 @@
       <van-cell icon="shop-o" size="large">
         <div slot="title">湖南家信认证家服公司</div>
       </van-cell>
-
-      <van-cell v-for="(data,i) in 3" :key="i" @click="$router.push('/CompanyDetails')">
+      <!-- 公司简介 -->
+      <van-cell v-for="(item,index) in companyList" :key="item.id" @click="$router.push(`/CompanyDetails/${item.id}`)">
         <div class="comment_list">
           <div class="touxiang">
-            <img src="https://img.yzcdn.cn/vant/apple-1.jpg" alt="">
+            <img :src="item.photo[index]" alt="">
             <div>
-              <van-icon name="location" class="dizhi" />10000km
+              <van-icon name="location" class="dizhi" />{{item.distance}}
             </div>
           </div>
           <div class="youall">
             <div class="nameicon">
-              <div>公司名称</div>
+              <div>{{item.name}}</div>
             </div>
-            <div>评价</div>
-            <div>标签</div>
-            <div>具体地址</div>
+            <div>{{item.ctitle}}</div>
+            <div class="company-tag">
+              <van-tag color="#3f51b5" plain round type="primary">{{item.comTag1}}</van-tag>
+              <van-tag color="#3f51b5" plain round type="primary">{{item.comTag2}}</van-tag>
+              <van-tag color="#3f51b5" plain round type="primary">{{item.comTag3}}</van-tag>
+
+            </div>
+            <div style="width:280px; overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;">{{item.address}}</div>
           </div>
         </div>
       </van-cell>
+      <!-- 公司简介 -->
       <div class="gengduo">更多公司
         <van-icon name="arrow" />
       </div>
@@ -145,7 +154,6 @@
         <div class="comment_list">
           <div class="touxiang">
             <img src="https://img.yzcdn.cn/vant/apple-1.jpg" alt="">
-
           </div>
           <div class="youall">
             <div class="nameicon">
@@ -171,24 +179,41 @@
 </template>
 
 <script>
-// import axios from 'axios'
-// import request from '../../../utiles/request'
+
 export default {
 
+  created () {
+    this.getThreeCompanys()
+  },
+  mounted () {
+
+  },
   data () {
     return {
-      images: [
-        'https://img.yzcdn.cn/vant/apple-1.jpg',
-        'https://img.yzcdn.cn/vant/apple-2.jpg'
-      ]
+      companyList: [],
+      companyImages: []
     }
   },
+
   methods: {
-    /*  async  getRes () {
-      const res = await this.$request.post('getAPI', { params: { nusername: 'bob' } })
-      console.log(res)
-    } */
+    // 获取首页三个公司的函数
+    async getThreeCompanys () {
+      const { data: res } = await this.$request.get('getCompanys')
+      // console.log('?', res.data)
+      // 变历获取的数据
+      res.data.forEach((item, i) => {
+        if (i <= 2) {
+          // 获取首页的三个公司
+          this.companyList.push(res.data[i])
+          // 实现首页公司图片的轮播
+          this.companyImages = res.data[0].photo
+          return this.companyList
+        }
+      })
+    }
+
   }
+
 }
 </script>
 
@@ -333,5 +358,12 @@ export default {
 .myself {
   font-size: 18px;
   color: #a7a2a2;
+}
+// 公司标签的样式
+.company-tag {
+  .van-tag {
+    padding: 10px 20px;
+    margin: 0 10px;
+  }
 }
 </style>
