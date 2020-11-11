@@ -30,7 +30,7 @@
 </template>
 
 <script>
-// import { mapState } from 'vuex'
+// import { company } from 'vuex'
 export default {
   name: 'LayoutIndex',
   data () {

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { company } from 'vuex';
 <template>
   <div class="Company-Details">
     <!-- 家政公司详情组件 -->
@@ -9,10 +10,8 @@ import axios from 'axios';
     <!-- 家政公司的轮播图片 -->
     <div class="company-swipe">
       <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-        <van-swipe-item>1</van-swipe-item>
-        <van-swipe-item>2</van-swipe-item>
-        <van-swipe-item>3</van-swipe-item>
-        <van-swipe-item>4</van-swipe-item>
+        <van-swipe-item v-for="(img,index) in  companyPhoto " :key="index"><img :src="img"></van-swipe-item>
+
       </van-swipe>
     </div>
     <!-- 家政公司的轮播图片 -->
@@ -21,17 +20,20 @@ import axios from 'axios';
     <div class="followed-reg">
       <div class="reg-header">
         <div class="header-left">
-          <span>1</span>
+          <span>{{currentCompanyDetails.regPerson}}</span>
           <span>注册家政员数</span>
         </div>
         <div class="header-right">
-          <span>1000</span>
+          <span>{{currentCompanyDetails.attestationPerson}}</span>
           <span>已认证客户数</span>
         </div>
         <div class="center"></div>
       </div>
       <div class="reg-footer">
-        <van-button class="followed-btn" round plain size="mini">关注</van-button>
+        <!-- 关注按钮 -->
+        <van-button @click="changeFollowed" v-if="currentCompanyDetails.is_followed" class="followed-btn" round plain size="mini">已关注</van-button>
+        <van-button v-else @click="changeFollowed" class=" followed-btn" round plain size="mini">关注</van-button>
+        <!-- 关注按钮 -->
       </div>
     </div>
     <!-- 关注与注册认证区域 -->
@@ -69,9 +71,10 @@ import axios from 'axios';
             </ul>
             <div class="card-img">
               <ul>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li><img :src="companyPhoto[1]" alt=""></li>
+                <li><img :src="companyPhoto[0]" alt=""></li>
+                <li><img :src="companyPhoto[2]" alt=""></li>
+
               </ul>
             </div>
             <ul class="border">
@@ -79,9 +82,9 @@ import axios from 'axios';
             </ul>
             <div class="card-img">
               <ul>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li><img :src="companyPhoto[2]" alt=""></li>
+                <li><img :src="companyPhoto[0]" alt=""></li>
+                <li><img :src="companyPhoto[3]" alt=""></li>
               </ul>
             </div>
           </div>
@@ -93,9 +96,9 @@ import axios from 'axios';
             </ul>
             <div class="card-img">
               <ul>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li><img :src="companyPhoto[3]" alt=""></li>
+                <li><img :src="companyPhoto[1]" alt=""></li>
+                <li><img :src="companyPhoto[2]" alt=""></li>
               </ul>
             </div>
             <ul class="border">
@@ -103,9 +106,9 @@ import axios from 'axios';
             </ul>
             <div class="card-img">
               <ul>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li><img :src="companyPhoto[3]" alt=""></li>
+                <li><img :src="companyPhoto[1]" alt=""></li>
+                <li><img :src="companyPhoto[0]" alt=""></li>
               </ul>
             </div>
           </div>
@@ -116,11 +119,11 @@ import axios from 'axios';
               <li><span>基本资料</span></li>
             </ul>
             <div class="base-details">
-              <div><span>公司名称：</span><span>湖南金管家家政服务有限责任公司</span></div>
-              <div><span>法人代表：</span><span>马晓爱</span></div>
-              <div><span>公司电话：</span><span>0731-2222</span></div>
-              <div><span>公司规模：</span><span>200人</span></div>
-              <div><span>公司地址：</span><span>湖南省长沙市天心区暮云工业园凯父满城烛照小区</span></div>
+              <div><span>公司名称：</span><span>{{currentCompanyDetails.name}}</span></div>
+              <div><span>法人代表：</span><span>{{currentCompanyDetails.representative}}</span></div>
+              <div><span>公司电话：</span><span>{{currentCompanyDetails.companyPhone}}</span></div>
+              <div><span>公司规模：</span><span>{{currentCompanyDetails.scale}}</span></div>
+              <div><span>公司地址：</span><span>{{currentCompanyDetails.address}}</span></div>
             </div>
           </div>
           <!-- 公司基本资料  -->
@@ -131,7 +134,7 @@ import axios from 'axios';
             </ul>
           </div>
           <div class="introduce">
-            <p>江苏金陵科技集团有限公司（以下简称金陵科技）位于六朝古都南京，始创于1984年；是国有控股高新技术企业、江苏省网络安全重点企业、首批涉密信息系统集成甲级资质企业。多年来深入研究大数据及应用展现、信息化与信息安全、智能感知及智能处理、网络可视化、特种通信等技术，为党政、军队、能源、金融、电信、交通、文博等行业客户，提供了大量先进、可靠、安全、高质量、易扩展的产品和系统集成服务。</p>
+            <p>{{currentCompanyDetails.companyIntroduce}}</p>
           </div>
           <!-- 公司介绍 -->
         </van-tab>
@@ -142,7 +145,6 @@ import axios from 'axios';
     <!-- 底部评价分享  -->
     <div class="footer">
       <van-tabbar>
-        <!-- <van-tabbar-item icon="comment">评价</van-tabbar-item> -->
         <van-tabbar-item icon="share">分享</van-tabbar-item>
         <van-tabbar-item icon="chat">微信联系</van-tabbar-item>
         <van-tabbar-item icon="phone">电话联系</van-tabbar-item>
@@ -155,15 +157,80 @@ import axios from 'axios';
 <script>
 export default {
   name: 'CompanyDetails',
+  props: {
+    comId: {
+      type: String,
+      required: true
+    }
+  },
   data () {
     return {
       // 公司资料标签高亮
-      active: 0
+      active: 0,
+      // 公司详情的对象
+      currentCompanyDetails: {},
+      // 公司轮播图片
+      companyPhoto: []
     }
+  },
+  created () {
+    // 调用获取当前公司信息的函数
+    this.getCurrentCompany()
   },
   methods: {
     onClickLeft () {
       this.$router.back()
+    },
+    // 获取当前公司信息的函数
+    async getCurrentCompany () {
+      const { data: res } = await this.$request.get('getCurrentCompany/', {
+        data: this.comId
+      }
+      )
+      // 将获得的公司信息存储到本地
+      this.currentCompanyDetails = res.data
+      this.companyPhoto = res.data.photo
+      console.log(this.currentCompanyDetails)
+    },
+    //  切换关注公司状态的函数
+    async changeFollowed () {
+    // 显示加载状态
+    // 拿到公司id,
+    // 取反关注
+    // 调接口
+      this.$toast.loading({
+        message: '加载中...',
+        forbidClick: true,
+        duration: 0
+
+      })
+
+      try {
+        // 判断当前的关注状态
+        if (this.currentCompanyDetails.is_followed) {
+          const res = await this.$request.patch('patchCurrentCompany', {
+            id: this.comId,
+            is_followed: this.currentCompanyDetails.is_followed
+          })
+          console.log(res)
+          console.log(this.currentCompanyDetails.is_followed)
+          // 取反关注状态
+          this.currentCompanyDetails.is_followed = !this.currentCompanyDetails.is_followed
+          this.$toast.success('已取消关注')
+        } else {
+          const res = await this.$request.patch('patchCurrentCompany', {
+            id: this.comId,
+            is_followed: this.currentCompanyDetails.is_followed
+          })
+          console.log(res)
+          console.log(this.currentCompanyDetails.is_followed)
+          // 取反关注状态
+          this.currentCompanyDetails.is_followed = !this.currentCompanyDetails.is_followed
+          this.$toast.success('成功关注')
+        }
+      } catch (e) {
+        this.$toast.fail('操作失败')
+      }
     }
   }
 }
@@ -198,6 +265,10 @@ export default {
       line-height: 100%;
       text-align: center;
       background-color: #39a9ed;
+      img {
+        height: 100%;
+        width: 100%;
+      }
     }
   }
   //关注与认证区域
@@ -337,12 +408,14 @@ export default {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-
             li {
               margin: 0 8px;
               width: 190px;
               height: 148px;
-              background-color: pink;
+              img {
+                height: 100%;
+                width: 100%;
+              }
             }
           }
         }
@@ -350,10 +423,10 @@ export default {
       .base-details {
         div {
           margin: 0;
+          height: 50px;
+          line-height: 50px;
           padding: 0 15px;
           span {
-            height: 50px !important;
-            line-height: 50px;
             font-size: 20px;
             white-space: normal;
           }

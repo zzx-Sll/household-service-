@@ -71,6 +71,9 @@ export default {
       // 登录成功，跳转到home
       this.$router.push('./Home')
       console.log(res)
+      // 查看公司信息
+      const { data } = await this.$request.get('getCompanys')
+      console.log(data)
     }
   }
 }
