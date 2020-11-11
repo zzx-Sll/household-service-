@@ -25,12 +25,13 @@
         </div>
       </van-cell>
 
-      <van-field v-model="Enterprisename"
+      <van-field v-model="telephonenum"
                  label="手机号码:" />
 
       <van-cell is-link
                 arrow-direction="down"
-                value="不限">
+                :value='agenum'
+                @click="showageonConfirm">
         <!-- 使用 title 插槽来自定义标题 -->
         <span slot="title"
               class="custom-title">年龄:</span>
@@ -38,7 +39,8 @@
 
       <van-cell is-link
                 arrow-direction="down"
-                value="不限">
+                :value="moneynum"
+                @click="showmoneyonConfirm">
         <!-- 使用 title 插槽来自定义标题 -->
         <span slot="title"
               class="custom-title">薪资:</span>
@@ -60,14 +62,33 @@
         <div slot="title"
              class="custom-title">住家:</div>
       </van-cell>
-      <van-field v-model="Enterprisename"
+      <van-field v-model="contacts"
                  label="联系人:" />
-      <van-field v-model="Enterprisename"
+      <van-field v-model="requirement"
                  label="籍贯要求:" />
-      <van-field v-model="Enterprisename"
+      <van-field v-model="workplace"
                  label="工作地点:" />
 
     </div>
+    <!-- 年龄选择器 -->
+    <van-popup v-model="showPickerage"
+               round
+               position="bottom">
+      <van-picker show-toolbar
+                  :columns="age"
+                  @cancel="showPickerage = false"
+                  @confirm="ageonConfirm" />
+    </van-popup>
+    <!-- 薪资选择器 -->
+    <van-popup v-model="showPickermoney"
+               round
+               position="bottom">
+      <van-picker show-toolbar
+                  :columns="money"
+                  @cancel="showPickermoney = false"
+                  @confirm="moneyonConfirm" />
+    </van-popup>
+    <!-- 按钮 -->
     <van-button type="primary"
                 class="submitdata"
                 size="large"
@@ -79,12 +100,37 @@
 export default {
   data () {
     return {
-
+      telephonenum: '',
+      contacts: '',
+      requirement: '',
+      workplace: '',
+      // 年龄选择器data
+      agenum: '',
+      showPickerage: false,
+      age: ['35~40', '40~45', '45~50'],
+      // 年龄选择器data
+      moneynum: '',
+      showPickermoney: false,
+      money: ['2000-2500', '2500-3000', '3000-3500', '3500-4000']
     }
   },
   methods: {
     onClickLeft () {
       this.$router.back()
+    },
+    showageonConfirm () {
+      this.showPickerage = true
+    },
+    ageonConfirm (val) {
+      this.agenum = val
+      this.showPickerage = false
+    },
+    showmoneyonConfirm () {
+      this.showPickermoney = true
+    },
+    moneyonConfirm (val) {
+      this.moneynum = val
+      this.showPickermoney = false
     }
   }
 
