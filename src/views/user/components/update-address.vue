@@ -27,15 +27,14 @@ export default {
   name: 'UpdateAddress',
   components: {},
   props: {
-    // value: {
-    //   type: String,
-    //   required: true
-    // }
+    value: {
+      type: String,
+      required: true
+    }
   },
   data () {
     return {
-      // localAddress: this.value
-      localAddress: '五一广场'
+      localAddress: this.value
     }
   },
   computed: {},
@@ -57,6 +56,8 @@ export default {
           return
         }
 
+        const { data } = await this.$request.patch('patchAddress', localAddress)
+        console.log(data)
         // 更新视图
         this.$emit('input', localAddress)
 
