@@ -1,12 +1,17 @@
 <template>
   <div class="house-info">
-    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+    <van-list v-model="loading"
+              :finished="finished"
+              finished-text="没有更多了"
+              @load="onLoad">
       <div class="companydesign">
 
-        <van-cell v-for="(data,i) in 6" :key="i">
+        <van-cell v-for="(data,i) in 6"
+                  :key="i">
           <div class="comment_list">
             <div class="touxiang">
-              <img src="https://img.yzcdn.cn/vant/apple-1.jpg" alt="">
+              <img src="https://img.yzcdn.cn/vant/apple-1.jpg"
+                   alt="">
 
             </div>
             <div class="youall">
@@ -24,11 +29,11 @@
             </div>
           </div>
         </van-cell>
-        <div class="gengduo">更多家服员
-          <van-icon name="arrow" />
-        </div>
+
       </div>
-      <van-cell v-for="item in list" :key="item" :title="item" />
+      <van-cell v-for="item in list"
+                :key="item"
+                :title="item" />
     </van-list>
 
   </div>

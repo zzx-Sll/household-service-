@@ -27,15 +27,14 @@ export default {
   name: 'UpdatePhone',
   components: {},
   props: {
-    // value: {
-    //   type: Number,
-    //   required: true
-    // }
+    value: {
+      type: Number,
+      required: true
+    }
   },
   data () {
     return {
-      // localPhone: this.value
-      localPhone: 13811111111
+      localPhone: this.value
     }
   },
   computed: {},
@@ -53,10 +52,11 @@ export default {
       try {
         const localPhone = this.localPhone
         if (!localPhone.length) {
-          this.$toast('昵称不能为空')
+          this.$toast('手机号不能为空')
           return
         }
-
+        const { data } = await this.$request.patch('patchUserPhone', localPhone)
+        console.log(data)
         // 更新视图
         this.$emit('input', localPhone)
 

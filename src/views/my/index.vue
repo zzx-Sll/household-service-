@@ -12,7 +12,7 @@
          class="header not-login">
       <div class="login-btn">
         <img class="login-img"
-             src="https://img.yzcdn.cn/vant/cat.jpeg"
+             :src="users.photo"
              alt="">
         <span class="text">{{$store.state.user.username}}</span>
       </div>
@@ -35,13 +35,15 @@
               :border="false"
               class="grid-nav"
               clickable>
-      <van-grid-item class="grid-item" @click="$router.push('/user/profile')">
+      <van-grid-item class="grid-item"
+                     @click="$router.push('/user/profile')">
         <i slot="icon"
            class="iconfont icon-gonggongziliao"></i>
         <span slot="text"
               class="text">个人资料</span>
       </van-grid-item>
-      <van-grid-item class="grid-item" @click="$router.push('../myfocus')">
+      <van-grid-item class="grid-item"
+                     @click="$router.push('../myfocus')">
         <i slot="icon"
            class="iconfont icon-wo"></i>
         <span slot="text"
@@ -53,7 +55,8 @@
         <span slot="text"
               class="text">我的评价</span>
       </van-grid-item>
-      <van-grid-item class="grid-item" @click="$router.push('/sttr')">
+      <van-grid-item class="grid-item"
+                     @click="$router.push('/sttr')">
         <i slot="icon"
            class="iconfont icon-29"></i>
         <span slot="text"
@@ -117,11 +120,14 @@
 
 <script>
 export default {
-
   data () {
     return {
-      isShow: false
+      isShow: false,
+      users: {}
     }
+  },
+  created () {
+    this.getUserData()
   },
   methods: {
     outLogin () {
@@ -141,6 +147,10 @@ export default {
         .catch(() => {
         // console.log('取消了退出')
         })
+    },
+    async getUserData () {
+      const { data } = await this.$request.get('getUserData')
+      this.users = data.data[0]
     }
   }
 }
