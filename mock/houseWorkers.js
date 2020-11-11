@@ -3,7 +3,7 @@ var Random = MockJs.Random
 
 // 随机方法
 // 月嫂图片
-var WorkerPhoto = ['https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2841992869,2094077500&fm=26&gp=0.jpg', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605073698532&di=943e555c1e4b68ed9721995d5857b3fa&imgtype=0&src=http%3A%2F%2Fwww.lzbs.com.cn%2Flanzhounews%2Fsite2%2F20171028%2FR061509133246835_change_p75_b.jpg', 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4053997526,1075551254&fm=26&gp=0.jpg', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605073698531&di=d9f85df366f8a0a46909bda9bda8ec80&imgtype=0&src=http%3A%2F%2Fwww.bynrnews.com%2Fu%2Fcms%2Fwww%2F201802%2F090906203f1t.jpg']
+var WorkerPhoto = ['https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2841992869,2094077500&fm=26&gp=0.jpg', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605073698532&di=943e555c1e4b68ed9721995d5857b3fa&imgtype=0&src=http%3A%2F%2Fwww.lzbs.com.cn%2Flanzhounews%2Fsite2%2F20171028%2FR061509133246835_change_p75_b.jpg', 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4053997526,1075551254&fm=26&gp=0.jpg', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605073698531&di=d9f85df366f8a0a46909bda9bda8ec80&imgtype=0&src=http%3A%2F%2Fwww.bynrnews.com%2Fu%2Fcms%2Fwww%2F201802%2F090906203f1t.jpg', 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2841992869,2094077500&fm=26&gp=0.jpg', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605073698532&di=943e555c1e4b68ed9721995d5857b3fa&imgtype=0&src=http%3A%2F%2Fwww.lzbs.com.cn%2Flanzhounews%2Fsite2%2F20171028%2FR061509133246835_change_p75_b.jpg', 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4053997526,1075551254&fm=26&gp=0.jpg', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605073698531&di=d9f85df366f8a0a46909bda9bda8ec80&imgtype=0&src=http%3A%2F%2Fwww.bynrnews.com%2Fu%2Fcms%2Fwww%2F201802%2F090906203f1t.jpg', 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2841992869,2094077500&fm=26&gp=0.jpg', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605073698532&di=943e555c1e4b68ed9721995d5857b3fa&imgtype=0&src=http%3A%2F%2Fwww.lzbs.com.cn%2Flanzhounews%2Fsite2%2F20171028%2FR061509133246835_change_p75_b.jpg', 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4053997526,1075551254&fm=26&gp=0.jpg', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605073698531&di=d9f85df366f8a0a46909bda9bda8ec80&imgtype=0&src=http%3A%2F%2Fwww.bynrnews.com%2Fu%2Fcms%2Fwww%2F201802%2F090906203f1t.jpg']
 
 var companys = []
 for (var i = 1; i <= 12; i++) {
@@ -114,7 +114,9 @@ for (var i = 1; i <= 12; i++) {
     // 月嫂技能
     skills: skills,
     // 月嫂生肖
-    zodiac: zodiac
+    zodiac: zodiac,
+    // 电话号码
+    phone: '18315' + Random.string('number', 6)
 
   })
 }
