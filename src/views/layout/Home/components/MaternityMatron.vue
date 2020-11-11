@@ -193,15 +193,11 @@ export default {
         )
         // 将获得的公司信息存储到本地
         this.currentWorkerDetails = res.data
-
-        console.log('当前月嫂的详情', this.currentWorkerDetails)
         // 将月嫂技能和职业存储起来
         const str = this.currentWorkerDetails.skills
         const str1 = this.currentWorkerDetails.profession
         this.skills.push(...str.split('|'))
         this.profession.push(...str1.split('|'))
-        console.log('月嫂的技能', this.skills)
-        console.log('月嫂的职业', this.profession)
       } catch (e) {
         this.$toast('获取月嫂详情失败')
       }

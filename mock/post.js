@@ -20,6 +20,15 @@ export default {
       msg: '添加成功',
       data: housekeepingdata
     }
+  },
+  // 提交求职的接口
+  'http://localhost:8080/HouseJob|post': option => {
+    // option.body = JSON.parse(option.body)
+    console.log(option)
+    return {
+      status: 200,
+      msg: '提交成功'
+    }
   }
 
 }
