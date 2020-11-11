@@ -1,13 +1,17 @@
 
 <template>
   <div class="all">
-    <van-nav-bar left-text="家政平台" :border="false" class="navbar" />
+    <van-nav-bar left-text="家政平台"
+                 :border="false"
+                 class="navbar" />
 
     <div class="head">
       <!-- 上轮播图 -->
       <div class="swipe">
-        <van-swipe :autoplay="3000" class="swipeimg">
-          <van-swipe-item v-for="(image, index) in  companyImages" :key="index">
+        <van-swipe :autoplay="3000"
+                   class="swipeimg">
+          <van-swipe-item v-for="(image, index) in  companyImages"
+                          :key="index">
             <img :src="image" />
           </van-swipe-item>
         </van-swipe>
@@ -15,12 +19,17 @@
     </div>
     <!-- 服务内容 -->
     <div class="content">
-      <van-grid :column-num="3" gutter="11px" :border="false">
-        <van-grid-item text="入驻商务部" @click="$router.push('/Business')">
+      <van-grid :column-num="3"
+                gutter="11px"
+                :border="false">
+        <van-grid-item text="入驻商务部"
+                       @click="$router.push('/Business')">
         </van-grid-item>
-        <van-grid-item text="家政求职" @click="$router.push('/HouseJob')">
+        <van-grid-item text="家政求职"
+                       @click="$router.push('/HouseJob')">
         </van-grid-item>
-        <van-grid-item text="找家庭服务">
+        <van-grid-item text="找家庭服务"
+                       @click="$router.push('/DomesticNeeds')">
         </van-grid-item>
         <van-grid-item text="线上家政培训">
         </van-grid-item>
@@ -109,16 +118,21 @@
     </div>
     <!-- 公司中 -->
     <div class="companydesign">
-      <van-cell icon="shop-o" size="large">
+      <van-cell icon="shop-o"
+                size="large">
         <div slot="title">湖南家信认证家服公司</div>
       </van-cell>
       <!-- 公司简介 -->
-      <van-cell v-for="(item,index) in companyList" :key="item.id" @click="$router.push(`/CompanyDetails/${item.id}`)">
+      <van-cell v-for="(item,index) in companyList"
+                :key="item.id"
+                @click="$router.push(`/CompanyDetails/${item.id}`)">
         <div class="comment_list">
           <div class="touxiang">
-            <img :src="item.photo[index]" alt="">
+            <img :src="item.photo[index]"
+                 alt="">
             <div>
-              <van-icon name="location" class="dizhi" />{{item.distance}}
+              <van-icon name="location"
+                        class="dizhi" />{{item.distance}}
             </div>
           </div>
           <div class="youall">
@@ -127,9 +141,18 @@
             </div>
             <div>{{item.ctitle}}</div>
             <div class="company-tag">
-              <van-tag color="#3f51b5" plain round type="primary">{{item.comTag1}}</van-tag>
-              <van-tag color="#3f51b5" plain round type="primary">{{item.comTag2}}</van-tag>
-              <van-tag color="#3f51b5" plain round type="primary">{{item.comTag3}}</van-tag>
+              <van-tag color="#3f51b5"
+                       plain
+                       round
+                       type="primary">{{item.comTag1}}</van-tag>
+              <van-tag color="#3f51b5"
+                       plain
+                       round
+                       type="primary">{{item.comTag2}}</van-tag>
+              <van-tag color="#3f51b5"
+                       plain
+                       round
+                       type="primary">{{item.comTag3}}</van-tag>
 
             </div>
             <div style="width:280px; overflow: hidden;
@@ -146,14 +169,26 @@
 
     <!-- 服务人员详情 -->
     <div class="companydesign">
-      <van-cell icon="manager" size="large">
+      <van-cell icon="manager"
+                size="large">
         <div slot="title">诚信注册家服员</div>
       </van-cell>
+<<<<<<< HEAD
+
+      <van-cell v-for="(data,i) in 3"
+                :key="i"
+                @click="$router.push('/MaternityMatron')">
+        <div class="comment_list">
+          <div class="touxiang">
+            <img src="https://img.yzcdn.cn/vant/apple-1.jpg"
+                 alt="">
+=======
       <!-- 月嫂信息 -->
       <van-cell @click="$router.push(`/MaternityMatron/${item.id}`)" v-for="(item,index) in workerList" :key="item.id">
         <div class="comment_list">
           <div class="touxiang">
             <img :src="workerImages[index]" alt="">
+>>>>>>> 6fae86840a0011e83fca9aefb7dcd66b170cafee
           </div>
           <div class="youall">
             <div class="nameicon">
