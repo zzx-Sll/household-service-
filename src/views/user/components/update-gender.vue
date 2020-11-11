@@ -1,14 +1,12 @@
 <template>
   <div class="update-gender">
-    <van-picker
-      show-toolbar
-      title="编辑性别"
-      :columns="columns"
-      :default-index="value"
-      @cancel="$emit('close')"
-      @confirm="onConfirm"
-      @change="onPickerChange"
-    />
+    <van-picker show-toolbar
+                title="编辑性别"
+                :columns="columns"
+                :default-index="value"
+                @cancel="$emit('close')"
+                @confirm="onConfirm"
+                @change="onPickerChange" />
   </div>
 </template>
 
@@ -65,17 +63,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
-::v-deep .van-picker__toolbar{
-    height: 128px;
+::v-deep .van-picker__toolbar {
+  height: 128px;
 
-    background-color:#3F51B5 ;
+  background-color: #3f51b5;
 }
 ::v-deep .van-picker__confirm {
-      color: white;
-    }
+  color: white;
+}
 ::v-deep .van-picker__cancel {
-    color: white;
+  color: white;
 }
 ::v-deep .van-picker__title {
   color: white;
-}</style>
+}
+</style>

@@ -11,7 +11,7 @@
     <div class="header not-login">
       <div class="login-btn">
         <img class="login-img"
-             src="https://img.yzcdn.cn/vant/cat.jpeg"
+             :src="userphoto"
              alt="">
         <span class="text">{{$store.state.user.username}}</span>
       </div>
@@ -48,13 +48,31 @@
     <!-- 同意协议按钮 -->
     <van-button class="consent-btn"
                 color="#3f51b5"
+                @click="consentProtocols"
                 size="large">我已阅读并同意以上协议</van-button>
   </div>
 </template>
 
 <script>
 export default {
-
+  data () {
+    return {
+      userphoto: ''
+    }
+  },
+  created () {
+    this.userPhoto()
+  },
+  methods: {
+    async userPhoto () {
+      const { data } = await this.$request.get('getUserData')
+      this.userphoto = data.data[0].photo
+    },
+    consentProtocols () {
+      this.$toast.success('已同意')
+      this.$router.push('/My')
+    }
+  }
 }
 </script>
 
@@ -109,13 +127,13 @@ export default {
     p {
       font-size: 24px;
       margin: 6px 20px;
-      line-height: 42px;
+      line-height: 41px;
 
       text-indent: 1em;
     }
     div {
       font-size: 24px;
-      line-height: 42px;
+      line-height: 41px;
       margin: 6px 20px;
     }
   }

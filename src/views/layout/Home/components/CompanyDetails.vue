@@ -218,14 +218,18 @@ export default {
     },
     // 获取当前公司信息的函数
     async getCurrentCompany () {
-      const { data: res } = await this.$request.get('getCurrentCompany/', {
-        data: this.comId
+      try {
+        const { data: res } = await this.$request.get('getCurrentCompany/', {
+          data: this.comId
+        }
+        )
+        // 将获得的公司信息存储到本地
+        this.currentCompanyDetails = res.data
+        this.companyPhoto = res.data.photo
+        console.log(this.currentCompanyDetails)
+      } catch (e) {
+        this.$toast('获取公司详情失败')
       }
-      )
-      // 将获得的公司信息存储到本地
-      this.currentCompanyDetails = res.data
-      this.companyPhoto = res.data.photo
-      console.log(this.currentCompanyDetails)
     },
     //  切换关注公司状态的函数
     async changeFollowed () {

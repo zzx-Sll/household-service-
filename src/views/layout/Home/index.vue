@@ -162,7 +162,7 @@
         </div>
       </van-cell>
       <!-- 公司简介 -->
-      <div class="gengduo">更多公司
+      <div class="gengduo" @click="$router.push('/Company')">更多公司
         <van-icon name="arrow" />
       </div>
     </div>
@@ -173,6 +173,7 @@
                 size="large">
         <div slot="title">诚信注册家服员</div>
       </van-cell>
+<<<<<<< HEAD
 
       <van-cell v-for="(data,i) in 3"
                 :key="i"
@@ -181,23 +182,30 @@
           <div class="touxiang">
             <img src="https://img.yzcdn.cn/vant/apple-1.jpg"
                  alt="">
+=======
+      <!-- 月嫂信息 -->
+      <van-cell @click="$router.push(`/MaternityMatron/${item.id}`)" v-for="(item,index) in workerList" :key="item.id">
+        <div class="comment_list">
+          <div class="touxiang">
+            <img :src="workerImages[index]" alt="">
+>>>>>>> 6fae86840a0011e83fca9aefb7dcd66b170cafee
           </div>
           <div class="youall">
             <div class="nameicon">
-              <div>卢本伟</div>
-              <div>8000元/26天</div>
+              <div>{{item.worker_name}}</div>
+              <div>{{item.price}}</div>
             </div>
             <div class="skil">
-              <span class="peoplegrid">八倍sks</span>
-              <span class="peoplegrid">10年老师傅</span>
+              <span class="peoplegrid">{{item.comTag1}}</span>
+              <span class="peoplegrid">{{item.comTag2}}</span>
 
             </div>
-            <div class="myself"><span>长沙</span> | <span>18岁</span> | <span>干了18次</span> | <span>9条评价</span></div>
+            <div class="myself"><span>{{item.address}}</span> | <span>{{item.age}}岁</span> | <span>服务{{item.serve_number}}户</span> | <span>9条评价</span></div>
 
           </div>
         </div>
       </van-cell>
-      <div class="gengduo">更多家服员
+      <div class="gengduo" @click="$router.push('/HouseWorker')">更多家服员
         <van-icon name="arrow" />
       </div>
     </div>
@@ -210,33 +218,65 @@
 export default {
 
   created () {
+    // 调用获取首页展示三个公司的函数
     this.getThreeCompanys()
+    // 调用获取首页显示三个月嫂信息的函数
+    this.getThreeWorkers()
   },
   mounted () {
 
   },
   data () {
     return {
+      // 公司信息列表
       companyList: [],
-      companyImages: []
+      // 公司展示图片
+      companyImages: [],
+      // 月嫂信息列表
+      workerList: [],
+      // 月嫂展示图片
+      workerImages: []
     }
   },
 
   methods: {
     // 获取首页三个公司的函数
     async getThreeCompanys () {
-      const { data: res } = await this.$request.get('getCompanys')
-      // console.log('?', res.data)
-      // 变历获取的数据
-      res.data.forEach((item, i) => {
-        if (i <= 2) {
+      try {
+        const { data: res } = await this.$request.get('getCompanys')
+        // console.log('?', res.data)
+        // 变历获取的数据
+        res.data.forEach((item, i) => {
+          if (i <= 2) {
           // 获取首页的三个公司
-          this.companyList.push(res.data[i])
-          // 实现首页公司图片的轮播
-          this.companyImages = res.data[0].photo
-          return this.companyList
-        }
-      })
+            this.companyList.push(res.data[i])
+            // 实现首页公司图片的轮播
+            this.companyImages = res.data[0].photo
+            return this.companyList
+          }
+        })
+      } catch (e) {
+        this.$toast('获取公司信息失败')
+      }
+    },
+    // 获取首页三个月嫂信息的函数
+    async getThreeWorkers () {
+      try {
+        const { data: res } = await this.$request.get('getAllWorker')
+        console.log('?', res.data)
+        // 变历获取的数据
+        res.data.forEach((item, i) => {
+          if (i <= 2) {
+          // 获取首页的三个公司
+            this.workerList.push(res.data[i])
+            // 实现首页公司图片的轮播
+            this.workerImages = res.data[0].worker_photo
+            return this.workerrList
+          }
+        })
+      } catch (e) {
+        this.$toast('获取月嫂信息失败')
+      }
     }
 
   }
@@ -374,12 +414,12 @@ export default {
 .skil {
   float: left;
   .peoplegrid {
-    font-size: 28px;
+    font-size: 24px;
     color: #7885cb;
     margin: 0 5px;
     border: solid #7885cb 1px;
-    border-radius: 20px;
-    padding: 10px;
+    border-radius: 30px;
+    padding: 10px 15px;
   }
 }
 .myself {

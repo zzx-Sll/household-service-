@@ -27,15 +27,14 @@ export default {
   name: 'UpdateService',
   components: {},
   props: {
-    // value: {
-    //   type: String,
-    //   required: true
-    // }
+    value: {
+      type: String,
+      required: true
+    }
   },
   data () {
     return {
-      // localService: this.value
-      localService: '湖南省长沙市'
+      localService: this.value
     }
   },
   computed: {},
@@ -56,7 +55,8 @@ export default {
           this.$toast('地址不能为空')
           return
         }
-
+        const { data } = await this.$request.patch('patchServiceArea', localService)
+        console.log(data)
         // 更新视图
         this.$emit('input', localService)
 

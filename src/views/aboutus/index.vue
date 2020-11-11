@@ -10,7 +10,7 @@
     <div class="header">
       <div class="title">湖南家政平台</div>
       <div class="image">
-        <img src="https://img.yzcdn.cn/vant/cat.jpeg"
+        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604930519339&di=547e7b93af82f50513bf859580f85292&imgtype=0&src=http%3A%2F%2Fimg2.imgtn.bdimg.com%2Fit%2Fu%3D2634240147%2C259401863%26fm%3D214%26gp%3D0.jpg"
              alt="">
       </div>
     </div>

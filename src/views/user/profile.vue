@@ -18,7 +18,7 @@
               center
               @click="$refs.file.click()">
       <van-image class="avatar"
-                 src="https://img.yzcdn.cn/vant/cat.jpeg"
+                 :src="users.photo"
                  fit="cover"
                  round
                  width="55px"
@@ -38,22 +38,22 @@
               title="性别:"
               is-link
               @click="isUpdateGenderShow = true"
-              :value="user.gender === 0 ? '男' : '女'" />
+              :value="users.gender === 1 ? '女' : '男'" />
     <van-cell size="large"
               title="手机号码:"
-              :value="13811111111"
+              :value="users.phone"
               is-link
               @click="isUpdatePhoneShow = true" />
     <van-cell size="large"
               title="服务区域:"
-              :value="'湖南省长沙市'"
+              :value="users.serviceArea"
               is-link
               @click="isUpdateServiceShow = true" />
     <van-cell size="large"
               title="详细地址:"
               is-link
               @click="isUpdateAddressShow = true"
-              :value="'五一广场'" />
+              :value="users.Address" />
     <van-field label="手机验证码:"
                name="code"
                placeholder="请输入验证码"
@@ -77,8 +77,6 @@
                     v-else>获取验证码</van-button>
       </template>
     </van-field>
-    <van-button class="save"
-                @click="SaveUserMessage">保存</van-button>
 
     <!-- 个人信息 -->
     <!-- 弹层 -->
@@ -87,7 +85,8 @@
                position="bottom"
                style="height: 100%;">
       <update-photo v-if="isUpdatePhotoShow"
-                    :img="img" />
+                    @close="isUpdatePhotoShow = false"
+                    :img="users.photo" />
     </van-popup>
     <!-- /编辑头像 -->
     <!-- 编辑昵称 -->
@@ -106,7 +105,7 @@
                style="height: 100%;"
                position="bottom">
       <update-gender v-if="isUpdateGenderShow"
-                     v-model="user.gender"
+                     v-model="users.gender"
                      @close="isUpdateGenderShow = false" />
     </van-popup>
     <!-- /编辑性别 -->
@@ -115,7 +114,7 @@
                style="height: 100%;"
                position="bottom">
       <update-phone v-if="isUpdatePhoneShow"
-                    v-model="user.phone"
+                    v-model="users.phone"
                     @close="isUpdatePhoneShow = false" />
     </van-popup>
     <!-- /编辑手机 -->
@@ -124,7 +123,8 @@
                style="height: 100%;"
                position="bottom">
       <update-address v-if="isUpdateAddressShow"
-                      v-model="user.address"
+                      v-model="users. Address"
+                      @input="users. Address = $event"
                       @close="isUpdateAddressShow = false" />
     </van-popup>
     <!-- /编辑详细地址 -->
@@ -133,7 +133,7 @@
                style="height: 100%;"
                position="bottom">
       <update-service v-if="isUpdateServiceShow"
-                      v-model="user.service"
+                      v-model="users.serviceArea"
                       @close="isUpdateServiceShow = false" />
     </van-popup>
     <!-- /编辑服务地址 -->
@@ -171,11 +171,15 @@ export default {
       isUpdateServiceShow: false,
       isUpdateAddressShow: false,
       img: null, // 预览的图片
-      isCountDown: false
+      isCountDown: false,
+      users: {}
     }
   },
   computed: {
     ...mapState(['user'])
+  },
+  created () {
+    this.getUserData()
   },
   watch: {},
 
@@ -200,6 +204,10 @@ export default {
     },
     SaveUserMessage () {
       this.$router.push('/My')
+    },
+    async getUserData () {
+      const { data } = await this.$request.get('getUserData')
+      this.users = data.data[0]
     }
 
   }
