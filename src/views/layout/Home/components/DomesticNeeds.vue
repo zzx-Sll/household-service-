@@ -16,21 +16,22 @@
         <div slot="label">
           <van-tag size="medium"
                    round
-                   type="primary"
                    plain
-                   v-for="(item,i) in 4"
+                   v-for="(item,i) in btype"
                    :key="i"
                    class="skill"
-                   color="#A7A2A2">月嫂</van-tag>
+                   :color="item.active? '#A7A2A2':'red'"
+                   @click="clickbusinesstype(item,i)">{{item.tp}}</van-tag>
         </div>
       </van-cell>
 
-      <van-field v-model="Enterprisename"
+      <van-field v-model="telephonenum"
                  label="手机号码:" />
 
       <van-cell is-link
                 arrow-direction="down"
-                value="不限">
+                :value='agenum'
+                @click="showageonConfirm">
         <!-- 使用 title 插槽来自定义标题 -->
         <span slot="title"
               class="custom-title">年龄:</span>
@@ -38,40 +39,65 @@
 
       <van-cell is-link
                 arrow-direction="down"
-                value="不限">
+                :value="moneynum"
+                @click="showmoneyonConfirm">
         <!-- 使用 title 插槽来自定义标题 -->
         <span slot="title"
               class="custom-title">薪资:</span>
       </van-cell>
       <van-cell>
         <!-- 使用 title 插槽来自定义标题 -->
-        <van-tag size="medium"
+        <van-tag v-if="livehome"
+                 size="medium"
                  round
                  type="primary"
                  plain
                  class="skill"
-                 color="#A7A2A2">住家</van-tag>
-        <van-tag size="medium"
+                 color="#A7A2A2"
+                 @click="changelive">住家</van-tag>
+        <van-tag v-else
+                 size="medium"
                  round
                  type="primary"
                  plain
                  class="skill"
-                 color="#A7A2A2">不住家</van-tag>
+                 color="#A7A2A2"
+                 @click="changelive">不住家</van-tag>
         <div slot="title"
              class="custom-title">住家:</div>
       </van-cell>
-      <van-field v-model="Enterprisename"
+      <van-field v-model="contacts"
                  label="联系人:" />
-      <van-field v-model="Enterprisename"
+      <van-field v-model="requirement"
                  label="籍贯要求:" />
-      <van-field v-model="Enterprisename"
+      <van-field v-model="workplace"
                  label="工作地点:" />
 
     </div>
+    <!-- 年龄选择器 -->
+    <van-popup v-model="showPickerage"
+               round
+               position="bottom">
+      <van-picker show-toolbar
+                  :columns="age"
+                  @cancel="showPickerage = false"
+                  @confirm="ageonConfirm" />
+    </van-popup>
+    <!-- 薪资选择器 -->
+    <van-popup v-model="showPickermoney"
+               round
+               position="bottom">
+      <van-picker show-toolbar
+                  :columns="money"
+                  @cancel="showPickermoney = false"
+                  @confirm="moneyonConfirm" />
+    </van-popup>
+    <!-- 按钮 -->
     <van-button type="primary"
                 class="submitdata"
                 size="large"
-                color="#3F51B5">提交资料</van-button>
+                color="#3F51B5"
+                @click="submitalldata">提交资料</van-button>
   </div>
 </template>
 
@@ -79,12 +105,80 @@
 export default {
   data () {
     return {
-
+      pushbtype: '',
+      telephonenum: '',
+      contacts: '',
+      requirement: '',
+      workplace: '',
+      btype: '',
+      active: 0,
+      livehome: true,
+      // 年龄选择器data
+      agenum: '',
+      showPickerage: false,
+      age: ['35~40', '40~45', '45~50'],
+      // 年龄选择器data
+      moneynum: '',
+      showPickermoney: false,
+      money: ['2000-2500', '2500-3000', '3000-3500', '3500-4000']
     }
+  },
+  created () {
+    this.getbusinesstype()
   },
   methods: {
     onClickLeft () {
       this.$router.back()
+    },
+    showageonConfirm () {
+      this.showPickerage = true
+    },
+    ageonConfirm (val) {
+      this.agenum = val
+      this.showPickerage = false
+    },
+    showmoneyonConfirm () {
+      this.showPickermoney = true
+    },
+    moneyonConfirm (val) {
+      this.moneynum = val
+      this.showPickermoney = false
+    },
+    async getbusinesstype () {
+      const res = await this.$request.get('getBusinesstype')
+      console.log(res.data.data)
+      this.btype = res.data.data
+    },
+    clickbusinesstype (item, i) {
+      item.active = !item.active
+      if (item.active) {
+        this.pushbtype.push(item)
+      }
+    },
+    changelive () {
+      this.livehome = !this.livehome
+    },
+    async submitalldata () {
+      const res = await this.$request.post('posthousekeeping', {
+        // 找家政接口
+        // 需求岗位
+        Businesstype: '',
+        // 电话号码
+        telephone: this.telephonenum,
+        // 年龄
+        age: this.agenum,
+        // 薪资
+        money: this.moneynum,
+        // 住家与否
+        live: this.livehome,
+        // 联系人
+        contacts: this.contacts,
+        // 籍贯要求
+        Nativeplace: this.requirement,
+        // 工作地点
+        Workplace: this.workplace
+      })
+      console.log(res)
     }
   }
 

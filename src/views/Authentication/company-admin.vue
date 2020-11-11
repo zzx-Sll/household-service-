@@ -11,7 +11,7 @@
     <div class="header not-login">
       <div class="login-btn">
         <img class="login-img"
-             src="https://img.yzcdn.cn/vant/cat.jpeg"
+             :src="userphoto"
              alt="">
         <span class="text">{{$store.state.user.username}}</span>
       </div>
@@ -37,6 +37,7 @@
     <!-- 提交认证按钮 -->
     <van-button class="consent-btn"
                 color="#3f51b5"
+                @click="approveData"
                 size="large">提交认证</van-button>
   </div>
 </template>
@@ -46,7 +47,25 @@ export default {
   data () {
     return {
       username: '',
-      password: ''
+      password: '',
+      userphoto: ''
+    }
+  },
+  created () {
+    this.userPhoto()
+  },
+  methods: {
+    async userPhoto () {
+      const { data } = await this.$request.get('getUserData')
+      this.userphoto = data.data[0].photo
+    },
+    approveData () {
+      const data = window.localStorage.getItem('usersdata')
+      if (JSON.parse(data).username !== this.username || JSON.parse(data).password !== this.password) {
+        return this.$toast('用户名或密码不正确')
+      }
+      this.$toast.success('认证成功')
+      this.$router.push('/My')
     }
   }
 }
