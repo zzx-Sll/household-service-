@@ -173,22 +173,11 @@
                 size="large">
         <div slot="title">诚信注册家服员</div>
       </van-cell>
-<<<<<<< HEAD
-
-      <van-cell v-for="(data,i) in 3"
-                :key="i"
-                @click="$router.push('/MaternityMatron')">
-        <div class="comment_list">
-          <div class="touxiang">
-            <img src="https://img.yzcdn.cn/vant/apple-1.jpg"
-                 alt="">
-=======
       <!-- 月嫂信息 -->
       <van-cell @click="$router.push(`/MaternityMatron/${item.id}`)" v-for="(item,index) in workerList" :key="item.id">
         <div class="comment_list">
           <div class="touxiang">
             <img :src="workerImages[index]" alt="">
->>>>>>> 6fae86840a0011e83fca9aefb7dcd66b170cafee
           </div>
           <div class="youall">
             <div class="nameicon">
