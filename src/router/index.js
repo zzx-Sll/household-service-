@@ -14,8 +14,8 @@ const routes = [
     children: [{
       // home组件
       path: '/Home',
-
-      component: () => import('../views/layout/Home/index.vue')
+      component: () => import('../views/layout/Home/index.vue'),
+      props: true
 
     },
     { path: '/My', component: () => import('@/views/my') },
@@ -62,9 +62,10 @@ const routes = [
   },
   {
     // 公司详情组件
-    path: '/CompanyDetails',
+    path: '/CompanyDetails/:comId',
     name: 'CompanyDetails',
-    component: () => import('@/views/layout/Home/components/CompanyDetails.vue')
+    component: () => import('@/views/layout/Home/components/CompanyDetails.vue'),
+    props: true
 
   },
   {

@@ -61,10 +61,11 @@
                      round
                      type="primary"
                      plain
-                     v-for="(item,i) in 4"
+                     v-for="(item,i) in btype"
                      :key="i"
                      class="skill"
-                     color="#A7A2A2">月嫂</van-tag>
+                     :color="item.active? '#A7A2A2':'red'"
+                     @click="clickbusinesstype(item)">{{item.tp}}</van-tag>
           </div>
         </van-cell>
       </van-form>
@@ -106,7 +107,8 @@
     <van-button type="primary"
                 class="next"
                 size="large"
-                color="#3F51B5">下一步</van-button>
+                color="#3F51B5"
+                @click="nextboy">下一步</van-button>
   </div>
 </template>
 
@@ -140,15 +142,21 @@ export default {
       typevalue: '',
       showtype: false,
       typedata: ['酱油型', '边缘ob型', '挂机划水型', '混日子型'],
-
+      // 主营业务数据
+      Businesstypetype: [],
       // 验证规则
       rule: {
         name_company: [{ required: true, message: '请填写企业名称' }],
         showname: [{ required: true, message: '请填写显示名称' }],
         money: [{ required: true, message: '请填写注册资本' }]
-      }
+      },
+      btype: '',
+      pushbtype: []
 
     }
+  },
+  created () {
+    this.getbusinesstype()
   },
   methods: {
     onClickLeft () {
@@ -174,6 +182,42 @@ export default {
     typeonConfirm (val) {
       this.typevalue = val
       this.showtype = false
+    },
+    async nextboy () {
+      await this.$request.post('postministry', {
+        // 法人类型
+        legal: this.value,
+        // 企业名字
+        Business_name: this.Enterprisename,
+        // 显示名称
+        nick_name: this.showname,
+        // 社会信用代码
+        Credit_Code: this.CreditCode,
+        // 公司注册时间
+        company_creattime: '',
+        // 注册资本
+        capital: this.timevalue,
+        // 注册地区
+        region: this.areavalue,
+        // 注册企业类型
+        Enterprise_type: this.typevalue,
+        // 主营业务
+        Businesstype: this.pushbtype
+      })
+      // console.log(res.data)
+    },
+    async getbusinesstype () {
+      const res = await this.$request.get('getBusinesstype')
+
+      this.btype = res.data.data
+    },
+    clickbusinesstype (item) {
+      // console.log(item)
+      item.active = !item.active
+      if (!item.active) {
+        this.pushbtype.push(item)
+      }
+      console.log(this.pushbtype)
     }
   }
 }
@@ -194,6 +238,7 @@ export default {
   }
 }
 .kard {
+  margin-bottom: 100px;
   width: 704px;
   height: 1126px;
   position: absolute;
@@ -222,5 +267,6 @@ export default {
 .next {
   position: fixed;
   bottom: 0;
+  z-index: 1;
 }
 </style>

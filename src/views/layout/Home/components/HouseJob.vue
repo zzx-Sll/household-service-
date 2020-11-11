@@ -1,7 +1,10 @@
 <template>
   <div class="House-Job">
     <!-- 月嫂详情页的导航栏  -->
-    <van-nav-bar class="login-navbar" left-text="家政求职" left-arrow @click-left="$router.back()" />
+    <van-nav-bar class="login-navbar"
+                 left-text="家政求职"
+                 left-arrow
+                 @click-left="$router.back()" />
     <!-- 月嫂详情页的导航栏  -->
     <div class="do-houseWorke">
       <ul class="border">
@@ -10,11 +13,18 @@
       <!-- 求职意向表单  -->
       <van-form @submit="onSubmit">
         <!-- 姓名框 -->
-        <van-field v-model="user_name" name="user_name" label="* 姓名 :" :rules="[{ required: true, message: '请填写用户名' }]" />
+        <van-field v-model="user_name"
+                   name="user_name"
+                   label="* 姓名 :"
+                   :rules="[{ required: true, message: '请填写用户名' }]" />
         <!-- 姓名框 -->
 
         <!-- 手机框 -->
-        <van-field v-model="phone" name="mobile" type="number" label="* 手机号码 :" :rules="mobile" />
+        <van-field v-model="phone"
+                   name="mobile"
+                   type="number"
+                   label="* 手机号码 :"
+                   :rules="mobile" />
         <!-- 手机框 -->
 
         <!-- 意向岗位 -->
@@ -22,14 +32,14 @@
         <van-cell title="* 意向岗位 ：">
           <template #label>
             <div class="intention-job">
-              <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">月嫂</van-tag>
-              <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">育婴师</van-tag>
-              <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">保洁/清洁</van-tag>
-              <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">保姆</van-tag>
-              <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">早教/托管</van-tag>
-              <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">养老/陪护</van-tag>
-              <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">家装/搬家</van-tag>
-              <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">产康师</van-tag>
+              <van-tag class="intention-tag"
+                       plain
+                       round
+                       type="primary"
+                       v-for="(item,index) in busineestype"
+                       :color="item.active? '#A7A2A2':'red'"
+                       :key="index"
+                       @click="changecolor(item)">{{item.tp}}</van-tag>
             </div>
           </template>
         </van-cell>
@@ -41,11 +51,31 @@
           <van-cell title="* 已获证书 ：">
             <template #label>
               <div class="certificate ">
-                <van-tag class="certificate-tag" color="#9f9a9a" plain round type="primary">月嫂</van-tag>
-                <van-tag class="certificate-tag" color="#9f9a9a" plain round type="primary">育婴师</van-tag>
-                <van-tag class="certificate-tag" color="#9f9a9a" plain round type="primary">小儿推拿</van-tag>
-                <van-tag class="certificate-tag" color="#9f9a9a" plain round type="primary">保姆</van-tag>
-                <van-tag class="certificate-tag" color="#9f9a9a" plain round type="primary">保育员证</van-tag>
+                <van-tag class="certificate-tag"
+                         color="#9f9a9a"
+                         plain
+                         round
+                         type="primary">月嫂</van-tag>
+                <van-tag class="certificate-tag"
+                         color="#9f9a9a"
+                         plain
+                         round
+                         type="primary">育婴师</van-tag>
+                <van-tag class="certificate-tag"
+                         color="#9f9a9a"
+                         plain
+                         round
+                         type="primary">小儿推拿</van-tag>
+                <van-tag class="certificate-tag"
+                         color="#9f9a9a"
+                         plain
+                         round
+                         type="primary">保姆</van-tag>
+                <van-tag class="certificate-tag"
+                         color="#9f9a9a"
+                         plain
+                         round
+                         type="primary">保育员证</van-tag>
               </div>
             </template>
           </van-cell>
@@ -53,18 +83,23 @@
         <!-- 已获证书 -->
 
         <!-- 籍贯  -->
-        <van-field v-model="native_place" name="native_place" label="籍贯 :" />
+        <van-field v-model="native_place"
+                   name="native_place"
+                   label="籍贯 :" />
         <!-- 籍贯  -->
 
         <!-- 现居住地  -->
-        <van-field v-model="now_place" name="now_place" label="现居住地 :" />
+        <van-field v-model="now_place"
+                   name="now_place"
+                   label="现居住地 :" />
         <!-- 现居住地  -->
 
         <!-- 意向家政公司  -->
         <van-cell-group>
           <van-cell title="意向家政公司 ：">
             <span v-if="intention_company">{{intention_company}}</span>
-            <span v-else @click="isShowCompanyProp=true">请选择
+            <span v-else
+                  @click="isShowCompanyProp=true">请选择
               <van-icon name="arrow-down" />
             </span>
 
@@ -73,12 +108,16 @@
         <!-- 意向家政公司  -->
 
         <!-- 备注信息  -->
-        <van-field v-model="note_info" name="note_info" label="备注信息 :" />
+        <van-field v-model="note_info"
+                   name="note_info"
+                   label="备注信息 :" />
         <!-- 备注信息  -->
 
         <!-- 提交按钮 -->
         <div style="margin: 16px;">
-          <van-button class="sub-btn" block native-type="submit">
+          <van-button class="sub-btn"
+                      block
+                      native-type="submit">
             提交资料
           </van-button>
         </div>
@@ -86,9 +125,14 @@
       <!-- 求职意向表单  -->
 
       <!-- 选择意向公司的弹出层 -->
-      <van-popup v-model="isShowCompanyProp" position="bottom">
+      <van-popup v-model="isShowCompanyProp"
+                 position="bottom">
         <!-- 选择框  -->
-        <van-picker title="标题" show-toolbar :columns="columns" @confirm="onConfirm" @cancel="isShowCompanyProp=false" />
+        <van-picker title="标题"
+                    show-toolbar
+                    :columns="columns"
+                    @confirm="onConfirm"
+                    @cancel="isShowCompanyProp=false" />
         <!-- 选择框  -->
       </van-popup>
       <!-- 选择意向公司的弹出层 -->
@@ -102,6 +146,7 @@ export default {
   data () {
     return {
       // 填写的用户名
+      busineestype: [{ tp: '月嫂', active: true }, { tp: '保姆', active: true }, { tp: '育婴师', active: true }, { tp: '产康师', active: true }, { tp: '家装/搬家', active: true }, { tp: '早教/托育', active: true }, { tp: '养老/陪护', active: true }, { tp: '保洁/清洗', active: true }],
       user_name: '',
       // 填写的手机号
       phone: null,
@@ -131,6 +176,9 @@ export default {
       console.log(value, index)
       this.intention_company = value
       this.isShowCompanyProp = false
+    },
+    changecolor (item) {
+      item.active = !item.active
     }
 
   }
