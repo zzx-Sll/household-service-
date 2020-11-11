@@ -46,7 +46,7 @@ export default {
 
 <style lang="scss" scoped>
 .myfocus {
-  margin-top: 237px;
+  margin-top: 240px;
 }
 .header {
   position: fixed;
@@ -56,7 +56,7 @@ export default {
   z-index: 2;
 }
 .page-nav-bar {
-  height: 128px;
+  height: 100px;
 
   background-color: #3f51b5;
 }
@@ -76,6 +76,11 @@ export default {
   color: white;
 }
 .active {
-  border-bottom: 3px solid white;
+  ::v-deep .van-grid-item__text {
+    padding-bottom: 15px;
+    color: white;
+    font-size: 28px;
+    border-bottom: 2px solid #fff;
+  }
 }
 </style>

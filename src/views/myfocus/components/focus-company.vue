@@ -24,9 +24,6 @@
             </div>
           </div>
         </van-cell>
-        <div class="gengduo">更多家服员
-          <van-icon name="arrow" />
-        </div>
       </div>
       <van-cell v-for="item in list" :key="item" :title="item" />
     </van-list>
