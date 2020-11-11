@@ -19,12 +19,14 @@ const routes = [
 
     },
     { path: '/My', component: () => import('@/views/my') },
+    //  家服人员首页
     { path: '/HouseWorker', component: () => import('@/views/HouseWorker') },
+    // 家政公司首页
     { path: '/Company', component: () => import('@/views/Company') }
     ]
   }, // 月嫂详情组件
   {
-    path: '/MaternityMatron', component: () => import('@/views/layout/Home/components/MaternityMatron.vue')
+    path: '/MaternityMatron/:workerId', component: () => import('@/views/layout/Home/components/MaternityMatron.vue'), props: true
   },
 
   // My组件的子路由
