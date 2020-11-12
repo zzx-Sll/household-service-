@@ -46,7 +46,8 @@
         <!-- 月嫂  -->
         <li>
           <div class="box">
-            <div class="radiu"></div>
+            <div class="radiu"><img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1492212475,2131340147&fm=26&gp=0.jpg"
+                   alt=""></div>
             <span>月嫂</span>
           </div>
         </li>
@@ -55,7 +56,8 @@
         <!-- 育婴师  -->
         <li>
           <div class="box">
-            <div class="radiu"></div>
+            <div class="radiu"><img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=281628446,1323517014&fm=26&gp=0.jpg"
+                   alt=""></div>
             <span>育婴师</span>
           </div>
         </li>
@@ -64,7 +66,8 @@
         <!-- 保洁/清洁  -->
         <li>
           <div class="box">
-            <div class="radiu"></div>
+            <div class="radiu"><img src="https://ns-strategy.cdn.bcebos.com/ns-strategy/upload/fc_big_pic/part-00020-3037.jpg"
+                   alt=""></div>
             <span>保洁/清洁</span>
           </div>
         </li>
@@ -73,7 +76,8 @@
         <!-- 保姆  -->
         <li>
           <div class="box">
-            <div class="radiu"></div>
+            <div class="radiu"><img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2933186354,1465652520&fm=26&gp=0.jpg"
+                   alt=""></div>
             <span>保姆</span>
           </div>
         </li>
@@ -82,7 +86,8 @@
         <!-- 产康师  -->
         <li>
           <div class="box">
-            <div class="radiu"></div>
+            <div class="radiu"><img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3920120743,111144046&fm=26&gp=0.jpg"
+                   alt=""></div>
             <span>产康师</span>
           </div>
         </li>
@@ -91,7 +96,8 @@
         <!-- 早教/托育  -->
         <li>
           <div class="box">
-            <div class="radiu"></div>
+            <div class="radiu"><img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1713596016,3106738539&fm=26&gp=0.jpg"
+                   alt=""></div>
             <span>早教/托育</span>
           </div>
         </li>
@@ -100,7 +106,8 @@
         <!-- 养老/陪护  -->
         <li>
           <div class="box">
-            <div class="radiu"></div>
+            <div class="radiu"><img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=856703829,384709557&fm=26&gp=0.jpg"
+                   alt=""></div>
             <span>养老/陪护</span>
           </div>
         </li>
@@ -109,7 +116,8 @@
         <!-- 家装/搬家  -->
         <li>
           <div class="box">
-            <div class="radiu"></div>
+            <div class="radiu"><img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3675762135,617741686&fm=26&gp=0.jpg"
+                   alt=""></div>
             <span>家装/搬家</span>
           </div>
         </li>
@@ -162,7 +170,8 @@
         </div>
       </van-cell>
       <!-- 公司简介 -->
-      <div class="gengduo" @click="$router.push('/Company')">更多公司
+      <div class="gengduo"
+           @click="$router.push('/Company')">更多公司
         <van-icon name="arrow" />
       </div>
     </div>
@@ -174,10 +183,13 @@
         <div slot="title">诚信注册家服员</div>
       </van-cell>
       <!-- 月嫂信息 -->
-      <van-cell @click="$router.push(`/MaternityMatron/${item.id}`)" v-for="(item,index) in workerList" :key="item.id">
+      <van-cell @click="$router.push(`/MaternityMatron/${item.id}`)"
+                v-for="(item,index) in workerList"
+                :key="item.id">
         <div class="comment_list">
           <div class="touxiang">
-            <img :src="workerImages[index]" alt="">
+            <img :src="workerImages[index]"
+                 alt="">
           </div>
           <div class="youall">
             <div class="nameicon">
@@ -194,7 +206,8 @@
           </div>
         </div>
       </van-cell>
-      <div class="gengduo" @click="$router.push('/HouseWorker')">更多家服员
+      <div class="gengduo"
+           @click="$router.push('/HouseWorker')">更多家服员
         <van-icon name="arrow" />
       </div>
     </div>
@@ -351,12 +364,17 @@ export default {
         // align-content: center;
         align-items: center;
         .radiu {
+          img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+          }
           // position: absolute;
           // left: 50%;
           // transform: translateX(-50%);
           width: 110px;
           height: 110px;
-          background-color: red;
+
           border-radius: 50%;
         }
         span {

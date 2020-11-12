@@ -1,16 +1,27 @@
 <template>
   <div class="nav">
     <div class="service-staffs">
-      <van-nav-bar left-text="家政平台"  class="navbar" :border="false" />
+      <van-nav-bar left-text="家政平台"
+                   class="navbar"
+                   :border="false" />
       <!-- <div class="Housekeeping">家政平台</div> -->
       <div class="service-staff">
-        <van-search v-model="value" placeholder="智能匹配" class="search" @click="showPopup" />
-        <van-cell v-model="value" is-link class="search" style="display:none"></van-cell>
-        <van-popup v-model="show" position="bottom" :style="{ height: '81%', width:'100%' }">
-          <house-info></house-info>
+        <van-search v-model="value"
+                    placeholder="智能匹配"
+                    class="search"
+                    @click="showPopup" />
+        <van-cell v-model="value"
+                  is-link
+                  class="search"
+                  style="display:none"></van-cell>
+        <van-popup v-model="show"
+                   position="bottom"
+                   :style="{ height: '81%', width:'100%' }">
+          <house-list @close="show = false"></house-list>
         </van-popup><span class="changsha">长沙</span>
         <div class="box">
-          <van-icon name="arrow-down" size="10px" />
+          <van-icon name="arrow-down"
+                    size="10px" />
         </div>
       </div>
 
@@ -19,31 +30,58 @@
     <div class="home">
       <div class="gekai"></div>
       <div class="btn">
-        <van-button round type="info" size="mini" color="none">月嫂</van-button>
-        <van-button round type="info" size="mini" color="none">保姆</van-button>
-        <van-button round type="info" size="mini" color="none">育婴师</van-button>
-        <van-button round type="info" size="mini" color="none">产康师</van-button>
+        <van-button round
+                    type="info"
+                    size="mini"
+                    color="none">月嫂</van-button>
+        <van-button round
+                    type="info"
+                    size="mini"
+                    color="none">保姆</van-button>
+        <van-button round
+                    type="info"
+                    size="mini"
+                    color="none">育婴师</van-button>
+        <van-button round
+                    type="info"
+                    size="mini"
+                    color="none">产康师</van-button>
 
       </div>
       <div class="btn-one">
-        <van-button round type="info" size="mini" color="none">家装/搬家</van-button>
-        <van-button round type="info" size="mini" color="none">早教/托育</van-button>
-        <van-button round type="info" size="mini" color="none">养老/陪护</van-button>
+        <van-button round
+                    type="info"
+                    size="mini"
+                    color="none">家装/搬家</van-button>
+        <van-button round
+                    type="info"
+                    size="mini"
+                    color="none">早教/托育</van-button>
+        <van-button round
+                    type="info"
+                    size="mini"
+                    color="none">养老/陪护</van-button>
       </div>
       <div class="btn-two">
-        <van-button round type="info" size="mini" color="none">保洁/清洗</van-button>
-        <van-button round type="info" size="mini" color="none">全部职业</van-button>
+        <van-button round
+                    type="info"
+                    size="mini"
+                    color="none">保洁/清洗</van-button>
+        <van-button round
+                    type="info"
+                    size="mini"
+                    color="none">全部职业</van-button>
       </div>
     </div>
     <div class="thehoues">
-      <house-list></house-list>
+      <house-info></house-info>
     </div>
   </div>
 </template>
 
 <script>
-import HouseInfo from './components/house-list'
-import HouseList from './components/house-info'
+import HouseList from './components/house-list'
+import HouseInfo from './components/house-info'
 export default {
   name: 'HouseWorker',
   components: {
@@ -161,8 +199,8 @@ button {
   top: 0;
   left: 0;
   right: 0;
-  ::v-deep .van-nav-bar__left{
-    .van-nav-bar__text{
+  ::v-deep .van-nav-bar__left {
+    .van-nav-bar__text {
       color: #fff;
       font-size: 32px;
     }

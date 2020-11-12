@@ -2,47 +2,29 @@
   <div class="nav">
     <div class="service-staffs">
 
-      <!-- <div class="Housekeeping">家政平台</div> -->
-      <!-- <span class="boot_sta">家政平台</span> -->
-      <!-- <div class="service-staff">
-        <van-search v-model="value" placeholder="智能匹配" class="search" right-icon="clear" /><span class="changsha">长沙</span>
-        <div class="box">
-          <van-icon name="arrow-down" size="10px" color="#D3D3D5" />
-        </div>
-      </div> -->
-
     </div>
 
     <div class="home">
       <div class="county-seat">职业类型</div>
       <div class="btn">
-        <!-- <van-button round type="info" size="mini" color="none">市辖区</van-button>
-        <van-button round type="info" size="mini" color="none">芙蓉区</van-button>
-        <van-button round type="info" size="mini" color="none">天心区</van-button>
-        <van-button round type="info" size="mini" color="none">岳麓区</van-button>
-         -->
-        <div class="box-rs">全部职业 </div>
-        <div class="box-rs">月嫂 </div>
-        <div class="box-rs">育婴师 </div>
-        <div class="box-rs">保洁/清 </div>
-
+        <div class="box-rs"
+             v-for="(v,i) in occupationList"
+             :key="i"
+             @click="isShowClass(v,i)"
+             :class="[v.active ? 'highlight' : '']">{{v.tp}} </div>
       </div>
       <div class="btn-one">
-        <!-- <van-button round type="info" size="mini" color="none">开福区</van-button>
-        <van-button round type="info" size="mini" color="none">雨花区</van-button>
-        <van-button round type="info" size="mini" color="none">长沙县</van-button>
-        <van-button round type="info" size="mini" color="none">望城县</van-button> -->
-        <div class="box-rs">保姆 </div>
-        <div class="box-rs">产康师 </div>
-        <div class="box-rs">早教/托 </div>
-        <div class="box-rs">养老/陪 </div>
-
+        <div class="box-rs"
+             v-for="(v,i) in occupationList1"
+             :key="i"
+             @click="isShowClass(v,i)"
+             :class="[v.active ? 'highlight' : '']">{{v.tp}} </div>
       </div>
       <div class="unfold">
 
-        <!-- <van-button size="mini" class="btnn">展开</van-button> -->
         <div class="btnn">展开
-          <van-icon name="arrow-down" class="icoone" />
+          <van-icon name="arrow-down"
+                    class="icoone" />
         </div>
 
       </div>
@@ -51,64 +33,53 @@
     <div class="home">
       <div class="county-seat">学历型</div>
       <div class="btn">
-        <!-- <van-button round type="info" size="mini" color="none">全部职</van-button>
-        <van-button round type="info" size="mini" color="none">月嫂</van-button>
-        <van-button round type="info" size="mini" color="none">育婴师</van-button>
-        <van-button round type="info" size="mini" color="none">保洁/清</van-button> -->
-        <div class="box-rs">小学 </div>
-        <div class="box-rs">初中 </div>
-        <div class="box-rs">中专 </div>
-        <div class="box-rs">职高 </div>
-
+        <div class="box-rs"
+             v-for="(v,i) in educationList"
+             :key="i"
+             @click="isShowClass(v,i)"
+             :class="[v.active ? 'highlight' : '']">{{v.tp}} </div>
       </div>
       <div class="btn-one">
-        <!-- <van-button round type="info" size="mini" color="none">保姆</van-button>
-        <van-button round type="info" size="mini" color="none">产康师</van-button>
-        <van-button round type="info" size="mini" color="none">早教/托</van-button>
-        <van-button round type="info" size="mini" color="none">养老/陪</van-button> -->
-        <div class="box-rs">高中 </div>
-        <div class="box-rs">大专 </div>
-        <div class="box-rs">本科 </div>
-        <div class="box-rs">研究生及以上 </div>
+        <div class="box-rs"
+             v-for="(v,i) in educationList1"
+             :key="i"
+             @click="isShowClass(v,i)"
+             :class="[v.active ? 'highlight' : '']">{{v.tp}} </div>
 
       </div>
 
       <div class="unfold">
 
         <div class="btnn">展开
-          <van-icon name="arrow-down" class="icoone" />
+          <van-icon name="arrow-down"
+                    class="icoone" />
         </div>
       </div>
     </div>
+
     <div class="home">
       <div class="county-seat">民族</div>
       <div class="btn">
-        <!-- <van-button round type="info" size="mini" color="none">全部职</van-button>
-        <van-button round type="info" size="mini" color="none">月嫂</van-button>
-        <van-button round type="info" size="mini" color="none">育婴师</van-button>
-        <van-button round type="info" size="mini" color="none">保洁/清</van-button> -->
-        <div class="box-rs">汉族 </div>
-        <div class="box-rs">蒙古族 </div>
-        <div class="box-rs">回族 </div>
-        <div class="box-rs">藏族 </div>
+        <div class="box-rs"
+             v-for="(v,i) in FamilyList"
+             :key="i"
+             @click="isShowClass(v,i)"
+             :class="[v.active ? 'highlight' : '']">{{v.tp}} </div>
 
       </div>
       <div class="btn-one">
-        <!-- <van-button round type="info" size="mini" color="none">保姆</van-button>
-        <van-button round type="info" size="mini" color="none">产康师</van-button>
-        <van-button round type="info" size="mini" color="none">早教/托</van-button>
-        <van-button round type="info" size="mini" color="none">养老/陪</van-button> -->
-        <div class="box-rs">维吾尔族 </div>
-        <div class="box-rs">苗族 </div>
-        <div class="box-rs">彝族 </div>
-        <div class="box-rs">壮族 </div>
-
+        <div class="box-rs"
+             v-for="(v,i) in FamilyList1"
+             :key="i"
+             @click="isShowClass(v,i)"
+             :class="[v.active ? 'highlight' : '']">{{v.tp}} </div>
       </div>
 
       <div class="unfold">
 
         <div class="btnn">展开
-          <van-icon name="arrow-down" class="icoone" />
+          <van-icon name="arrow-down"
+                    class="icoone" />
         </div>
       </div>
     </div>
@@ -119,10 +90,11 @@
 
         <div class="btn">
 
-          <div class="box-rs">未婚 </div>
-          <div class="box-rs">已婚 </div>
-          <div class="box-rs">离异 </div>
-          <div class="box-rs">丧偶 </div>
+          <div class="box-rs"
+               v-for="(v,i) in marriageList"
+               :key="i"
+               @click="isShowClass(v,i)"
+               :class="[v.active ? 'highlight' : '']">{{v.tp}} </div>
 
         </div>
 
@@ -131,7 +103,8 @@
       <div class="unfold">
 
         <div class="btnn">展开
-          <van-icon name="arrow-down" class="icoone" />
+          <van-icon name="arrow-down"
+                    class="icoone" />
         </div>
       </div>
     </div>
@@ -141,10 +114,11 @@
       <div class="btn Credit">
 
         <div class="nbas">
-
-          <div class="nba">白羊座（3.21~4.20）</div>
-          <div class="nba">金牛座（4.20~5.20）</div>
-
+          <div class="nba"
+               v-for="(v,i) in signList"
+               :key="i"
+               :class="[v.active ? 'highlight' : '']"
+               @click="isShowClass(v,i)">{{v.tp}}</div>
         </div>
 
       </div>
@@ -152,7 +126,8 @@
       <div class="unfold">
 
         <div class="btnn">展开
-          <van-icon name="arrow-down" class="icoone" />
+          <van-icon name="arrow-down"
+                    class="icoone" />
         </div>
       </div>
     </div>
@@ -160,46 +135,43 @@
       <div class="county-seat">生肖</div>
     </div>
     <div class="ttrs">
-      <div class="box-rs">鼠</div>
-      <div class="box-rs">牛</div>
-      <div class="box-rs">狗</div>
-      <div class="box-rs">猪</div>
+      <div class="box-rs"
+           v-for="(v,i) in ZodiacList"
+           :key="i"
+           @click="isShowClass(v,i)"
+           :class="[v.active ? 'highlight' : '']">{{v.tp}} </div>
     </div>
     <div class="unfold">
 
       <div class="btnn">展开
-        <van-icon name="arrow-down" class="icoone" />
+        <van-icon name="arrow-down"
+                  class="icoone" />
       </div>
     </div>
     <div class="home">
       <div class="county-seat">工作年限</div>
       <div class="btn">
-        <!-- <van-button round type="info" size="mini" color="none">全部职</van-button>
-        <van-button round type="info" size="mini" color="none">月嫂</van-button>
-        <van-button round type="info" size="mini" color="none">育婴师</van-button>
-        <van-button round type="info" size="mini" color="none">保洁/清</van-button> -->
-        <div class="box-rs">1年 </div>
-        <div class="box-rs">2年 </div>
-        <div class="box-rs">3年 </div>
-        <div class="box-rs">4年 </div>
+        <div class="box-rs"
+             v-for="(v,i) in duration"
+             :key="i"
+             @click="isShowClass(v,i)"
+             :class="[v.active ? 'highlight' : '']">{{v.tp}} </div>
 
       </div>
       <div class="btn-one">
-        <!-- <van-button round type="info" size="mini" color="none">保姆</van-button>
-        <van-button round type="info" size="mini" color="none">产康师</van-button>
-        <van-button round type="info" size="mini" color="none">早教/托</van-button>
-        <van-button round type="info" size="mini" color="none">养老/陪</van-button> -->
-        <div class="box-rs">5年 </div>
-        <div class="box-rs">6年 </div>
-        <div class="box-rs">7年 </div>
-        <div class="box-rs">8年 </div>
+        <div class="box-rs"
+             v-for="(v,i) in duration1"
+             :key="i"
+             @click="isShowClass(v,i)"
+             :class="[v.active ? 'highlight' : '']">{{v.tp}} </div>
 
       </div>
 
       <div class="unfold">
 
         <div class="btnn">展开
-          <van-icon name="arrow-down" class="icoone" />
+          <van-icon name="arrow-down"
+                    class="icoone" />
         </div>
       </div>
     </div>
@@ -207,38 +179,42 @@
     <div class="home">
       <div class="county-seat">主要技能</div>
       <div class="btn">
-        <!-- <van-button round type="info" size="mini" color="none">全部职</van-button>
-        <van-button round type="info" size="mini" color="none">月嫂</van-button>
-        <van-button round type="info" size="mini" color="none">育婴师</van-button>
-        <van-button round type="info" size="mini" color="none">保洁/清</van-button> -->
-        <div class="box-rs">做 </div>
-        <div class="box-rs">催 </div>
-        <div class="box-rs">产后护理 </div>
-        <div class="box-rs">月子餐 </div>
+
+        <div class="box-rs"
+             v-for="(v,i) in skill"
+             :key="i"
+             @click="isShowClass(v,i)"
+             :class="[v.active ? 'highlight' : '']">{{v.tp}} </div>
 
       </div>
       <div class="btn-one">
-        <!-- <van-button round type="info" size="mini" color="none">保姆</van-button>
-        <van-button round type="info" size="mini" color="none">产康师</van-button>
-        <van-button round type="info" size="mini" color="none">早教/托</van-button>
-        <van-button round type="info" size="mini" color="none">养老/陪</van-button> -->
-        <div class="box-rs">家庭保洁 </div>
-        <div class="box-rs">洗 </div>
-        <div class="box-rs">育婴护 </div>
-        <div class="box-rs">小儿推拿 </div>
+        <div class="box-rs"
+             v-for="(v,i) in skill1"
+             :key="i"
+             @click="isShowClass(v,i)"
+             :class="[v.active ? 'highlight' : '']">{{v.tp}} </div>
 
       </div>
 
       <div class="unfold">
 
         <div class="btnn">展开
-          <van-icon name="arrow-down" class="icoone" />
+          <van-icon name="arrow-down"
+                    class="icoone" />
         </div>
       </div>
     </div>
     <div class="btn-puls">
-      <van-button type="primary" size="small" class="vbs_btn" round>清除条件</van-button>
-      <van-button type="primary" size="small" class="vbs_btn" round>确认筛选</van-button>
+      <van-button type="primary"
+                  size="small"
+                  class="vbs_btn"
+                  @click="allactive"
+                  round>清除条件</van-button>
+      <van-button type="primary"
+                  size="small"
+                  class="vbs_btn"
+                  @click="confirmationScreen"
+                  round>确认筛选</van-button>
     </div>
 
   </div>
@@ -251,18 +227,65 @@ export default {
   props: {},
   data () {
     return {
-      value: ''
+      value: '',
+      occupationList: [{ tp: '全部职业', active: false }, { tp: '月嫂', active: false }, { tp: '育婴师', active: false }, { tp: '保洁/清', active: false }],
+      occupationList1: [{ tp: '保姆', active: false }, { tp: '产康师', active: false }, { tp: '早教/托', active: false }, { tp: '养老/陪', active: false }],
+      educationList: [{ tp: '小学', active: false }, { tp: '初中', active: false }, { tp: '中专', active: false }, { tp: '职高', active: false }],
+      educationList1: [{ tp: '高中', active: false }, { tp: '大专', active: false }, { tp: '本科', active: false }, { tp: '研究生以上', active: false }],
+      FamilyList: [{ tp: '汉族', active: false }, { tp: '蒙古族', active: false }, { tp: '回族', active: false }, { tp: '维吾尔族', active: false }],
+      FamilyList1: [{ tp: '苗族', active: false }, { tp: '彝族', active: false }, { tp: '壮族', active: false }, { tp: '藏族', active: false }],
+      marriageList: [{ tp: '未婚', active: false }, { tp: '已婚', active: false }, { tp: '离异', active: false }, { tp: '丧偶', active: false }],
+      signList: [{ tp: '白羊座（3.21~4.20）', active: false }, { tp: '狮子座（3.21~4.20）', active: false }, { tp: '天蝎座（3.21~4.20）', active: false }, { tp: '金牛座（4.20~5.20）', active: false }],
+      ZodiacList: [{ tp: '鼠', active: false }, { tp: '牛', active: false }, { tp: '狗', active: false }, { tp: '猪', active: false }],
+      duration: [{ tp: '1年', active: false }, { tp: '2年', active: false }, { tp: '3年', active: false }, { tp: '4年', active: false }],
+      duration1: [{ tp: '5年', active: false }, { tp: '6年', active: false }, { tp: '7年', active: false }, { tp: '8年', active: false }],
+      skill: [{ tp: '做', active: false }, { tp: '催', active: false }, { tp: '产后护理', active: false }, { tp: '月子餐', active: false }],
+      skill1: [{ tp: '家庭保洁', active: false }, { tp: '洗', active: false }, { tp: '育婴护', active: false }, { tp: '小儿推拿', active: false }]
+
     }
   },
   computed: {},
   watch: {},
   created () {},
   mounted () {},
-  methods: {}
+  methods: {
+    isShowClass (v) {
+      v.active = !v.active
+    },
+    allactive () {
+      for (let i = 0; i < 4; i++) {
+        this.occupationList[i].active = false
+        this.occupationList1[i].active = false
+        this.educationList[i].active = false
+        this.educationList1[i].active = false
+        this.FamilyList[i].active = false
+        this.FamilyList1[i].active = false
+        this.marriageList[i].active = false
+        this.ZodiacList[i].active = false
+        this.signList[i].active = false
+        this.duration[i].active = false
+        this.duration1[i].active = false
+        this.skill[i].active = false
+        this.skill1[i].active = false
+      }
+    },
+    confirmationScreen () {
+      this.$toast.success('筛选成功')
+      this.$emit('close', false)
+    }
+  }
 }
 </script>
 
 <style scoped lang="scss">
+.home,
+.ttrs {
+  .highlight {
+    color: #3f51b5;
+    border: 2px solid #3f51b5;
+  }
+}
+
 // .service-staffs {
 //   background-color: #354499;
 //   height: 252px;
@@ -436,7 +459,7 @@ span {
 }
 
 .ttrs {
-  margin-left: 48px;
+  margin-left: 22px;
   display: flex;
 }
 /* 职业类型 */
