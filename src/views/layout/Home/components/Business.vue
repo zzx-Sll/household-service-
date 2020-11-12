@@ -119,6 +119,7 @@ export default {
   name: 'Buseniess',
   data () {
     return {
+      surelist: [],
       Enterprisename: '',
       showname: '',
       CreditCode: '',
@@ -184,40 +185,54 @@ export default {
       this.showtype = false
     },
     async nextboy () {
-      await this.$request.post('postministry', {
+      try {
+        await this.$request.post('postministry', {
         // 法人类型
-        legal: this.value,
-        // 企业名字
-        Business_name: this.Enterprisename,
-        // 显示名称
-        nick_name: this.showname,
-        // 社会信用代码
-        Credit_Code: this.CreditCode,
-        // 公司注册时间
-        company_creattime: '',
-        // 注册资本
-        capital: this.timevalue,
-        // 注册地区
-        region: this.areavalue,
-        // 注册企业类型
-        Enterprise_type: this.typevalue,
-        // 主营业务
-        Businesstype: this.pushbtype
-      })
-      // console.log(res.data)
+          legal: this.value,
+          // 企业名字
+          Business_name: this.Enterprisename,
+          // 显示名称
+          nick_name: this.showname,
+          // 社会信用代码
+          Credit_Code: this.CreditCode,
+          // 公司注册时间
+          company_creattime: this.timevalue,
+          // 注册资本
+          capital: this.dollar,
+          // 注册地区
+          region: this.areavalue,
+          // 注册企业类型
+          Enterprise_type: this.typevalue,
+          // 主营业务
+          Businesstype: this.surelist
+        })
+        if (this.value && this.Enterprisename && this.showname && this.CreditCode && this.timevalue && this.dollar && this.areavalue && this.surelist && this.typevalue !== '' && []) {
+          this.$toast('提交成功')
+          this.$router.push('/Home')
+        } else {
+          this.$toast('请填写完整')
+        }
+      } catch (err) {
+
+      }
     },
     async getbusinesstype () {
       const res = await this.$request.get('getBusinesstype')
-
       this.btype = res.data.data
     },
     clickbusinesstype (item) {
       // console.log(item)
       item.active = !item.active
       if (!item.active) {
-        this.pushbtype.push(item)
+        this.surelist.push(item)
+      } else {
+        // 从当前项删除此项
+        // 找到当前项索引
+        const i = this.surelist.indexOf(item)
+        //  删除当前项
+        this.surelist.splice(i, 1)
       }
-      console.log(this.pushbtype)
+      console.log(this.surelist)
     }
   }
 }

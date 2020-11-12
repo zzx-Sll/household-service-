@@ -24,10 +24,11 @@
                    round
                    type="primary"
                    plain
-                   v-for="(item,i) in 10"
+                   v-for="(item,i) in btype"
                    :key="i"
                    class="skill"
-                   color="#A7A2A2">月嫂</van-tag>
+                   :color="item.active? '#A7A2A2':'red'"
+                   @click="changecolor(item)">{{item.tp}}</van-tag>
         </div>
       </van-cell>
 
@@ -38,37 +39,11 @@
                    type="primary"
                    plain
                    class="skill"
-                   color="#A7A2A2">五星</van-tag>
-          <van-tag size="medium"
-                   round
-                   type="primary"
-                   plain
-                   class="skill"
-                   color="#A7A2A2">四星</van-tag>
-          <van-tag size="medium"
-                   round
-                   type="primary"
-                   plain
-                   class="skill"
-                   color="#A7A2A2">三星</van-tag>
-          <van-tag size="medium"
-                   round
-                   type="primary"
-                   plain
-                   class="skill"
-                   color="#A7A2A2">二星</van-tag>
-          <van-tag size="medium"
-                   round
-                   type="primary"
-                   plain
-                   class="skill"
-                   color="#A7A2A2">一星</van-tag>
-          <van-tag size="medium"
-                   round
-                   type="primary"
-                   plain
-                   class="skill"
-                   color="#A7A2A2">金牌</van-tag>
+                   color="#A7A2A2"
+                   v-for="item2 in leveldata"
+                   :key="item2.id"
+                   @click="changelevel(item2.id)"
+                   :class="{active : active == item2.id}">{{item2.level}}</van-tag>
         </div>
       </van-cell>
     </div>
@@ -93,10 +68,17 @@ export default {
   name: 'UrbanService',
   data () {
     return {
+      surelist: [],
+      btype: '',
+      active: 0,
       areavalue: '',
       showArea: false,
-      areaList: list
+      areaList: list,
+      leveldata: [{ level: '一星', id: 1 }, { level: '二星', id: 2 }, { level: '三星', id: 3 }, { level: '四星', id: 4 }, { level: '五星', id: 5 }, { level: '金牌', id: 6 }]
     }
+  },
+  created () {
+    this.getbusiness()
   },
   methods: {
     onClickLeft () {
@@ -108,6 +90,27 @@ export default {
         .map((item) => item.name)
         .join('/')
       this.showArea = false
+    },
+    async getbusiness () {
+      const { data } = await this.$request.get('getBusinesstype')
+      this.btype = data.data
+      console.log(this.btype)
+    },
+    changecolor (item) {
+      item.active = !item.active
+      if (!item.active) {
+        this.surelist.push(item)
+      } else {
+        // 从当前项删除此项
+        // 找到当前项索引
+        const i = this.surelist.indexOf(item)
+        //  删除当前项
+        this.surelist.splice(i, 1)
+      }
+      console.log(this.surelist)
+    },
+    changelevel (itemid) {
+      this.active = itemid
     }
   }
 }
@@ -157,5 +160,8 @@ export default {
   z-index: 1;
   position: fixed;
   bottom: 0;
+}
+::v-deep .active {
+  color: red !important;
 }
 </style>

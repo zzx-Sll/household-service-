@@ -1,34 +1,36 @@
 <template>
   <div class="house-info">
-    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-      <div class="companydesign">
+    <van-list v-model="loading"
+              :finished="finished"
+              finished-text="没有更多了"
+              @load="onLoad">
 
-        <van-cell v-for="(data,i) in 6" :key="i">
+      <div class="companydesign">
+        <!-- 月嫂信息 -->
+        <van-cell @click="$router.push(`/MaternityMatron/${item.id}`)"
+                  v-for="(item,index) in workerList"
+                  :key="item.id">
           <div class="comment_list">
             <div class="touxiang">
-              <img src="https://img.yzcdn.cn/vant/apple-1.jpg" alt="">
-
+              <img :src="workerImages[index]"
+                   alt="">
             </div>
             <div class="youall">
               <div class="nameicon">
-                <div>五五开</div>
-                <div>8000元/26天</div>
+                <div>{{item.worker_name}}</div>
+                <div>{{item.price}}</div>
               </div>
               <div class="skil">
-                <span class="peoplegrid">八倍sks</span>
-                <span class="peoplegrid">10年老师傅</span>
+                <span class="peoplegrid">{{item.comTag1}}</span>
+                <span class="peoplegrid">{{item.comTag2}}</span>
 
               </div>
-              <div class="myself"><span>长沙</span> | <span>18岁</span> | <span>干了18次</span> | <span>9条评价</span></div>
+              <div class="myself"><span>{{item.address}}</span> | <span>{{item.age}}岁</span> | <span>服务{{item.serve_number}}户</span> | <span>9条评价</span></div>
 
             </div>
           </div>
         </van-cell>
-        <div class="gengduo">更多家服员
-          <van-icon name="arrow" />
-        </div>
       </div>
-      <van-cell v-for="item in list" :key="item" :title="item" />
     </van-list>
 
   </div>
@@ -48,26 +50,43 @@ export default {
     return {
       list: [],
       loading: false,
-      finished: false
+      finished: false,
+      workerList: [],
+      workerImages: []
     }
   },
   computed: {},
   watch: {},
-  created () {},
+  created () {
+    this.getHouseWoker()
+  },
   mounted () {},
   methods: {
     onLoad () {
       // 异步更新数据
       // setTimeout 仅做示例，真实场景中一般为 ajax 请求
       setTimeout(() => {
+        for (let i = 0; i < this.workerList.length; i++) {
+          this.list.push(this.list.length + 1)
+        }
         // 加载状态结束
         this.loading = false
 
         // 数据全部加载完成
-        if (this.list.length >= 40) {
+        if (this.list.length >= 12) {
           this.finished = true
         }
       }, 1000)
+    },
+    async getHouseWoker () {
+      const { data: res } = await this.$request.get('getAllWorker')
+      res.data.forEach((item, i) => {
+        this.workerList.push(res.data[i])
+        this.workerImages = res.data[0].worker_photo
+        return this.workerList
+      })
+      this.loading = false
+      console.log(this.workerList)
     }
   }
 }
@@ -75,6 +94,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.companydesign {
+  margin-bottom: 36px;
+}
 .comment_list {
   display: flex;
 

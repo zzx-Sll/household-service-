@@ -21,7 +21,7 @@
                    :key="i"
                    class="skill"
                    :color="item.active? '#A7A2A2':'red'"
-                   @click="clickbusinesstype(item,i)">{{item.tp}}</van-tag>
+                   @click="clickbusinesstype(item)">{{item.tp}}</van-tag>
         </div>
       </van-cell>
 
@@ -105,6 +105,7 @@
 export default {
   data () {
     return {
+      surelist: [],
       pushbtype: '',
       telephonenum: '',
       contacts: '',
@@ -149,36 +150,55 @@ export default {
       console.log(res.data.data)
       this.btype = res.data.data
     },
-    clickbusinesstype (item, i) {
+    clickbusinesstype (item) {
+      // item.active = !item.active
       item.active = !item.active
-      if (item.active) {
-        this.pushbtype.push(item)
+      if (!item.active) {
+        this.surelist.push(item)
+      } else {
+        // 从当前项删除此项
+        // 找到当前项索引
+        const i = this.surelist.indexOf(item)
+        //  删除当前项
+        this.surelist.splice(i, 1)
       }
+      console.log(this.surelist)
     },
     changelive () {
       this.livehome = !this.livehome
     },
     async submitalldata () {
-      const res = await this.$request.post('posthousekeeping', {
+      try {
+        await this.$request.post('posthousekeeping', {
         // 找家政接口
         // 需求岗位
-        Businesstype: '',
-        // 电话号码
-        telephone: this.telephonenum,
-        // 年龄
-        age: this.agenum,
-        // 薪资
-        money: this.moneynum,
-        // 住家与否
-        live: this.livehome,
-        // 联系人
-        contacts: this.contacts,
-        // 籍贯要求
-        Nativeplace: this.requirement,
-        // 工作地点
-        Workplace: this.workplace
-      })
-      console.log(res)
+          Businesstype: this.surelist,
+          // 电话号码
+          telephone: this.telephonenum,
+          // 年龄
+          age: this.agenum,
+          // 薪资
+          money: this.moneynum,
+          // 住家与否
+          live: this.livehome,
+          // 联系人
+          contacts: this.contacts,
+          // 籍贯要求
+          Nativeplace: this.requirement,
+          // 工作地点
+          Workplace: this.workplace
+        })
+        if (this.surelist && this.telephonenum && this.agenum && this.moneynum && this.contacts && this.requirement && this.workplace !== '') {
+          this.$toast('提交成功')
+          this.$router.push('/Home')
+        } else {
+          this.$toast('请填写完整')
+        }
+      } catch (err) {
+        this.$toast('错误')
+      }
+
+      // console.log(res)
     }
   }
 
