@@ -1,40 +1,43 @@
 <template>
   <div class="contact">
 
-     <!-- 导航栏 -->
+    <!-- 导航栏 -->
     <van-nav-bar left-text="已联系家政人员"
                  :border="false"
                  left-arrow
                  @click-left="$router.back()"
                  class="contact-nav-bar" />
 
-    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+    <van-list v-model="loading"
+              :finished="finished"
+              finished-text="没有更多了"
+              @load="onLoad">
       <div class="companydesign">
-
-        <van-cell v-for="(data,i) in 6" :key="i">
+        <!-- 月嫂信息 -->
+        <van-cell @click="$router.push(`/MaternityMatron/${item.id}`)"
+                  v-for="(item,index) in workerList"
+                  :key="item.id">
           <div class="comment_list">
             <div class="touxiang">
-              <img src="https://img.yzcdn.cn/vant/apple-1.jpg" alt="">
-
+              <img :src="workerImages[index]"
+                   alt="">
             </div>
             <div class="youall">
               <div class="nameicon">
-                <div>陈佳</div>
-                <div>13800138000</div>
+                <div>{{item.worker_name}}</div>
+                <div>{{item.phone}}</div>
               </div>
               <div class="skil">
-                <span class="peoplegrid">二星育婴师</span>
-                <span class="peoplegrid">6年老师傅</span>
+                <span class="peoplegrid">{{item.comTag1}}</span>
+                <span class="peoplegrid">{{item.comTag2}}</span>
 
               </div>
-              <div class="myself"><span>湖南前海优家网络科技有限公司</span></div>
+              <div class="myself"><span>{{item.address}}</span> | <span>{{item.age}}岁</span> | <span>服务{{item.serve_number}}户</span> | <span>9条评价</span></div>
 
             </div>
           </div>
         </van-cell>
-
       </div>
-      <van-cell v-for="item in list" :key="item" :title="item" />
     </van-list>
 
   </div>
@@ -54,30 +57,44 @@ export default {
     return {
       list: [],
       loading: false,
-      finished: false
+      finished: false,
+      workerList: [],
+      workerImages: []
     }
   },
   computed: {},
   watch: {},
-  created () {},
+  created () {
+    this.getContactWoker()
+  },
   mounted () {},
   methods: {
     onLoad () {
       // 异步更新数据
       // setTimeout 仅做示例，真实场景中一般为 ajax 请求
       setTimeout(() => {
-        // for (let i = 0; i < 10; i++) {
-        //   this.list.push(this.list.length + 1)
-        // }
+        for (let i = 0; i < 10; i++) {
+          this.list.push(this.list.length + 1)
+        }
 
         // 加载状态结束
         this.loading = false
 
         // 数据全部加载完成
-        if (this.list.length >= 40) {
+        if (this.list.length >= 12) {
           this.finished = true
         }
       }, 1000)
+    },
+    async getContactWoker () {
+      const { data: res } = await this.$request.get('getAllWorker')
+      res.data.forEach((item, i) => {
+        this.workerList.push(res.data[i])
+        this.workerImages = res.data[0].worker_photo
+        return this.workerList
+      })
+      this.loading = false
+      console.log(this.workerList)
     }
   }
 }
@@ -88,23 +105,23 @@ body {
   background-color: #f8f8f8;
 }
 .contact-nav-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: #3f51b5;
-    height: 130px;
-    ::v-deep .van-nav-bar__left {
-      .van-icon-arrow-left,
-      .van-nav-bar__text {
-        color: #fff;
-        font-size: 30px;
-      }
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #3f51b5;
+  height: 130px;
+  ::v-deep .van-nav-bar__left {
+    .van-icon-arrow-left,
+    .van-nav-bar__text {
+      color: #fff;
+      font-size: 30px;
     }
   }
-  .companydesign{
-    padding-top: 130px;
-  }
+}
+.companydesign {
+  padding-top: 130px;
+}
 .nav {
   // 头部 背景颜色
   height: 100px;

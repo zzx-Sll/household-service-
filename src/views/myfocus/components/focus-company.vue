@@ -94,9 +94,7 @@ export default {
     async getMyFocusCompany () {
       const { data: res } = await this.$request.get('getCompanys')
       res.data.forEach((item, i) => {
-      // 获取首页的三个公司
         this.companyList.push(res.data[i])
-        // 实现首页公司图片的轮播
         return this.companyList
       })
       this.loading = false

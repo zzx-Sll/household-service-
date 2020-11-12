@@ -4,13 +4,19 @@ import { company } from 'vuex';
   <div class="Company-Details">
     <!-- 家政公司详情组件 -->
     <!-- 家政公司详情页的导航栏  -->
-    <van-nav-bar class="login-navbar" left-text="家政平台" left-arrow @click-left="onClickLeft" />
+    <van-nav-bar class="login-navbar"
+                 left-text="家政平台"
+                 left-arrow
+                 @click-left="onClickLeft" />
     <!-- 家政公司详情页的导航栏  -->
 
     <!-- 家政公司的轮播图片 -->
     <div class="company-swipe">
-      <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-        <van-swipe-item v-for="(img,index) in  companyPhoto " :key="index"><img :src="img"></van-swipe-item>
+      <van-swipe class="my-swipe"
+                 :autoplay="3000"
+                 indicator-color="white">
+        <van-swipe-item v-for="(img,index) in  companyPhoto "
+                        :key="index"><img :src="img"></van-swipe-item>
 
       </van-swipe>
     </div>
@@ -31,8 +37,18 @@ import { company } from 'vuex';
       </div>
       <div class="reg-footer">
         <!-- 关注按钮 -->
-        <van-button @click="changeFollowed" v-if="currentCompanyDetails.is_followed" class="followed-btn" round plain size="mini">已关注</van-button>
-        <van-button v-else @click="changeFollowed" class=" followed-btn" round plain size="mini">关注</van-button>
+        <van-button @click="changeFollowed"
+                    v-if="currentCompanyDetails.is_followed"
+                    class="followed-btn"
+                    round
+                    plain
+                    size="mini">已关注</van-button>
+        <van-button v-else
+                    @click="changeFollowed"
+                    class=" followed-btn"
+                    round
+                    plain
+                    size="mini">关注</van-button>
         <!-- 关注按钮 -->
       </div>
     </div>
@@ -45,15 +61,21 @@ import { company } from 'vuex';
       </ul>
       <div class="down">
         <div class="down-business">
-          <van-image class="down-img" round src="https://img.yzcdn.cn/vant/cat.jpeg" />
+          <van-image class="down-img"
+                     round
+                     src="https://img.yzcdn.cn/vant/cat.jpeg" />
           <span>月嫂</span>
         </div>
         <div class="down-business">
-          <van-image class="down-img" round src="https://img.yzcdn.cn/vant/cat.jpeg" />
+          <van-image class="down-img"
+                     round
+                     src="https://img.yzcdn.cn/vant/cat.jpeg" />
           <span>月嫂</span>
         </div>
         <div class="down-business">
-          <van-image class="down-img" round src="https://img.yzcdn.cn/vant/cat.jpeg" />
+          <van-image class="down-img"
+                     round
+                     src="https://img.yzcdn.cn/vant/cat.jpeg" />
           <span>月嫂</span>
         </div>
       </div>
@@ -62,7 +84,8 @@ import { company } from 'vuex';
 
     <!-- 公司资料 -->
     <div class="company-info">
-      <van-tabs v-model="active" swipeable>
+      <van-tabs v-model="active"
+                swipeable>
         <van-tab title="公司资料">
           <!-- 公司资质和办公环境 -->
           <div class="card-info">
@@ -71,9 +94,12 @@ import { company } from 'vuex';
             </ul>
             <div class="card-img">
               <ul>
-                <li><img :src="companyPhoto[1]" alt=""></li>
-                <li><img :src="companyPhoto[0]" alt=""></li>
-                <li><img :src="companyPhoto[2]" alt=""></li>
+                <li><img :src="companyPhoto[1]"
+                       alt=""></li>
+                <li><img :src="companyPhoto[0]"
+                       alt=""></li>
+                <li><img :src="companyPhoto[2]"
+                       alt=""></li>
 
               </ul>
             </div>
@@ -82,9 +108,12 @@ import { company } from 'vuex';
             </ul>
             <div class="card-img">
               <ul>
-                <li><img :src="companyPhoto[2]" alt=""></li>
-                <li><img :src="companyPhoto[0]" alt=""></li>
-                <li><img :src="companyPhoto[3]" alt=""></li>
+                <li><img :src="companyPhoto[2]"
+                       alt=""></li>
+                <li><img :src="companyPhoto[0]"
+                       alt=""></li>
+                <li><img :src="companyPhoto[3]"
+                       alt=""></li>
               </ul>
             </div>
           </div>
@@ -96,9 +125,12 @@ import { company } from 'vuex';
             </ul>
             <div class="card-img">
               <ul>
-                <li><img :src="companyPhoto[3]" alt=""></li>
-                <li><img :src="companyPhoto[1]" alt=""></li>
-                <li><img :src="companyPhoto[2]" alt=""></li>
+                <li><img :src="companyPhoto[3]"
+                       alt=""></li>
+                <li><img :src="companyPhoto[1]"
+                       alt=""></li>
+                <li><img :src="companyPhoto[2]"
+                       alt=""></li>
               </ul>
             </div>
             <ul class="border">
@@ -106,9 +138,12 @@ import { company } from 'vuex';
             </ul>
             <div class="card-img">
               <ul>
-                <li><img :src="companyPhoto[3]" alt=""></li>
-                <li><img :src="companyPhoto[1]" alt=""></li>
-                <li><img :src="companyPhoto[0]" alt=""></li>
+                <li><img :src="companyPhoto[3]"
+                       alt=""></li>
+                <li><img :src="companyPhoto[1]"
+                       alt=""></li>
+                <li><img :src="companyPhoto[0]"
+                       alt=""></li>
               </ul>
             </div>
           </div>
@@ -183,14 +218,18 @@ export default {
     },
     // 获取当前公司信息的函数
     async getCurrentCompany () {
-      const { data: res } = await this.$request.get('getCurrentCompany/', {
-        data: this.comId
+      try {
+        const { data: res } = await this.$request.get('getCurrentCompany/', {
+          data: this.comId
+        }
+        )
+        // 将获得的公司信息存储到本地
+        this.currentCompanyDetails = res.data
+        this.companyPhoto = res.data.photo
+        console.log(this.currentCompanyDetails)
+      } catch (e) {
+        this.$toast('获取公司详情失败')
       }
-      )
-      // 将获得的公司信息存储到本地
-      this.currentCompanyDetails = res.data
-      this.companyPhoto = res.data.photo
-      console.log(this.currentCompanyDetails)
     },
     //  切换关注公司状态的函数
     async changeFollowed () {
@@ -202,7 +241,6 @@ export default {
         message: '加载中...',
         forbidClick: true,
         duration: 0
-
       })
 
       try {

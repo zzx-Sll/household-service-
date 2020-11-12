@@ -6,19 +6,35 @@
     <!-- 月嫂详情页的导航栏  -->
 
     <!-- 月嫂信息的描述卡片  -->
-    <van-card class="yue-card" title="张丽丽" thumb="https://img.yzcdn.cn/vant/ipad.jpeg">
-      <!-- 月嫂描述区域  -->
+    <van-card class="yue-card">
+      <template #thumb>
+        <img class="avatar" :src="currentWorkerDetails.worker_photo[currentWorkerDetails.id-1]" alt="">
+      </template>
+      <!-- 自定义标题 -->
+      <!-- 关注按钮 -->
+      <template #title>
+        <span class="name">{{currentWorkerDetails.worker_name}}</span>
+        <div class="followed" v-if="currentWorkerDetails.is_followed">
+          <van-button @click="changeFollowed" class="followed-btn" round plain size="mini">已关注</van-button>
+        </div>
+        <div class="followed" v-else>
+          <van-button @click="changeFollowed" class="followed-btn" round plain size="mini">关注</van-button>
+        </div>
+      </template>
+      <!-- 关注按钮 -->
+      <!-- 自定义标题 -->
+      <!-- 月嫂描述区域-->
       <template #desc>
         <div class="desc">
           <div>
-            <van-tag color="#3f51b5" plain round type="primary">二星育婴师</van-tag>
+            <van-tag color="#3f51b5" plain round type="primary">{{currentWorkerDetails.comTag1}}</van-tag>
           </div>
           <div>
-            <span>湖南长沙</span>
+            <span>{{currentWorkerDetails.address}}</span>
             <span>|</span>
-            <span>46岁</span>
+            <span>{{currentWorkerDetails.age}}岁</span>
             <span>|</span>
-            <span>七年经验</span>
+            <span>{{currentWorkerDetails.comTag2}}</span>
           </div>
         </div>
       </template>
@@ -27,14 +43,11 @@
       <template #footer>
         <div class="price-bottom">
           <div class="company"><span>注册公司：</span>
-            <span>湖南前海友网络科技有限公司</span>
+            <span>{{currentWorkerDetails.com_name}}</span>
           </div>
           <div class="pr">
             <span>职业：</span>
-            <span>保姆</span>
-            <span>月嫂</span>
-            <span>育婴师</span>
-            <span>早教/托育</span>
+            <span v-for="(item,index) in profession" :key="index">{{item}}</span>
           </div>
         </div>
         <div class="info">
@@ -49,13 +62,7 @@
         </div>
       </template>
       <!-- 注册公司职业区域 -->
-      <!-- 关注按钮 -->
-      <template #title>
-        <div class="followed">
-          <van-button class="followed-btn" round plain size="mini">关注</van-button>
-        </div>
-      </template>
-      <!-- 关注按钮 -->
+
     </van-card>
     <!-- 月嫂信息的描述卡片  -->
 
@@ -67,13 +74,7 @@
           <li><span>主要技能</span></li>
         </ul>
         <div class="skill-tag">
-          <van-tag color="#3f51b5" plain round type="primary">月子餐</van-tag>
-          <van-tag color="#3f51b5" plain round type="primary">家庭保洁</van-tag>
-          <van-tag color="#3f51b5" plain round type="primary">洗衣</van-tag>
-          <van-tag color="#3f51b5" plain round type="primary">育婴护理</van-tag>
-          <van-tag color="#3f51b5" plain round type="primary">小孩看护</van-tag>
-          <van-tag color="#3f51b5" plain round type="primary">家庭辅导</van-tag>
-          <van-tag color="#3f51b5" plain round type="primary">做饭</van-tag>
+          <van-tag v-for="(item,index) in skills" :key="index" color="#3f51b5" plain round type="primary">{{item}}</van-tag>
         </div>
       </div>
       <!-- 主要技能  -->
@@ -88,7 +89,7 @@
                 <li><span>个人简介</span></li>
               </ul>
             </template>
-            <p>学习期间表现优秀，完成了机械设计，机械制造技术基础Ⅰ，理论力学，材料力学，结构力学，金属结构，液压与气压传动，机械工程控制基础，画法几何与机械制图等专业学科的学习；通过了英语四级，计算机C语言二级，全国计算机辅助技术应用工程师考试并获得相关证书。同时，本人工作认真负责，能吃苦耐劳，严格要求自己，上进心强，乐于挑战，对新的事物有较强的接受能力；有团队精神和敬业精神，性格随和开朗、待人诚恳、具有良好的人际关系。</p>
+            <p>{{currentWorkerDetails.workerIntroduce}}</p>
           </van-collapse-item>
           <van-collapse-item name="2">
             <template #title>
@@ -98,12 +99,12 @@
             </template>
             <div class="person-info">
               <ul>
-                <li><span>任职公司：</span> <span>湖南前还有家网络科技有限公司</span></li>
-                <li><span>籍贯民族：</span><span>汉族</span></li>
-                <li><span>生肖属相：</span><span>汉族</span></li>
-                <li><span>星座：</span><span>摩羯座</span></li>
-                <li><span>出生日期：</span><span>1977-12-23</span></li>
-                <li><span>学历：</span><span>中专</span></li>
+                <li><span>任职公司：</span> <span>{{currentWorkerDetails.com_name}}</span></li>
+                <li><span>籍贯民族：</span><span>{{currentWorkerDetails.nation}}</span></li>
+                <li><span>生肖属相：</span><span>{{currentWorkerDetails.zodiac}}</span></li>
+                <li><span>星座：</span><span>{{currentWorkerDetails.constellation}}</span></li>
+                <li><span>出生日期：</span><span>{{currentWorkerDetails.birthday}}</span></li>
+                <li><span>学历：</span><span>{{currentWorkerDetails.education}}</span></li>
               </ul>
             </div>
           </van-collapse-item>
@@ -154,20 +155,97 @@
 
 <script>
 export default {
+  props: {
+    workerId: {
+      type: [Number, String],
+      required: true
+    }
+  },
   name: 'MaternityMatron',
   data () {
     return {
       // 折叠面板的索引
-      activeNames: ['1', '2']
+      activeNames: ['1', '2'],
+      // 当前月嫂的详情
+      currentWorkerDetails: null,
+      // 月嫂职业
+      profession: [],
+      // 月嫂技能
+      skills: []
 
     }
+  },
+  mounted () {
+    // 调用获取当前公司信息的函数
+    this.getCurrentWorker()
   },
   methods: {
     onClickLeft () {
       this.$router.back()
+    },
+    // 获取当前月嫂信息的函数
+
+    async getCurrentWorker () {
+      try {
+        const { data: res } = await this.$request.get('getCurrentWorker/', {
+          data: this.workerId
+        }
+        )
+        // 将获得的公司信息存储到本地
+        this.currentWorkerDetails = res.data
+        // 将月嫂技能和职业存储起来
+        const str = this.currentWorkerDetails.skills
+        const str1 = this.currentWorkerDetails.profession
+        this.skills.push(...str.split('|'))
+        this.profession.push(...str1.split('|'))
+      } catch (e) {
+        this.$toast('获取月嫂详情失败')
+      }
+    },
+    // 更改当前月嫂的关注信息
+    //  切换关注公司状态的函数
+    async changeFollowed () {
+    // 显示加载状态
+    // 拿到公司id,
+    // 取反关注
+    // 调接口
+      this.$toast.loading({
+        message: '加载中...',
+        forbidClick: true,
+        duration: 0
+
+      })
+
+      try {
+        // 判断当前的关注状态
+        if (this.currentWorkerDetails.is_followed) {
+          const res = await this.$request.patch('patchCurrentWorker', {
+            id: this.id,
+            is_followed: this.currentWorkerDetails.is_followed
+          })
+          console.log(res)
+          console.log(this.currentWorkerDetails.is_followed)
+          // 取反关注状态
+          this.currentWorkerDetails.is_followed = !this.currentWorkerDetails.is_followed
+          this.$toast.success('已取消关注')
+        } else {
+          const res = await this.$request.patch('patchCurrentCompany', {
+            id: this.comId,
+            is_followed: this.currentWorkerDetails.is_followed
+          })
+          console.log(res)
+          console.log(this.currentWorkerDetails.is_followed)
+          // 取反关注状态
+          this.currentWorkerDetails.is_followed = !this.currentWorkerDetails.is_followed
+          this.$toast.success('成功关注')
+        }
+      } catch (e) {
+        this.$toast.fail('操作失败')
+      }
     }
   }
 }
+
 </script>
 
 <style lang="scss" scoped>
@@ -193,6 +271,13 @@ export default {
     height: 450px;
     background-color: #fff;
     border-radius: 10px;
+    .avatar {
+      width: 180px;
+      height: 180px;
+    }
+    .name {
+      font-size: 30px;
+    }
     .desc {
       display: flex;
       flex-direction: column;
@@ -242,7 +327,7 @@ export default {
       }
     }
     .followed {
-      position: relative;
+      position: absolute;
       left: 0;
       .followed-btn {
         position: absoulte;

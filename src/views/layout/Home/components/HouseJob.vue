@@ -22,14 +22,7 @@
         <van-cell title="* 意向岗位 ：">
           <template #label>
             <div class="intention-job">
-              <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">月嫂</van-tag>
-              <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">育婴师</van-tag>
-              <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">保洁/清洁</van-tag>
-              <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">保姆</van-tag>
-              <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">早教/托管</van-tag>
-              <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">养老/陪护</van-tag>
-              <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">家装/搬家</van-tag>
-              <van-tag class="intention-tag" color="#9f9a9a" plain round type="primary">产康师</van-tag>
+              <van-tag class="intention-tag" plain round type="primary" v-for="(item,index) in busineestype" :color="item.active? '#3f51b5' :'#A7A2A2'" :key="index" @click="changecolor(item)">{{item.tp}}</van-tag>
             </div>
           </template>
         </van-cell>
@@ -41,11 +34,8 @@
           <van-cell title="* 已获证书 ：">
             <template #label>
               <div class="certificate ">
-                <van-tag class="certificate-tag" color="#9f9a9a" plain round type="primary">月嫂</van-tag>
-                <van-tag class="certificate-tag" color="#9f9a9a" plain round type="primary">育婴师</van-tag>
-                <van-tag class="certificate-tag" color="#9f9a9a" plain round type="primary">小儿推拿</van-tag>
-                <van-tag class="certificate-tag" color="#9f9a9a" plain round type="primary">保姆</van-tag>
-                <van-tag class="certificate-tag" color="#9f9a9a" plain round type="primary">保育员证</van-tag>
+                <van-tag @click="changeCert(item)" v-for="(item,index) in certificate_list" :key="index" class="certificate-tag" :certificate_active="certificate_active" :color='item.active?"#3f51b5" :"#9f9a9a"' plain round type="primary">{{item.tp}}</van-tag>
+
               </div>
             </template>
           </van-cell>
@@ -63,8 +53,9 @@
         <!-- 意向家政公司  -->
         <van-cell-group>
           <van-cell title="意向家政公司 ：">
-            <span v-if="intention_company">{{intention_company}}</span>
-            <span v-else @click="isShowCompanyProp=true">请选择
+            <span @click="isShowCompanyProp=true">{{intention_company}} </span>
+            <span @click="isShowCompanyProp=true">
+              请选择
               <van-icon name="arrow-down" />
             </span>
 
@@ -102,7 +93,11 @@ export default {
   data () {
     return {
       // 填写的用户名
+      busineestype: [{ tp: '月嫂', active: false }, { tp: '保姆', active: false }, { tp: '育婴师', active: false }, { tp: '产康师', active: false }, { tp: '家装/搬家', active: false }, { tp: '早教/托育', active: false }, { tp: '养老/陪护', active: false }, { tp: '保洁/清洗', active: false }],
+      // 姓名
       user_name: '',
+      // 需要提交的意向岗位list
+      want_list: [],
       // 填写的手机号
       phone: null,
       // 定义手机号的验证规则
@@ -117,20 +112,80 @@ export default {
       isShowCompanyProp: false,
       // 求职意向公司
       columns: ['长沙公司一号', '长沙公司二号', '长沙公司三号', '长沙公司四号', '长沙公司五号', '长沙公司六号', '长沙公司七号'],
+      // 已获证书列表
+      certificate_list: [{ tp: '月嫂', active: false }, { tp: '育婴师', active: false }, { tp: '小儿推拿', active: false }, { tp: '保姆', active: false }, { tp: '保育员证', active: false }],
+      // 需要提交的证书列表
+      want_cert_list: [],
+      // 证书激活状态
+      certificate_active: false,
       // 备注信息
       note_info: ''
     }
   },
   methods: {
     // 信息提交函数
-    onSubmit () {
-      console.log(1)
+    async onSubmit () {
+      try {
+        const res = await this.$request.post('HouseJob', {
+          params: {
+            user_name: this.user_name,
+            phone: this.phone,
+            want_list: this.want_list,
+            want_cert_list: this.want_cert_list,
+            native_place: this.native_place,
+            now_place: this.now_place,
+            intention_company: this.intention_company,
+            note_info: this.note_info
+
+          }
+
+        })
+        // 成功提示
+        this.$toast('提交成功')
+        // 跳转到首页
+        this.$router.push('/Home')
+        console.log(res)
+      } catch (e) {
+        this.$toast('提交失败')
+      }
     },
-    // 确认选择公司的函
+    // 确认选择公司的函数
     onConfirm (value, index) {
       console.log(value, index)
       this.intention_company = value
       this.isShowCompanyProp = false
+    },
+    changecolor (item) {
+      // console.log(item, index)
+      // 取反状态
+      item.active = !item.active
+      // 进行判断，如果当前是激活状态，则从当前数组中添加当前项
+      if (item.active) {
+        this.want_list.push(item)
+      } else {
+        // 从当前项删除此项
+        // 找到当前项索引
+        const i = this.want_list.indexOf(item)
+        //  删除当前项
+        this.want_list.splice(i, 1)
+        // console.log(this.want_list, i)
+      }
+    },
+    changeCert (item) {
+      // console.log(item, index)
+      // 取反状态
+      item.active = !item.active
+      // 进行判断，如果当前是激活状态，则从当前数组中添加当前项
+      if (item.active) {
+        this.want_cert_list.push(item)
+      } else {
+        // 从当前项删除此项
+        // 找到当前项索引
+        const i = this.want_cert_list.indexOf(item)
+        //  删除当前项
+        this.want_cert_list.splice(i, 1)
+        console.log(this.want_cert_list, i)
+      }
     }
 
   }

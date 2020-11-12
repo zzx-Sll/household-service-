@@ -1,34 +1,53 @@
 <template>
   <div class="company-info">
-    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+    <van-list v-model="loading"
+              :finished="finished"
+              finished-text="没有更多了"
+              @load="onLoad">
+      <!-- 公司中 -->
       <div class="companydesign">
-
-        <van-cell v-for="(data,i) in 6" :key="i">
+        <!-- 公司简介 -->
+        <van-cell v-for="(item,index) in companyList"
+                  :key="item.id"
+                  @click="$router.push(`/CompanyDetails/${item.id}`)">
           <div class="comment_list">
             <div class="touxiang">
-              <img src="https://img.yzcdn.cn/vant/apple-1.jpg" alt="">
-
+              <img :src="item.photo[index]"
+                   alt="">
+              <div>
+                <van-icon name="location"
+                          class="dizhi" />{{item.distance}}
+              </div>
             </div>
             <div class="youall">
               <div class="nameicon">
-                <div>卢本伟广场</div>
-                <div>8000元/26天</div>
+                <div>{{item.name}}</div>
               </div>
-              <div class="skil">
-                <span class="peoplegrid">八倍sks</span>
-                <span class="peoplegrid">10年老师傅</span>
+              <div>{{item.ctitle}}</div>
+              <div class="company-tag">
+                <van-tag color="#3f51b5"
+                         plain
+                         round
+                         type="primary">{{item.comTag1}}</van-tag>
+                <van-tag color="#3f51b5"
+                         plain
+                         round
+                         type="primary">{{item.comTag2}}</van-tag>
+                <van-tag color="#3f51b5"
+                         plain
+                         round
+                         type="primary">{{item.comTag3}}</van-tag>
 
               </div>
-              <div class="myself"><span>长沙</span> | <span>18岁</span> | <span>干了18次</span> | <span>9条评价</span></div>
-
+              <div style="width:280px; overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;">{{item.address}}</div>
             </div>
           </div>
         </van-cell>
-        <div class="gengduo">更多家服员
-          <van-icon name="arrow" />
-        </div>
+        <!-- 公司简介 -->
+
       </div>
-      <van-cell v-for="item in list" :key="item" :title="item" />
     </van-list>
 
   </div>
@@ -48,30 +67,42 @@ export default {
     return {
       list: [],
       loading: false,
-      finished: false
+      finished: false,
+      companyList: []
     }
   },
   computed: {},
   watch: {},
-  created () {},
+  created () {
+    this.getHousesCompany()
+  },
   mounted () {},
   methods: {
     onLoad () {
       // 异步更新数据
       // setTimeout 仅做示例，真实场景中一般为 ajax 请求
       setTimeout(() => {
-        // for (let i = 0; i < 10; i++) {
-        //   this.list.push(this.list.length + 1)
-        // }
+        for (let i = 0; i < this.companyList.length; i++) {
+          this.list.push(this.list.length + 1)
+        }
 
         // 加载状态结束
-        this.loading = false
+        this.loading = true
 
         // 数据全部加载完成
-        if (this.list.length >= 40) {
+        if (this.list.length >= this.companyList.length) {
           this.finished = true
         }
       }, 1000)
+    },
+    async getHousesCompany () {
+      const { data: res } = await this.$request.get('getCompanys')
+      res.data.forEach((item, i) => {
+        this.companyList.push(res.data[i])
+        return this.companyList
+      })
+      this.loading = false
+      console.log(this.companyList)
     }
   }
 }
@@ -79,6 +110,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.companydesign {
+  margin-bottom: 36px;
+}
 .comment_list {
   display: flex;
 
