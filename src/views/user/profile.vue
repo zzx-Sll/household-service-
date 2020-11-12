@@ -6,28 +6,28 @@
                  left-arrow
                  @click-left="$router.back()" />
     <!-- /导航栏 -->
-    <input type="file"
-           hidden
-           ref="file"
-           @change="onFileChange">
+    <input
+      type="file"
+      hidden
+      ref="file"
+      @change="onFileChange"
+    >
+
     <!-- 个人信息 -->
-    <van-cell size="large"
-              class="photo-cell"
-              title="头像"
-              is-link
-              center
-              @click="$refs.file.click()">
-      <van-image class="avatar"
-                 :src="users.photo"
-                 fit="cover"
-                 round
-                 width="55px"
-                 height="55px">
-        <template v-slot:loading>
-          <van-loading type="spinner"
-                       size="20" />
-        </template>
-      </van-image>
+    <van-cell
+    size="large"
+      class="photo-cell"
+      title="头像"
+      is-link
+      center
+      @click="$refs.file.click()"
+    >
+      <van-image
+        class="avatar"
+        fit="cover"
+        round
+        :src="users.photo"
+      />
     </van-cell>
     <van-cell size="large"
               title="昵称:"
@@ -80,15 +80,7 @@
 
     <!-- 个人信息 -->
     <!-- 弹层 -->
-    <!-- 编辑头像 -->
-    <van-popup v-model="isUpdatePhotoShow"
-               position="bottom"
-               style="height: 100%;">
-      <update-photo v-if="isUpdatePhotoShow"
-                    @close="isUpdatePhotoShow = false"
-                    :img="users.photo" />
-    </van-popup>
-    <!-- /编辑头像 -->
+
     <!-- 编辑昵称 -->
     <van-popup v-model="isUpdateNameShow"
                style="height: 100%;"
@@ -144,7 +136,6 @@
 <script>
 import UpdateGender from './components/update-gender'
 import UpdateName from './components/update-name'
-import UpdatePhoto from './components/update-photo'
 import UpdatePhone from './components/update-phone'
 import UpdateAddress from './components/update-address'
 import UpdateService from './components/update-service'
@@ -155,7 +146,6 @@ export default {
   components: {
     UpdateGender,
     UpdateName,
-    UpdatePhoto,
     UpdatePhone,
     UpdateAddress,
     UpdateService
@@ -183,22 +173,10 @@ export default {
   },
   watch: {},
 
-  mounted () {},
+  mounted () {
+
+  },
   methods: {
-    onFileChange () {
-      // 获取文件对象
-      const file = this.$refs.file.files[0]
-
-      // 基于文章对象获取 blob 数据
-      this.img = window.URL.createObjectURL(file)
-
-      // 展示预览图片弹出层
-      this.isUpdatePhotoShow = true
-
-      // file-input 如果选了同一个文件不会触发 change 事件
-      // 解决办法就是每次使用完毕，把它的 value 清空
-      this.$refs.file.value = ''
-    },
     onSendSms () {
       this.isCountDown = true
     },
@@ -207,10 +185,30 @@ export default {
     },
     async getUserData () {
       const { data } = await this.$request.get('getUserData')
+      console.log(data)
       this.users = data.data[0]
+    },
+    async onFileChange () {
+      // 获取文件对象
+      try {
+        const file = this.$refs.file.files[0]
+
+        // 基于文章对象获取 blob 数据
+        this.img = window.URL.createObjectURL(file)
+        const image = this.img
+        const { data } = await this.$request.patch('patchUserData', image)
+        console.log(data)
+        // this.isUpdatePhotoShow = true
+        this.$refs.file.value = ''
+        this.getUserData()
+        this.$toast.success('更新成功')
+      } catch (err) {
+        this.$toast.fail('更新失败')
+      }
     }
 
   }
+
   // updataName (newName) {
   //   console.log(newName)
   //   this.user.username = newName
@@ -245,12 +243,6 @@ export default {
   .van-popup {
     background-color: #f5f7f9;
   }
-
-  .photo-cell {
-    .van-cell__value {
-      display: flex;
-      flex-direction: row-reverse;
-    }
   }
   .save {
     position: absolute;
@@ -264,5 +256,5 @@ export default {
     text-align: center;
     background-color: #3f51b5;
   }
-}
+
 </style>
