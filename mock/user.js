@@ -49,5 +49,13 @@ export default {
       msg: '请求成功',
       data: users
     }
+  },
+  'http://localhost:8080/patchUserData|patch': option => {
+    users[0].photo = option.body
+    return {
+      status: 200,
+      msg: '请求成功',
+      data: users
+    }
   }
 }
