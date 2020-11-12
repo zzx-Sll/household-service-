@@ -125,6 +125,13 @@ export default {
   methods: {
     // 信息提交函数
     async onSubmit () {
+      // 开启提示
+      this.$toast.loading({
+        message: '加载中...',
+        forbidClick: true,
+        duration: 0
+
+      })
       try {
         const res = await this.$request.post('HouseJob', {
           params: {
@@ -141,12 +148,12 @@ export default {
 
         })
         // 成功提示
-        this.$toast('提交成功')
+        this.$toast.success('提交成功')
         // 跳转到首页
         this.$router.push('/Home')
         console.log(res)
       } catch (e) {
-        this.$toast('提交失败')
+        this.$toast.fail('提交失败')
       }
     },
     // 确认选择公司的函数

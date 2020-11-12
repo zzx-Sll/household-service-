@@ -1,46 +1,19 @@
 <template>
   <div class="nav">
     <div class="service-staffs">
-
-      <!-- <div class="Housekeeping">家政平台</div> -->
-      <!-- <span class="boot_sta">家政平台</span> -->
-      <!-- <div class="service-staff">
-        <van-search v-model="value" placeholder="智能匹配" class="search" right-icon="clear" /><span class="changsha">长沙</span>
-        <div class="box">
-          <van-icon name="arrow-down" size="10px" color="#D3D3D5" />
-        </div>
-      </div> -->
-
     </div>
 
     <div class="home">
       <div class="county-seat">区县</div>
       <div class="btn">
-        <!-- <van-button round type="info" size="mini" color="none">市辖区</van-button>
-        <van-button round type="info" size="mini" color="none">芙蓉区</van-button>
-        <van-button round type="info" size="mini" color="none">天心区</van-button>
-        <van-button round type="info" size="mini" color="none">岳麓区</van-button>
-         -->
-        <div class="box-rs">市辖区 </div>
-        <div class="box-rs">芙蓉区 </div>
-        <div class="box-rs">天心区 </div>
-        <div class="box-rs">岳麓区 </div>
+
+        <div class="box-rs" :class="{active:currentIndex===index}" @click="change1(item,index)" v-for="(item,index) in countryList" :key="index">{{item.tp}} </div>
 
       </div>
       <div class="btn-one">
-        <!-- <van-button round type="info" size="mini" color="none">开福区</van-button>
-        <van-button round type="info" size="mini" color="none">雨花区</van-button>
-        <van-button round type="info" size="mini" color="none">长沙县</van-button>
-        <van-button round type="info" size="mini" color="none">望城县</van-button> -->
-        <div class="box-rs">开福区 </div>
-        <div class="box-rs">雨花区 </div>
-        <div class="box-rs">长沙县 </div>
-        <div class="box-rs">望城县 </div>
-
       </div>
       <div class="unfold">
 
-        <!-- <van-button size="mini" class="btnn">展开</van-button> -->
         <div class="btnn">展开
           <van-icon name="arrow-down" class="icoone" />
         </div>
@@ -51,27 +24,11 @@
     <div class="home">
       <div class="county-seat">职业类型</div>
       <div class="btn">
-        <!-- <van-button round type="info" size="mini" color="none">全部职</van-button>
-        <van-button round type="info" size="mini" color="none">月嫂</van-button>
-        <van-button round type="info" size="mini" color="none">育婴师</van-button>
-        <van-button round type="info" size="mini" color="none">保洁/清</van-button> -->
-        <div class="box-rs">全部职 </div>
-        <div class="box-rs">月嫂 </div>
-        <div class="box-rs">育婴师 </div>
-        <div class="box-rs">保洁/清 </div>
+        <div class="box-rs">全部职业 </div>
+        <div class="box-rs" :class="{active:currentIndex1===index}" @click="change2(item,index)" v-for="(item,index) in professionList" :key="index">{{item.tp}} </div>
 
       </div>
-      <div class="btn-one">
-        <!-- <van-button round type="info" size="mini" color="none">保姆</van-button>
-        <van-button round type="info" size="mini" color="none">产康师</van-button>
-        <van-button round type="info" size="mini" color="none">早教/托</van-button>
-        <van-button round type="info" size="mini" color="none">养老/陪</van-button> -->
-        <div class="box-rs">保姆 </div>
-        <div class="box-rs">产康师 </div>
-        <div class="box-rs">早教/托 </div>
-        <div class="box-rs">养老/陪 </div>
 
-      </div>
       <div class="unfold">
 
         <div class="btnn">展开
@@ -86,15 +43,13 @@
 
         <div class="nbas">
 
-          <div class="nba">AAAA级</div>
-          <div class="nba">AAAA级</div>
+          <div class="nba" :class="{active:currentIndex2===index}" @click="change3(item,index)" v-for="(item,index) in creditList" :key="index">{{item.tp}}</div>
 
         </div>
 
       </div>
 
       <div class="unfold">
-
         <div class="btnn">展开
           <van-icon name="arrow-down" class="icoone" />
         </div>
@@ -107,10 +62,7 @@
 
         <div class="nbas">
 
-          <div class="nba">大于100人</div>
-          <div class="nba">50-100</div>
-          <div class="nba">30-50</div>
-          <div class="nba">小于30人</div>
+          <div class="nba" :class="{active:currentIndex3===index}" @click="change4(item,index)" v-for="(item,index) in certificationList" :key="index">{{item.tp}}</div>
 
         </div>
 
@@ -127,14 +79,12 @@
       <div class="county-seat">职业类型</div>
     </div>
     <div class="ttrs">
-      <div class="gook">500-1000人</div>
-      <div class="gook">1000人以</div>
-      <div class="gook">200人以</div>
-      <div class="gook">200-500</div>
+      <div class="gook" :class="{active:currentIndex4===index}" @click="change5(item,index)" v-for="(item,index) in typeList" :key="index">{{item.tp}}</div>
+
     </div>
     <div class="btn-puls">
-      <van-button type="primary" size="small" class="vbs_btn" round>清除条件</van-button>
-      <van-button type="primary" size="small" class="vbs_btn" round>确认筛选</van-button>
+      <van-button type="primary" size="small" class="vbs_btn" round @click="clearAll">清除条件</van-button>
+      <van-button type="primary" size="small" class="vbs_btn" round @click="onfirm">确认筛选</van-button>
     </div>
 
   </div>
@@ -147,14 +97,166 @@ export default {
   props: {},
   data () {
     return {
-      value: ''
+      value: '',
+      // 提交资料的列表
+      want_list: [],
+      want_list1: [],
+      want_list2: [],
+      want_list3: [],
+      want_list4: [],
+      // 区县列表
+      countryList: [{ tp: '市辖区', active: false }, { tp: '芙蓉区', active: false }, { tp: '天心区', active: false }, { tp: '岳麓区', active: false }, { tp: '开福区', active: false }, { tp: '雨花区', active: false }, { tp: '长沙县', active: false }, { tp: '望城县', active: false }],
+      // 当前激活索引
+      currentIndex: null,
+      currentIndex1: null,
+      currentIndex2: null,
+      currentIndex3: null,
+      currentIndex4: null,
+      currentIndex5: null,
+      // 职业类型列表
+      professionList: [{ tp: '月嫂', active: false }, { tp: '育婴师', active: false }, { tp: '保洁/清洁', active: false }, { tp: '保姆', active: false }, { tp: '产康师', active: false }, { tp: '早教/托管', active: false }, { tp: '养老/陪护', active: false }],
+      // 信用等级列表
+      creditList: [{ tp: 'AAAA', active: false }, { tp: 'AAAAA', active: false }],
+      // 认证客户列表
+      certificationList: [{ tp: '大于100人', active: false }, { tp: '50-100人', active: false }, { tp: '30-50人', active: false }, { tp: '小于30人', active: false }],
+      // 公司类型列表
+      typeList: [{ tp: '500-1000人', active: false }, { tp: '1000人以上', active: false }, { tp: '200人以下', active: false }, { tp: '200-500人', active: false }]
     }
   },
   computed: {},
   watch: {},
   created () {},
   mounted () {},
-  methods: {}
+  methods: {
+    // 切换区县的函数
+    change1 (item, index) {
+      console.log(item, index)
+      if (this.currentIndex === index) {
+        this.currentIndex = null
+        // 清空数组
+        this.want_list = []
+      } else {
+        // 展示高亮颜色
+        this.currentIndex = index
+        // 清空数组
+        this.want_list = []
+        // 追加当前项
+        this.want_list.push(item)
+        console.log(this.want_list)
+      }
+    },
+    change2 (item, index) {
+      console.log(item, index)
+      if (this.currentIndex1 === index) {
+        this.currentIndex1 = null
+        // 清空数组
+        this.want_list1 = []
+      } else {
+        // 展示高亮颜色
+        this.currentIndex1 = index
+        // 清空数组
+        this.want_list1 = []
+        // 追加当前项
+        this.want_list1.push(item)
+        console.log(this.want_list1)
+      }
+    },
+    change3 (item, index) {
+      console.log(item, index)
+      if (this.currentIndex2 === index) {
+        this.currentIndex2 = null
+        // 清空数组
+        this.want_list2 = []
+      } else {
+        // 展示高亮颜色
+        this.currentIndex2 = index
+        // 清空数组
+        this.want_list2 = []
+        // 追加当前项
+        this.want_list2.push(item)
+        console.log(this.want_list2)
+      }
+    },
+    change4 (item, index) {
+      console.log(item, index)
+      if (this.currentIndex3 === index) {
+        this.currentIndex3 = null
+        // 清空数组
+        this.want_list3 = []
+      } else {
+        // 展示高亮颜色
+        this.currentIndex3 = index
+        // 清空数组
+        this.want_list3 = []
+        // 追加当前项
+        this.want_list3.push(item)
+        console.log(this.want_list3)
+      }
+    },
+    change5 (item, index) {
+      console.log(item, index)
+      if (this.currentIndex4 === index) {
+        this.currentIndex4 = null
+        // 清空数组
+        this.want_list4 = []
+      } else {
+        // 展示高亮颜色
+        this.currentIndex4 = index
+        // 清空数组
+        this.want_list4 = []
+        // 追加当前项
+        this.want_list4.push(item)
+        console.log(this.want_list)
+      }
+    },
+    // 点击清除的函数
+    clearAll () {
+      this.currentIndex = null
+      this.currentIndex1 = null
+      this.currentIndex2 = null
+      this.currentIndex3 = null
+      this.currentIndex4 = null
+      this.currentIndex5 = null
+      this.want_list = []
+      this.want_list1 = []
+      this.want_list2 = []
+      this.want_list3 = []
+      this.want_list4 = []
+    },
+    // 点击提交的函数
+    async onfirm () {
+      const obj = {
+        // 区县
+        country: this.countryList[0],
+        // 职业
+        profression: this.professionList[0],
+        // 信用等级：
+        credit: this.creditList[0],
+        // 认证客服
+        certification: this.certificationList[0],
+        // 职业类型
+        type: this.typeList[0]
+      }
+      // 开启提示
+      this.$toast.loading({
+        message: '加载中...',
+        forbidClick: true,
+        duration: 0
+
+      })
+      try {
+        const res = await this.$request.post('HouseCompany', {
+          params: obj
+        })
+        console.log(res)
+        this.$toast.success('筛选成功')
+        // 关闭弹出层
+        this.$emit('closePorp')
+      } catch (e) {
+        this.$toast.fail('筛选失败')
+      }
+    }
+  }
 }
 </script>
 
@@ -217,23 +319,24 @@ export default {
   color: #000;
 }
 
-.box-rs {
-  flex: 1;
-  width: 132px;
-  height: 46px;
-  border: solid 1px #979393;
-  font-size: 22px;
-  border-radius: 30px;
-  margin: 0 15px;
-  text-align: center;
-  line-height: 46px;
-  color: #a7a4a4;
-}
-
 .btn {
   margin-bottom: 28px;
   width: 100%;
   display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+  .box-rs {
+    // flex: 1;
+    width: 132px;
+    height: 46px;
+    border: solid 1px #979393;
+    font-size: 22px;
+    border-radius: 30px;
+    margin: 10px 15px;
+    text-align: center;
+    line-height: 46px;
+    color: #a7a4a4;
+  }
 
   /* button  盒子  */
 }
@@ -362,5 +465,9 @@ span {
 }
 .van-button__text {
   color: #fff;
+}
+.active {
+  color: #3f51b5 !important;
+  border-color: #3f51b5 !important;
 }
 </style>

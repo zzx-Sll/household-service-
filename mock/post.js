@@ -29,6 +29,15 @@ export default {
       status: 200,
       msg: '提交成功'
     }
+  },
+  // 家服公司提交筛选
+  'http://localhost:8080/HouseCompany|post': option => {
+    // option.body = JSON.parse(option.body)
+    console.log(option)
+    return {
+      status: 200,
+      msg: '提交成功'
+    }
   }
 
 }

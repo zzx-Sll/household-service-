@@ -1,22 +1,15 @@
 <template>
   <div class="company-info">
-    <van-list v-model="loading"
-              :finished="finished"
-              finished-text="没有更多了"
-              @load="onLoad">
+    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
       <!-- 公司中 -->
       <div class="companydesign">
         <!-- 公司简介 -->
-        <van-cell v-for="(item,index) in companyList"
-                  :key="item.id"
-                  @click="$router.push(`/CompanyDetails/${item.id}`)">
+        <van-cell v-for="(item,index) in companyList" :key="item.id" @click="$router.push(`/CompanyDetails/${item.id}`)">
           <div class="comment_list">
             <div class="touxiang">
-              <img :src="item.photo[index]"
-                   alt="">
+              <img :src="item.photo[index]" alt="">
               <div>
-                <van-icon name="location"
-                          class="dizhi" />{{item.distance}}
+                <van-icon name="location" class="dizhi" />{{item.distance}}
               </div>
             </div>
             <div class="youall">
@@ -25,18 +18,9 @@
               </div>
               <div>{{item.ctitle}}</div>
               <div class="company-tag">
-                <van-tag color="#3f51b5"
-                         plain
-                         round
-                         type="primary">{{item.comTag1}}</van-tag>
-                <van-tag color="#3f51b5"
-                         plain
-                         round
-                         type="primary">{{item.comTag2}}</van-tag>
-                <van-tag color="#3f51b5"
-                         plain
-                         round
-                         type="primary">{{item.comTag3}}</van-tag>
+                <van-tag color="#3f51b5" plain round type="primary">{{item.comTag1}}</van-tag>
+                <van-tag color="#3f51b5" plain round type="primary">{{item.comTag2}}</van-tag>
+                <van-tag color="#3f51b5" plain round type="primary">{{item.comTag3}}</van-tag>
 
               </div>
               <div style="width:280px; overflow: hidden;

@@ -1,13 +1,15 @@
 <template>
   <div class="nav">
     <div class="service-staffs">
-      <van-nav-bar left-text="家政平台" class="navbar" :border="false"/>
+      <van-nav-bar left-text="家政平台" class="navbar" :border="false" />
       <!-- <div class="Housekeeping">家政平台</div> -->
       <div class="service-staff">
         <van-search v-model="value" placeholder="智能匹配" class="search" @click="showPopup" />
         <van-cell v-model="value" is-link class="search" style="display:none"></van-cell>
         <van-popup v-model="show" position="bottom" :style="{ height: '81%', width:'100%' }">
-          <service-staff></service-staff>
+          <!-- 家政公司弹出的路由出口 -->
+          <service-staff @closePorp="close"></service-staff>
+          <!-- 家政公司弹出的路由出口 -->
         </van-popup><span class="changsha">长沙</span>
         <div class="box">
           <van-icon name="arrow-down" size="10px" />
@@ -64,6 +66,11 @@ export default {
   methods: {
     showPopup () {
       this.show = true
+    },
+    // 关闭弹出层
+    close () {
+      console.log(11)
+      this.show = false
     }
   }
 }
@@ -161,8 +168,8 @@ button {
   top: 0;
   left: 0;
   right: 0;
-  ::v-deep .van-nav-bar__left{
-    .van-nav-bar__text{
+  ::v-deep .van-nav-bar__left {
+    .van-nav-bar__text {
       color: #fff;
       font-size: 32px;
     }
