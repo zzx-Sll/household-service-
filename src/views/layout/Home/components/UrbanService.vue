@@ -58,7 +58,8 @@
     <van-button type="primary"
                 class="selectdata"
                 size="large"
-                color="#3F51B5">家政服务标准查询</van-button>
+                color="#3F51B5"
+                @click="submitservicestandards">家政服务标准查询</van-button>
   </div>
 </template>
 
@@ -75,6 +76,7 @@ export default {
       showArea: false,
       areaList: list,
       leveldata: [{ level: '一星', id: 1 }, { level: '二星', id: 2 }, { level: '三星', id: 3 }, { level: '四星', id: 4 }, { level: '五星', id: 5 }, { level: '金牌', id: 6 }]
+
     }
   },
   created () {
@@ -107,10 +109,29 @@ export default {
         //  删除当前项
         this.surelist.splice(i, 1)
       }
-      console.log(this.surelist)
+      // console.log(this.surelist)
     },
     changelevel (itemid) {
       this.active = itemid
+    },
+    async submitservicestandards () {
+      try {
+        if (this.areavalue && this.surelist && this.active !== '' && []) {
+          const { res } = await this.$request.post('servicestandards', {
+            Servicearea: this.areavalue,
+            // 服务类型
+            Servicetype: this.surelist,
+            // 服务星级
+            Servicelevel: this.active
+          })
+          this.$toast('提交成功')
+          console.log(res)
+        } else {
+          this.$toast('请填写全部')
+        }
+      } catch (err) {
+        this.$toast('错误')
+      }
     }
   }
 }

@@ -169,26 +169,26 @@ export default {
     },
     async submitalldata () {
       try {
-        await this.$request.post('posthousekeeping', {
-        // 找家政接口
-        // 需求岗位
-          Businesstype: this.surelist,
-          // 电话号码
-          telephone: this.telephonenum,
-          // 年龄
-          age: this.agenum,
-          // 薪资
-          money: this.moneynum,
-          // 住家与否
-          live: this.livehome,
-          // 联系人
-          contacts: this.contacts,
-          // 籍贯要求
-          Nativeplace: this.requirement,
-          // 工作地点
-          Workplace: this.workplace
-        })
         if (this.surelist && this.telephonenum && this.agenum && this.moneynum && this.contacts && this.requirement && this.workplace !== '') {
+          await this.$request.post('posthousekeeping', {
+            // 找家政接口
+            // 需求岗位
+            Businesstype: this.surelist,
+            // 电话号码
+            telephone: this.telephonenum,
+            // 年龄
+            age: this.agenum,
+            // 薪资
+            money: this.moneynum,
+            // 住家与否
+            live: this.livehome,
+            // 联系人
+            contacts: this.contacts,
+            // 籍贯要求
+            Nativeplace: this.requirement,
+            // 工作地点
+            Workplace: this.workplace
+          })
           this.$toast('提交成功')
           this.$router.push('/Home')
         } else {

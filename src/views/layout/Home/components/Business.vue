@@ -186,27 +186,27 @@ export default {
     },
     async nextboy () {
       try {
-        await this.$request.post('postministry', {
-        // 法人类型
-          legal: this.value,
-          // 企业名字
-          Business_name: this.Enterprisename,
-          // 显示名称
-          nick_name: this.showname,
-          // 社会信用代码
-          Credit_Code: this.CreditCode,
-          // 公司注册时间
-          company_creattime: this.timevalue,
-          // 注册资本
-          capital: this.dollar,
-          // 注册地区
-          region: this.areavalue,
-          // 注册企业类型
-          Enterprise_type: this.typevalue,
-          // 主营业务
-          Businesstype: this.surelist
-        })
         if (this.value && this.Enterprisename && this.showname && this.CreditCode && this.timevalue && this.dollar && this.areavalue && this.surelist && this.typevalue !== '' && []) {
+          await this.$request.post('postministry', {
+            // 法人类型
+            legal: this.value,
+            // 企业名字
+            Business_name: this.Enterprisename,
+            // 显示名称
+            nick_name: this.showname,
+            // 社会信用代码
+            Credit_Code: this.CreditCode,
+            // 公司注册时间
+            company_creattime: this.timevalue,
+            // 注册资本
+            capital: this.dollar,
+            // 注册地区
+            region: this.areavalue,
+            // 注册企业类型
+            Enterprise_type: this.typevalue,
+            // 主营业务
+            Businesstype: this.surelist
+          })
           this.$toast('提交成功')
           this.$router.push('/Home')
         } else {
